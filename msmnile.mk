@@ -307,3 +307,7 @@ ro.crypto.volume.filenames_mode = "aes-256-cts" \
 ro.crypto.allow_encrypt_override = true
 
 $(call inherit-product, build/make/target/product/product_launched_with_p.mk)
+
+#Thermal
+PRODUCT_PACKAGES += android.hardware.thermal@1.0-impl \
+                    android.hardware.thermal@1.0-service
