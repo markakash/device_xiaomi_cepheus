@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Copyright (c) 2015, The Linux Foundation. All rights reserved.
+    Copyright (c) 2018, The Linux Foundation. All rights reserved.
 
     Redistribution and use in source and binary forms, with or without
     modification, are permitted provided that the following conditions are
@@ -27,14 +27,30 @@
     OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
     IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
-
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-
-    <!-- Mobile network settings screen, setting summary text when check box is selected -->
-    <string name="roaming_enable">Data Roaming enables you to browse the web, use email, MMS and other data services while abroad. Check with your network provider for pricing</string>
-    <!-- Mobile network settings screen, setting summary text when check box is clear -->
-    <string name="roaming_disable">Data Roaming enables you to browse the web, use email, MMS and other data services while abroad. Check with your network provider for pricing</string>
-
-    <!-- Mobile network settings screen, dialog message when user selects the Data roaming check box -->
-    <string name="roaming_warning">Click &lt;OK&gt; to use data while roaming. Check with your network provider for pricing.</string>
+    <!-- Do not translate. Defines the slots is Two Digit Number for dialing normally not USSD -->
+    <string-array name="config_twoDigitNumberPattern">
+        <item>"0"</item>
+        <item>"00"</item>
+        <item>"*0"</item>
+        <item>"*1"</item>
+        <item>"*2"</item>
+        <item>"*3"</item>
+        <item>"*4"</item>
+        <item>"*5"</item>
+        <item>"*6"</item>
+        <item>"*7"</item>
+        <item>"*8"</item>
+        <item>"*9"</item>
+        <item>"#0"</item>
+        <item>"#1"</item>
+        <item>"#2"</item>
+        <item>"#3"</item>
+        <item>"#4"</item>
+        <item>"#5"</item>
+        <item>"#6"</item>
+        <item>"#7"</item>
+        <item>"#8"</item>
+        <item>"#9"</item>
+    </string-array>
 </resources>
