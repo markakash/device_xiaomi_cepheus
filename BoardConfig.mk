@@ -23,6 +23,9 @@ BOARD_SECCOMP_POLICY := device/qcom/$(TARGET_BOARD_PLATFORM)/seccomp
 TARGET_NO_BOOTLOADER := false
 TARGET_USES_UEFI := true
 TARGET_NO_KERNEL := false
+
+TARGET_USES_IOPHAL := true
+
 BOARD_PRESIL_BUILD := true
 -include $(QCPATH)/common/msmnile/BoardConfigVendor.mk
 
@@ -52,6 +55,9 @@ BOARD_USES_RECOVERY_AS_BOOT := true
 ifneq ($(AB_OTA_UPDATER),true)
     TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_msm
 endif
+
+#Enable Charging Icon
+TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 
 #Enable split vendor image
 ENABLE_VENDOR_IMAGE := true
@@ -97,8 +103,8 @@ BOARD_VENDOR_KERNEL_MODULES := \
     $(KERNEL_MODULES_OUT)/audio_native.ko \
     $(KERNEL_MODULES_OUT)/audio_machine_msmnile.ko \
     $(KERNEL_MODULES_OUT)/wil6210.ko \
-    $(KERNEL_MODULES_OUT)/msm_11ad_proxy.ko
-#    $(KERNEL_MODULES_OUT)/qca_cld3_wlan.ko \
+    $(KERNEL_MODULES_OUT)/msm_11ad_proxy.ko \
+    $(KERNEL_MODULES_OUT)/qca_cld3_wlan.ko
 #    $(KERNEL_MODULES_OUT)/rdbg.ko
 
 TARGET_USES_ION := true

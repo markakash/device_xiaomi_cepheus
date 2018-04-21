@@ -12,7 +12,7 @@ PRODUCT_MODEL := msmnile for arm64
 TARGET_USES_AOSP := true
 TARGET_USES_AOSP_FOR_AUDIO := false
 TARGET_USES_QCOM_BSP := false
-#BOARD_HAVE_QCOM_FM := true
+BOARD_HAVE_QCOM_FM := true
 
 #Default vendor image configuration
 ifeq ($(ENABLE_VENDOR_IMAGE),)
@@ -165,6 +165,11 @@ PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-impl
 # Enable binderized camera HAL
 PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-service
 
+# Vibrator
+PRODUCT_PACKAGES += \
+    android.hardware.vibrator@1.0-impl \
+    android.hardware.vibrator@1.0-service \
+
 # WLAN host driver
 ifneq ($(WLAN_CHIPSET),)
 PRODUCT_PACKAGES += $(WLAN_CHIPSET)_wlan.ko
@@ -216,7 +221,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 PRODUCT_VENDOR_MOVE_ENABLED := true
 
-KMGK_USE_QTI_SERVICE := false
+KMGK_USE_QTI_SERVICE := true
 
 # Enable flag to support slow devices
 TARGET_PRESIL_SLOW_BOARD := true
+
+ENABLE_VENDOR_RIL_SERVICE := true

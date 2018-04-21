@@ -19,7 +19,7 @@ endif
 # Compile Linux Kernel
 #----------------------------------------------------------------------
 ifeq ($(KERNEL_DEFCONFIG),)
-     KERNEL_DEFCONFIG := $(shell ls ./kernel/msm-4.14/arch/arm64/configs/ | grep sdm..._defconfig)
+     KERNEL_DEFCONFIG := $(shell ls ./kernel/msm-4.14/arch/arm64/configs/ | grep sm8..._defconfig)
 endif
 
 ifeq ($(TARGET_KERNEL_SOURCE),)
@@ -100,7 +100,7 @@ LOCAL_MODULE       := wpa_supplicant_overlay.conf
 LOCAL_MODULE_TAGS  := optional
 LOCAL_MODULE_CLASS := ETC
 LOCAL_SRC_FILES    := $(LOCAL_MODULE)
-LOCAL_MODULE_PATH  := $(TARGET_OUT_ETC)/wifi
+LOCAL_MODULE_PATH  := $(TARGET_OUT_VENDOR)/etc/wifi
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
@@ -108,7 +108,7 @@ LOCAL_MODULE       := p2p_supplicant_overlay.conf
 LOCAL_MODULE_TAGS  := optional
 LOCAL_MODULE_CLASS := ETC
 LOCAL_SRC_FILES    := $(LOCAL_MODULE)
-LOCAL_MODULE_PATH  := $(TARGET_OUT_ETC)/wifi
+LOCAL_MODULE_PATH  := $(TARGET_OUT_VENDOR)/etc/wifi
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
