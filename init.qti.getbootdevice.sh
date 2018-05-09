@@ -1,5 +1,5 @@
 #!/vendor/bin/sh
-# Copyright (c) 2017, The Linux Foundation. All rights reserved.
+# Copyright (c) 2018, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are
@@ -27,9 +27,29 @@
 # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 #
+#Script to find if the boot device is SD card or UFS
 
-while [ "$registered" != "true" ]
-do
-    sleep 0.1
-    registered="`getprop vendor.sys.listeners.registered`"
-done
+
+echo "Bootdevice setup:  Starting..." > /dev/kmsg
+
+bootdevice=`getprop ro.boot.bootdevice`
+
+if [ "$bootdevice" = "8804000.sdhci" ]; then
+	ln -s /dev/block/platform/soc/8804000.sdhci /dev/block/bootdevice
+	echo "Waiting for SDHCI device to show up..." > /dev/kmsg
+	while [ ! -e "/dev/block/platform/soc/8804000.sdhci" ]; do
+		sleep 1
+	done
+elif [ "$bootdevice" = "1d84000.ufshc" ]; then
+	ln -s /dev/block/platform/soc/1d84000.ufshc /dev/block/bootdevice
+	echo "Waiting for UFS device to show up..." > /dev/kmsg
+	while [ ! -e "/dev/block/platform/soc/1d84000.ufshc" ]; do
+		sleep 1;
+	done
+else
+	while true; do
+		echo "Boot failure - invalid bootdevice ($bootdevice)" > /dev/kmsg
+		sleep 30;
+	done
+fi
+echo "Bootdevice setup:  Completed ($bootdevice)" > /dev/kmsg
