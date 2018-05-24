@@ -36,7 +36,7 @@ qcom.hw.aac.encoder=true
 #
 # system props for the cne module
 #
-persist.cne.feature=1
+persist.vendor.cne.feature=1
 
 #system props for the MM modules
 media.stagefright.enable-player=true
@@ -89,6 +89,10 @@ persist.fuse_sdcard=true
 
 #system prop for Bluetooth SOC type
 qcom.bluetooth.soc=cherokee
+vendor.bluetooth.soc=cherokee
+ro.bluetooth.library_name=libbluetooth_qti.so
+persist.vendor.btstack.enable.splita2dp=true
+persist.vendor.btstack.a2dp_offload_cap=sbc-aptx-aptxtws-aptxhd-aac
 
 #system prop for wipower support
 ro.bluetooth.emb_wp_mode=true
