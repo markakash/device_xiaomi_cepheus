@@ -259,18 +259,17 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <hal format="hidl">
        <name>android.hardware.keymaster</name>
        <transport>hwbinder</transport>
-       <impl level="generic"></impl>
        <version>4.0</version>
        <interface>
            <name>IKeymasterDevice</name>
            <instance>default</instance>
+           <instance>strongbox</instance>
        </interface>
     </hal>
     <!-- gatekeeper -->
     <hal format="hidl">
        <name>android.hardware.gatekeeper</name>
        <transport>hwbinder</transport>
-       <impl level="generic"></impl>
        <version>1.0</version>
        <interface>
            <name>IGatekeeper</name>
