@@ -232,6 +232,9 @@ on boot
     # Create vpp directory
     mkdir /mnt/vendor/persist/vpp 0770 media media
 
+    # Create hvdcp_opti directory
+    mkdir /mnt/vendor/persist/hvdcp_opti 0770 root system
+
 # msm specific files that need to be created on /data
 on post-fs-data
     mkdir /data/vendor/misc 01771 system system
@@ -422,8 +425,8 @@ on post-fs-data
     mkdir /data/vendor/qti-logkit/logdata/ 2750 system shell
 
     #Create SWAP related dirs
-    mkdir /data/system/swap 0770 root system
-    chmod 2770 /data/system/swap
+    mkdir /data/vendor/swap 0770 root system
+    chmod 2770 /data/vendor/swap
 
     # set aggressive read ahead for dm-0 and dm-1 during boot up
     write /sys/block/dm-0/queue/read_ahead_kb 2048
@@ -437,6 +440,9 @@ on post-fs-data
 
     #Create dir for TUI
     mkdir /data/vendor/tui 0600 system drmrpc
+
+    #Start move time data to /data/vendor once post-fs-data done
+    start vendor.move_time_data
 
 service nqnfcinfo /system/vendor/bin/nqnfcinfo
     class late_start
@@ -455,6 +461,13 @@ service qcomsysd /system/vendor/bin/qcom-system-daemon
     class main
     user root
     group root diag oem_2901
+    disabled
+
+on property:persist.vendor.qcomsysd.enabled=1
+    enable qcomsysd
+
+on property:persist.vendor.qcomsysd.enabled=0
+    stop qcomsysd
 
 service vendor.ssr_setup /system/vendor/bin/ssr_setup
     oneshot
@@ -739,7 +752,8 @@ service vendor.wigig_supplicant /vendor/bin/hw/wpa_supplicant \
 # FST Manager with hostapd (softap) - all settings inside ini file
 service fstman /vendor/bin/fstman -B -ddd -c /data/vendor/wifi/fstman.ini -a 1
     user wifi
-    group wifi net_admin net_raw
+    group wifi
+    capabilities NET_ADMIN NET_RAW
     class main
     disabled
     oneshot
@@ -748,18 +762,14 @@ service fstman /vendor/bin/fstman -B -ddd -c /data/vendor/wifi/fstman.ini -a 1
 service fstman_wlan0 /vendor/bin/fstman -B -ddd -c /data/vendor/wifi/fstman.ini \
     -a 0 @android:vendor_wpa_wlan0
     user wifi
-    group wifi net_admin net_raw
+    group wifi
+    capabilities NET_ADMIN NET_RAW
     class main
     disabled
     oneshot
 
-on property:netd.fstman.start=true
-    start fstman
-
-on property:netd.fstman.start=false
-    stop fstman
-
 service wigighalsvc /vendor/bin/wigighalsvc
+    interface vendor.qti.hardware.wigig.supptunnel@1.0::ISuppTunnelProvider default
     class hal
     user system
     group wifi
@@ -768,17 +778,13 @@ service wigighalsvc /vendor/bin/wigighalsvc
     disabled
 
 service wigignpt /vendor/bin/wigignpt
+    interface vendor.qti.hardware.wigig.netperftuner@1.0::INetPerfTuner default
     class hal
     socket wigignpt stream 660 system wifi
     user system
-    group wifi net_admin
+    group wifi
+    capabilities NET_ADMIN
     disabled
-
-on property:persist.vendor.wigig.enable=1
-    start wigighalsvc
-
-on property:persist.vendor.wigig.npt.enable=1
-    start wigignpt
 
 service dhcpcd_wlan0 /system/bin/dhcpcd -ABKLG
     class late_start
@@ -839,7 +845,7 @@ service wifi_ftmd /system/vendor/bin/wifi_ftmd
     disabled
     oneshot
 
-on property:wifi.ftmd.load=true
+on property:vendor.wifi.ftmd.load=true
     insmod /system/lib/modules/pronto/pronto_wlan.ko con_mode=5
 
 service cnss-daemon /system/vendor/bin/cnss-daemon -n -l
@@ -946,7 +952,7 @@ on property:sys.boot_completed=1
     start qcom-post-boot
     start qti-testscripts
 
-on property:ro.runtime.mbn_copy_completed=1
+on property:ro.vendor.ril.mbn_copy_completed=1
     write /data/vendor/radio/copy_complete 1
 
 service qvop-daemon /vendor/bin/qvop-daemon
@@ -962,15 +968,17 @@ service vendor.atfwd /vendor/bin/ATFWD-daemon
 service hostapd_fst /vendor/bin/hw/hostapd -dd -g /data/vendor/wifi/hostapd/global
     interface android.hardware.wifi.hostapd@1.0::IHostapd default
     class main
+    capabilities NET_ADMIN NET_RAW
     user wifi
-    group wifi net_raw net_admin
+    group wifi
     disabled
     oneshot
 
 service vendor.wigig_hostapd /vendor/bin/hw/hostapd -dd  -j wigighostapd /data/vendor/wifi/hostapd/wigig_hostapd.conf
     class late_start
+    capabilities NET_ADMIN NET_RAW
     user wifi
-    group wifi inet keystore net_admin net_raw
+    group wifi inet keystore
     oneshot
     disabled
 
@@ -1166,6 +1174,13 @@ service seemp_healthd /vendor/bin/seemp_healthd
 
 service power_off_alarm /vendor/bin/power_off_alarm
     class core
+    group system
+    disabled
+    oneshot
+
+service vendor.move_time_data /system/bin/move_time_data.sh
+    class main
+    user system
     group system
     disabled
     oneshot

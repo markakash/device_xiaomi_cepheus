@@ -42,6 +42,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <!-- Screen brightness when dozing. -->
     <integer name="config_screenBrightnessDoze">17</integer>
     <bool name="config_powerDecoupleInteractiveModeFromDisplay">false</bool>
+    <bool name="config_powerDecoupleAutoSuspendModeFromDisplay">true</bool>
     <bool name="config_setColorTransformAccelerated">true</bool>
 
     <!-- ImsService package name to bind to by default. If none is specified in an overlay, an
