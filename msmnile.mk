@@ -76,6 +76,10 @@ ifneq ($(strip $(QCPATH)),)
     PRODUCT_BOOT_JARS += WfdCommon
 endif
 
+ifneq ($(strip $(QCPATH)),)
+    PRODUCT_BOOT_JARS += libprotobuf-java_mls
+endif
+
 # Video codec configuration files
 ifeq ($(TARGET_ENABLE_QC_AV_ENHANCEMENTS), true)
 PRODUCT_COPY_FILES += device/qcom/msmnile/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_vendor.xml
@@ -86,6 +90,8 @@ PRODUCT_COPY_FILES += device/qcom/msmnile/media_codecs_vendor_audio.xml:$(TARGET
 
 PRODUCT_COPY_FILES += device/qcom/msmnile/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml
 endif #TARGET_ENABLE_QC_AV_ENHANCEMENTS
+
+PRODUCT_COPY_FILES += hardware/qcom/media/conf_files/msmnile/system_properties.xml:$(TARGET_COPY_OUT_VENDOR)/etc/system_properties.xml
 
 PRODUCT_PACKAGES += android.hardware.media.omx@1.0-impl
 
@@ -177,8 +183,7 @@ PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-service_64
 
 # Vibrator
 PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.0-impl \
-    android.hardware.vibrator@1.0-service \
+    vendor.qti.hardware.vibrator@1.2-service
 
 # Context hub HAL
 PRODUCT_PACKAGES += \
@@ -187,12 +192,15 @@ PRODUCT_PACKAGES += \
 
 # system prop for Bluetooth SOC type
 PRODUCT_PROPERTY_OVERRIDES += \
-    qcom.bluetooth.soc=cherokee \
     vendor.qcom.bluetooth.soc=cherokee
 
 # MIDI feature
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.midi.xml:system/etc/permissions/android.software.midi.xml
+
+# USB default HAL
+PRODUCT_PACKAGES += \
+    android.hardware.usb@1.0-service
 
 # Sensor conf files
 PRODUCT_COPY_FILES += \
@@ -217,6 +225,10 @@ KERNEL_MODULES_OUT := out/target/product/$(PRODUCT_NAME)/$(KERNEL_MODULES_INSTAL
 #FEATURE_OPENGLES_EXTENSION_PACK support string config file
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml
+
+#Exclude vibrator from InputManager
+PRODUCT_COPY_FILES += \
+    device/qcom/msmnile/excluded-input-devices.xml:system/etc/excluded-input-devices.xml
 
 #Enable full treble flag
 PRODUCT_FULL_TREBLE_OVERRIDE := true

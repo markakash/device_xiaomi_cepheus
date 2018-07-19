@@ -100,8 +100,8 @@ BOARD_VENDOR_KERNEL_MODULES := \
     $(KERNEL_MODULES_OUT)/audio_native.ko \
     $(KERNEL_MODULES_OUT)/audio_machine_msmnile.ko \
     $(KERNEL_MODULES_OUT)/wil6210.ko \
-    $(KERNEL_MODULES_OUT)/msm_11ad_proxy.ko
-#    $(KERNEL_MODULES_OUT)/rdbg.ko
+    $(KERNEL_MODULES_OUT)/msm_11ad_proxy.ko \
+    $(KERNEL_MODULES_OUT)/rdbg.ko
 
 # install lkdtm only for userdebug and eng build variants
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
@@ -184,3 +184,6 @@ TARGET_ENABLE_MEDIADRM_64 := true
 ifeq ($(strip $(BOARD_HAS_QCOM_WLAN)),true)
 include device/qcom/wlan/msmnile/BoardConfigWlan.mk
 endif
+
+#Enable VNDK Compliance
+BOARD_VNDK_VERSION:=current
