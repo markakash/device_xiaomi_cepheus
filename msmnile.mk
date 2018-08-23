@@ -1,6 +1,11 @@
 # Enable AVB 2.0
 BOARD_AVB_ENABLE := true
 
+
+# Override heap growth limit due to high display density on device
+PRODUCT_PROPERTY_OVERRIDES += \
+	dalvik.vm.heapgrowthlimit=256m
+
 $(call inherit-product, device/qcom/common/common64.mk)
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
@@ -13,6 +18,9 @@ PRODUCT_MODEL := msmnile for arm64
 TARGET_USES_AOSP := false
 TARGET_USES_AOSP_FOR_AUDIO := false
 TARGET_USES_QCOM_BSP := false
+
+# RRO configuration
+TARGET_USES_RRO := true
 
 #Default vendor image configuration
 ifeq ($(ENABLE_VENDOR_IMAGE),)
@@ -37,9 +45,7 @@ KERNEL_SD_LLVM_SUPPORT := true
 TARGET_USES_NQ_NFC := true
 ifeq ($(TARGET_USES_NQ_NFC),true)
 PRODUCT_COPY_FILES += \
-    vendor/nxp/opensource/external/libnfc-nci/halimpl/libnfc-nci.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nci.conf \
-    vendor/nxp/opensource/external/libnfc-nci/halimpl/libnfc-brcm.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-brcm.conf \
-    vendor/nxp/opensource/external/libnfc-nci/halimpl/libnfc-brcm_NCI2_0.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-brcm_NCI2_0.conf
+    device/qcom/common/nfc/libnfc-brcm.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nci.conf
 endif
 
 # default is nosdcard, S/W button enabled in resource
@@ -85,6 +91,7 @@ ifeq ($(TARGET_ENABLE_QC_AV_ENHANCEMENTS), true)
 PRODUCT_COPY_FILES += device/qcom/msmnile/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_vendor.xml
 
 PRODUCT_COPY_FILES += device/qcom/msmnile/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml
+PRODUCT_COPY_FILES += device/qcom/msmnile/media_codecs_vendor.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_vendor.xml
 
 PRODUCT_COPY_FILES += device/qcom/msmnile/media_codecs_vendor_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_vendor_audio.xml
 
@@ -243,10 +250,12 @@ KMGK_USE_QTI_SERVICE := true
 
 #Enable KEYMASTER 4.0
 ENABLE_KM_4_0 := true
-#Should be enabled only on SM8150
+#Should be enabled only on msmnile
 ENABLE_STRONGBOX_KM := true
 
+ifneq ($(strip $(TARGET_USES_RRO)),true)
 DEVICE_PACKAGE_OVERLAYS += device/qcom/msmnile/overlay
+endif
 
 
 ENABLE_VENDOR_RIL_SERVICE := true
