@@ -654,6 +654,8 @@ NQ_NFC += libpn547_fw.so
 NQ_NFC += libpn548ad_fw.so
 NQ_NFC += libnfc-brcm.conf
 NQ_NFC += libnfc-brcm_NCI2_0.conf
+NQ_NFC += libnfc-nci.conf
+NQ_NFC += libnfc-nci_NCI2_0.conf
 NQ_NFC += libnfc-nxp_default.conf
 NQ_NFC += nqnfcee_access.xml
 NQ_NFC += nqnfcse_access.xml
@@ -976,9 +978,7 @@ PRODUCT_PACKAGES += $(IMS_EXT)
 PRODUCT_PACKAGES += android.hidl.manager@1.0-java
 
 PRODUCT_PACKAGES += android.hardware.drm@1.0-impl
-ifneq ($(strip $(TARGET_HAS_LOW_RAM)),true)
 PRODUCT_PACKAGES += android.hardware.drm@1.0-service
-endif
 PRODUCT_PACKAGES += android.hardware.drm@1.1-service.widevine
 PRODUCT_PACKAGES += android.hardware.drm@1.1-service.clearkey
 ifeq ($(strip $(OTA_FLAG_FOR_DRM)),true)
