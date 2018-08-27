@@ -1,13 +1,23 @@
 # Enable AVB 2.0
 BOARD_AVB_ENABLE := true
 
+# Enable chain partition for system, to facilitate system-only OTA in Treble.
+BOARD_AVB_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
+BOARD_AVB_SYSTEM_ALGORITHM := SHA256_RSA2048
+BOARD_AVB_SYSTEM_ROLLBACK_INDEX := 0
+BOARD_AVB_SYSTEM_ROLLBACK_INDEX_LOCATION := 1
 
-# Override heap growth limit due to high display density on device
-PRODUCT_PROPERTY_OVERRIDES += \
-	dalvik.vm.heapgrowthlimit=256m
-
+TARGET_DEFINES_DALVIK_HEAP := true
 $(call inherit-product, device/qcom/common/common64.mk)
-$(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
+
+#Inherit all except heap growth limit from phone-xhdpi-2048-dalvik-heap.mk
+PRODUCT_PROPERTY_OVERRIDES  += \
+	dalvik.vm.heapstartsize=8m \
+	dalvik.vm.heapsize=512m \
+	dalvik.vm.heaptargetutilization=0.75 \
+	dalvik.vm.heapminfree=512k \
+	dalvik.vm.heapmaxfree=8m
+
 
 PRODUCT_NAME := msmnile
 PRODUCT_DEVICE := msmnile
@@ -278,3 +288,6 @@ TARGET_MOUNT_POINTS_SYMLINKS := false
 ifeq ($(ENABLE_VENDOR_IMAGE), true)
  VENDOR_SECURITY_PATCH := 2018-06-05
 endif
+
+TARGET_USES_MKE2FS := true
+$(call inherit-product, build/make/target/product/product_launched_with_p.mk)
