@@ -785,9 +785,6 @@ IMS_SETTINGS := imssettings
 IMS_EXT := ims-ext-common
 IMS_EXT += ConfURIDialer
 
-#Android Telephony library
-PRODUCT_BOOT_JARS += qtiNetworkLib
-
 #CRDA
 CRDA := crda
 CRDA += regdbdump
