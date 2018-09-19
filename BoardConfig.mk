@@ -29,6 +29,7 @@ TARGET_NO_KERNEL := false
 
 TARGET_USES_IOPHAL := true
 
+-include vendor/qcom/msmnile/BoardConfigVendor.mk
 -include $(QCPATH)/common/msmnile/BoardConfigVendor.mk
 
 # Some framework code requires this to enable BT
