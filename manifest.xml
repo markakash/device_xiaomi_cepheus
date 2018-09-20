@@ -855,6 +855,10 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <name>IMlsDap</name>
             <instance>mlsdaphal</instance>
         </interface>
+        <interface>
+            <name>IMlsVnc</name>
+            <instance>mlsvnchal</instance>
+        </interface>
     </hal>
     <!-- SCVE Panorama hal services -->
     <hal format="hidl">
