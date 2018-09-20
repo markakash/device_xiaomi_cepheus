@@ -80,7 +80,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </hal>
     <hal format="hidl" optional="true">
         <name>vendor.display.config</name>
-        <version>1.0-2</version>
+        <version>1.0-5</version>
         <interface>
              <name>IDisplayConfig</name>
              <instance>default</instance>
@@ -467,14 +467,6 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <instance>mlsvnchal</instance>
         </interface>
    </hal>
-   <hal format="hidl" optional="true">
-        <name>vendor.display.config</name>
-        <version>1.4</version>
-        <interface>
-            <name>IDisplayConfig</name>
-            <instance>default</instance>
-        </interface>
-  </hal>
   <hal format="hidl" optional="true">
         <name>vendor.qti.hardware.improvetouch.blobmanager</name>
         <version>1.0</version>
