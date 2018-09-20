@@ -165,7 +165,7 @@ PRODUCT_PACKAGES += \
 
 # Fingerprint feature
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.fingerprint.xml:system/etc/permissions/android.hardware.fingerprint.xml \
+    frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml \
 
 DEVICE_MANIFEST_FILE := device/qcom/msmnile/manifest.xml
 DEVICE_MATRIX_FILE   := device/qcom/common/compatibility_matrix.xml
@@ -188,8 +188,15 @@ PRODUCT_COPY_FILES += \
     device/qcom/msmnile/init.qti.qseecomd.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qti.qseecomd.sh \
     device/qcom/msmnile/init.qti.getbootdevice.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qti.getbootdevice.sh
 
+# Strongbox support
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.strongbox_keystore.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.strongbox_keystore.xml
+
 # MSM IRQ Balancer configuration file
 PRODUCT_COPY_FILES += device/qcom/msmnile/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf
+
+# Powerhint configuration file
+PRODUCT_COPY_FILES += device/qcom/msmnile/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
 
 # Camera configuration file. Shared by passthrough/binderized camera HAL
 PRODUCT_PACKAGES += camera.device@3.2-impl
@@ -289,5 +296,14 @@ ifeq ($(ENABLE_VENDOR_IMAGE), true)
  VENDOR_SECURITY_PATCH := 2018-06-05
 endif
 
+#Property to enable/disable scroll pre-obtain view
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.scroll.preobtain.enable := false
+
 TARGET_USES_MKE2FS := true
+
+PRODUCT_PROPERTY_OVERRIDES += \
+ro.crypto.volume.filenames_mode = "aes-256-cts" \
+ro.crypto.allow_encrypt_override = true
+
 $(call inherit-product, build/make/target/product/product_launched_with_p.mk)

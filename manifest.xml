@@ -272,6 +272,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <name>IGnss</name>
             <instance>default</instance>
         </interface>
+        <fqname>@1.0::IGnss/gnss_vendor</fqname>
     </hal>
     <hal format="hidl">
         <name>vendor.qti.gnss</name>
@@ -377,17 +378,6 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <instance>Uim0</instance>
             <instance>Uim1</instance>
         </interface>
-    </hal>
-    <!-- radio config -->
-    <hal format="hidl">
-        <name>vendor.qti.hardware.radio.config</name>
-           <transport>hwbinder</transport>
-           <version>1.0</version>
-           <interface>
-               <name>IConfig</name>
-               <instance>radioconfig0</instance>
-               <instance>radioconfig1</instance>
-           </interface>
     </hal>
     <!-- legacy qtiradio service -->
     <hal format="hidl">
@@ -555,24 +545,6 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </interface>
     </hal>
     <hal format="hidl">
-        <name>com.quicinc.cne.api</name>
-        <transport>hwbinder</transport>
-        <version>1.1</version>
-        <interface>
-            <name>IApiService</name>
-            <instance>cnd</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>com.quicinc.cne.server</name>
-        <transport>hwbinder</transport>
-        <version>2.2</version>
-        <interface>
-            <name>IServer</name>
-            <instance>cnd</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
         <name>android.hardware.drm</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
@@ -588,6 +560,15 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <fqname>@1.1::IDrmFactory/clearkey</fqname>
         <fqname>@1.1::ICryptoFactory/widevine</fqname>
         <fqname>@1.1::IDrmFactory/widevine</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.qti.esepowermanager</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IEsePowerManager</name>
+            <instance>default</instance>
+        </interface>
     </hal>
  <!--ANT-->
     <hal format="hidl">
@@ -636,17 +617,6 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
            <instance>SIM2</instance>
            <instance>eSE1</instance>
        </interface>
-    </hal>
-    <!-- RIL OEM HOOK -->
-    <hal format="hidl">
-        <name>android.hardware.radio.deprecated</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IOemHook</name>
-            <instance>slot1</instance>
-            <instance>slot2</instance>
-        </interface>
     </hal>
     <!-- VPP Service -->
     <hal format="hidl">
@@ -907,6 +877,15 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <interface>
             <name>IObjectTracker</name>
             <instance>objectTracker</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.qti.power.pasrmanager</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IPasrManager</name>
+            <instance>default</instance>
         </interface>
     </hal>
 </manifest>
