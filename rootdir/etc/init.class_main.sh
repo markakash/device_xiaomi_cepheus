@@ -52,7 +52,7 @@ case "$baseband" in
 esac
 
 case "$baseband" in
-    "msm" | "csfb" | "svlte2a" | "mdm" | "mdm2" | "sglte" | "sglte2" | "dsda2" | "unknown" | "dsda3" | "sdm" | "sdx")
+    "msm" | "csfb" | "svlte2a" | "mdm" | "mdm2" | "sglte" | "sglte2" | "dsda2" | "unknown" | "dsda3" | "sdm" | "sdx" | "sm6")
 
     if [ -f /vendor/firmware_mnt/verinfo/ver_info.txt ]; then
         modem=`cat /vendor/firmware_mnt/verinfo/ver_info.txt |
@@ -78,6 +78,19 @@ case "$baseband" in
                     sed 's/.*TA.\(.*\)/\1/g' | cut -d \- -f 1`
             if [ ! -z $version ]; then
                 if [ "$version" \< "3.0" ]; then
+                    # For OTA targets, ril-daemon will be defined and for new vendor.ril-daemon
+                    # To keep this script agnostic,start both of them as only valid one will start.
+                    start ril-daemon
+                    start vendor.ril-daemon
+                fi
+            fi
+        # For older than JO 3.2 start ril-daemon
+        elif [ "$modem" = "JO" ]; then
+            version=`cat /vendor/firmware_mnt/verinfo/ver_info.txt |
+                    sed -n 's/^[^:]*modem[^:]*:[[:blank:]]*//p' |
+                    sed 's/.*JO.\(.*\)/\1/g' | cut -d \- -f 1`
+            if [ ! -z $version ]; then
+                if [ "$version" \< "3.2" ]; then
                     # For OTA targets, ril-daemon will be defined and for new vendor.ril-daemon
                     # To keep this script agnostic,start both of them as only valid one will start.
                     start ril-daemon
