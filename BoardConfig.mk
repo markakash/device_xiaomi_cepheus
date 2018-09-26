@@ -60,16 +60,15 @@ ifneq ($(AB_OTA_UPDATER),true)
     TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_msm
 endif
 
+TARGET_RECOVERY_FSTAB := device/qcom/msmnile/fstab.qcom
+
 #Enable split vendor image
 ENABLE_VENDOR_IMAGE := true
 ifeq ($(ENABLE_VENDOR_IMAGE), true)
-TARGET_RECOVERY_FSTAB := device/qcom/msmnile/recovery_vendor_variant.fstab
 BOARD_VENDORIMAGE_PARTITION_SIZE := 1073741824
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_COPY_OUT_VENDOR := vendor
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
-else
-TARGET_RECOVERY_FSTAB := device/qcom/msmnile/recovery.fstab
 endif
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x06000000
