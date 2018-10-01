@@ -21,6 +21,9 @@ ro.telephony.default_network=22,22
 dalvik.vm.heapsize=36m
 dev.pm.dyn_samplingrate=1
 
+#Enable virtual display.
+debug.sf.enable_hwc_vds=1
+
 #ro.hdmi.enable=true
 #persist.speaker.prot.enable=false
 qcom.hw.aac.encoder=true
