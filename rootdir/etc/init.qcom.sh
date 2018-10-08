@@ -92,13 +92,6 @@ start_msm_irqbalance_8939()
 	fi
 }
 
-start_msm_irqbalance_msmnile()
-{
-         if [ -f /vendor/bin/msm_irqbalance ]; then
-                start vendor.msm_irqbalance
-         fi
-}
-
 start_msm_irqbalance()
 {
 	if [ -f /vendor/bin/msm_irqbalance ]; then
@@ -260,7 +253,7 @@ case "$target" in
                   ;;
         esac
         ;;
-    "msm8994" | "msm8992" | "msm8998" | "apq8098_latv" | "sdm845" | "sdm710" | "qcs605" | "talos")
+    "msm8994" | "msm8992" | "msm8998" | "apq8098_latv" | "sdm845" | "sdm710" | "qcs605" | "msmnile" | "talos")
         start_msm_irqbalance
         ;;
     "msm8996")
@@ -286,9 +279,6 @@ case "$target" in
         ;;
     "msm8909")
         start_vm_bms
-        ;;
-    "msmnile")
-        start_msm_irqbalance_msmnile
         ;;
     "msm8937")
         start_msm_irqbalance_8939
