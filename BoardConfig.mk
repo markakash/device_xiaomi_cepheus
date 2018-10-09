@@ -29,6 +29,7 @@ TARGET_NO_KERNEL := false
 
 TARGET_USES_IOPHAL := true
 
+-include vendor/qcom/msmnile/BoardConfigVendor.mk
 -include $(QCPATH)/common/msmnile/BoardConfigVendor.mk
 
 # Some framework code requires this to enable BT
@@ -60,26 +61,32 @@ ifneq ($(AB_OTA_UPDATER),true)
     TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_msm
 endif
 
+TARGET_RECOVERY_FSTAB := device/qcom/msmnile/fstab.qcom
+
 #Enable split vendor image
 ENABLE_VENDOR_IMAGE := true
 ifeq ($(ENABLE_VENDOR_IMAGE), true)
-TARGET_RECOVERY_FSTAB := device/qcom/msmnile/recovery_vendor_variant.fstab
 BOARD_VENDORIMAGE_PARTITION_SIZE := 1073741824
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_COPY_OUT_VENDOR := vendor
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
-else
-TARGET_RECOVERY_FSTAB := device/qcom/msmnile/recovery.fstab
 endif
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x06000000
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3221225472
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 10737418240
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 19327352832
 BOARD_PERSISTIMAGE_PARTITION_SIZE := 33554432
 BOARD_METADATAIMAGE_PARTITION_SIZE := 16777216
 BOARD_DTBOIMG_PARTITION_SIZE := 0x0800000
 BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
+
+#----------------------------------------------------------------------
+# Compile Linux Kernel
+#----------------------------------------------------------------------
+ifeq ($(KERNEL_DEFCONFIG),)
+     KERNEL_DEFCONFIG := $(shell ls ./kernel/msm-4.14/arch/arm64/configs/vendor/ | grep sm8..._defconfig)
+endif
 
 BOARD_VENDOR_KERNEL_MODULES := \
     $(KERNEL_MODULES_OUT)/audio_apr.ko \
@@ -107,6 +114,8 @@ BOARD_VENDOR_KERNEL_MODULES := \
     $(KERNEL_MODULES_OUT)/wil6210.ko \
     $(KERNEL_MODULES_OUT)/msm_11ad_proxy.ko \
     $(KERNEL_MODULES_OUT)/rdbg.ko \
+    $(KERNEL_MODULES_OUT)/rmnet_shs.ko \
+    $(KERNEL_MODULES_OUT)/rmnet_perf.ko \
     $(KERNEL_MODULES_OUT)/mpq-adapter.ko \
     $(KERNEL_MODULES_OUT)/mpq-dmx-hw-plugin.ko \
     $(KERNEL_MODULES_OUT)/tspp.ko \

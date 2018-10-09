@@ -154,7 +154,6 @@ PRODUCT_PACKAGES += update_engine \
 #Boot control HAL test app
 PRODUCT_PACKAGES_DEBUG += bootctl
 
-DEVICE_FRAMEWORK_MANIFEST_FILE := device/qcom/msmnile/framework_manifest.xml
 
 #Healthd packages
 PRODUCT_PACKAGES += \
@@ -169,7 +168,9 @@ PRODUCT_COPY_FILES += \
 
 DEVICE_MANIFEST_FILE := device/qcom/msmnile/manifest.xml
 DEVICE_MATRIX_FILE   := device/qcom/common/compatibility_matrix.xml
-#DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := device/qcom/msmnile/vendor_framework_compatibility_matrix.xml
+DEVICE_FRAMEWORK_MANIFEST_FILE := device/qcom/msmnile/framework_manifest.xml
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := device/qcom/msmnile/vendor_framework_compatibility_matrix.xml
+
 
 #ANT+ stack
 PRODUCT_PACKAGES += \
@@ -229,6 +230,12 @@ PRODUCT_COPY_FILES += \
 # USB default HAL
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service
+
+#PASR HAL and APP
+PRODUCT_PACKAGES += \
+    vendor.qti.power.pasrmanager@1.0-service \
+    vendor.qti.power.pasrmanager@1.0-impl \
+    pasrservice
 
 # Sensor conf files
 PRODUCT_COPY_FILES += \
@@ -307,3 +314,7 @@ ro.crypto.volume.filenames_mode = "aes-256-cts" \
 ro.crypto.allow_encrypt_override = true
 
 $(call inherit-product, build/make/target/product/product_launched_with_p.mk)
+
+#Thermal
+PRODUCT_PACKAGES += android.hardware.thermal@1.0-impl \
+                    android.hardware.thermal@1.0-service
