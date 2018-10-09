@@ -119,6 +119,14 @@ case "$target" in
         esac
         ;;
 
+    "talos")
+        case "$soc_hwplatform" in
+            "ADP")
+                setprop vendor.display.lcd_density 160
+                ;;
+        esac
+        ;;
+
     "msm8960")
         # lcd density is write-once. Hence the separate switch case
         case "$soc_hwplatform" in
@@ -237,6 +245,11 @@ case "$target" in
         case "$soc_hwid" in
             294|295|296|297|298|313|353|354|363|364)
                 setprop vendor.opengles.version 196610
+                if [ $soc_hwid = 354 ]
+                then
+                    setprop vendor.media.msm8937.version 1
+                    log -t BOOT -p i "SDM429 early_boot prop set for: HwID '$soc_hwid'"
+                fi
                 ;;
             303|307|308|309|320)
                 # Vulkan is not supported for 8917 variants
@@ -267,10 +280,8 @@ case "$target" in
             *)
                 if [ $fb_width -le 1600 ]; then
                     setprop vendor.display.lcd_density 560
-                    setprop dalvik.vm.heapgrowthlimit 256m
                 else
                     setprop vendor.display.lcd_density 640
-                    setprop dalvik.vm.heapgrowthlimit 512m
                 fi
                 ;;
         esac
@@ -280,12 +291,17 @@ case "$target" in
             *)
                 if [ $fb_width -le 1600 ]; then
                     setprop vendor.display.lcd_density 560
-                    setprop dalvik.vm.heapgrowthlimit 256m
                 else
                     setprop vendor.display.lcd_density 640
-                    setprop dalvik.vm.heapgrowthlimit 512m
                 fi
                 ;;
+        esac
+        ;;
+    "talos")
+        case "$soc_hwplatform" in
+            *)
+                    setprop vendor.display.lcd_density 480
+                    setprop dalvik.vm.heapgrowthlimit 256m
         esac
         ;;
     "sdm710" | "msmpeafowl")
@@ -296,6 +312,20 @@ case "$target" in
                     setprop vendor.media.sdm710.version 1
                 fi
                 ;;
+        esac
+        ;;
+    "talos")
+        case "$soc_hwid" in
+            365|366)
+                sku_ver=`cat /sys/devices/platform/soc/aa00000.qcom,vidc1/sku_version` 2> /dev/null
+                if [ $sku_ver -eq 1 ]; then
+                    setprop vendor.media.sm7150.version 1
+                fi
+                ;;
+            355)
+                setprop vendor.media.sm6150.version 1
+                ;;
+            *)
         esac
         ;;
     "msm8953")
@@ -310,6 +340,14 @@ case "$target" in
                     setprop vendor.media.msm8953.version 1
                 fi
                 ;;
+    #Set property to differentiate SDM660 & SDM455
+    #SOC ID for SDM455 is 385
+    "sdm660")
+        case "$soc_hwid" in
+           385)
+               setprop vendor.media.sdm660.version 1
+        esac
+        ;;
 esac
 
 baseband=`getprop ro.baseband`
