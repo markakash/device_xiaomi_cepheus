@@ -261,6 +261,14 @@ KERNEL_MODULES_OUT := out/target/product/$(PRODUCT_NAME)/$(KERNEL_MODULES_INSTAL
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml
 
+# system prop for opengles version
+#
+# 196608 is decimal for 0x30000 to report version 3
+# 196609 is decimal for 0x30001 to report version 3.1
+# 196610 is decimal for 0x30002 to report version 3.2
+PRODUCT_PROPERTY_OVERRIDES  += \
+    ro.opengles.version=196610
+
 #Exclude vibrator from InputManager
 PRODUCT_COPY_FILES += \
     device/qcom/msmnile/excluded-input-devices.xml:system/etc/excluded-input-devices.xml
