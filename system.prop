@@ -164,7 +164,7 @@ vendor.perf.iop_v3.enable=true
 vendor.perf.gestureflingboost.enable=true
 
 #Expose aux camera for below packages
-vendor.camera.aux.packagelist=org.codeaurora.snapcam
+vendor.camera.aux.packagelist=org.codeaurora.snapcam,com.qualcomm.saltproject2
 
 #enable IZat OptInApp overlay
 persist.vendor.overlay.izat.optin=rro
