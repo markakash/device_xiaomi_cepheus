@@ -285,3 +285,13 @@ service smcinvoked /system/bin/smcinvoked
     class main
     user system
     group system
+
+service vendor.sar_proxy_mgr /vendor/bin/sarproxymgr
+    class main
+    user radio
+    group radio wakelock net_admin
+    capabilities BLOCK_SUSPEND
+    disabled
+
+on property:ro.boot.baseband=mdm
+    start vendor.sar_proxy_mgr
