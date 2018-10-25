@@ -730,6 +730,7 @@ THERMAL_HAL += thermal.msm8996
 THERMAL_HAL += thermal.msm8953
 THERMAL_HAL += thermal.msm8937
 THERMAL_HAL += thermal.msmnile
+THERMAL_HAL += thermal.$(MSMSTEPPE)
 
 #TSLIB_EXTERNAL
 TSLIB_EXTERNAL := corgi
@@ -791,9 +792,6 @@ IMS_SETTINGS := imssettings
 IMS_EXT := ims-ext-common
 IMS_EXT += ConfURIDialer
 
-#Android Telephony library
-PRODUCT_BOOT_JARS += qtiNetworkLib
-
 #CRDA
 CRDA := crda
 CRDA += regdbdump
@@ -829,8 +827,6 @@ PRODUCT_PACKAGES := \
     AlarmProvider \
     Bluetooth \
     BluetoothExt \
-    BATestApp \
-    HidTestApp \
     Calculator \
     Calendar \
     Camera \
@@ -865,6 +861,7 @@ PRODUCT_PACKAGES := \
     wipowerservice \
     Mms \
     QtiDialer \
+    NrNetworkSettingApp \
     qtiNetworkLib \
     TestApp5G
 
