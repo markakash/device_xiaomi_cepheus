@@ -41,7 +41,9 @@ on init
     write /dev/stune/foreground/schedtune.colocate 0
     write /dev/stune/top-app/schedtune.colocate 1
     write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
-    exec u:r:vendor_init:s0 -- /vendor/bin/init.qti.getbootdevice.sh
+    wait /dev/block/platform/soc/1d84000.ufshc
+    symlink /dev/block/platform/soc/1d84000.ufshc /dev/block/bootdevice
+    start logd
     start vendor.qseecomd
     start keymaster-4-0
     start keymaster-sb-4-0
@@ -283,3 +285,13 @@ service smcinvoked /system/bin/smcinvoked
     class main
     user system
     group system
+
+service vendor.sar_proxy_mgr /vendor/bin/sarproxymgr
+    class main
+    user radio
+    group radio wakelock net_admin
+    capabilities BLOCK_SUSPEND
+    disabled
+
+on property:ro.boot.baseband=mdm
+    start vendor.sar_proxy_mgr
