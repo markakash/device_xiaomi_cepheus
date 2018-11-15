@@ -524,4 +524,16 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
            <instance>wifiStats</instance>
        </interface>
    </hal>
+   <hal format="hidl" optional="true">
+       <name>vendor.qti.hardware.biometrics.face</name>
+       <version>1.0</version>
+       <interface>
+         <name>IBiometricsFace</name>
+           <instance>default</instance>
+       </interface>
+       <interface>
+         <name>IBiometricsFaceClientCallback</name>
+           <instance>default</instance>
+       </interface>
+   </hal>
 </compatibility-matrix>
