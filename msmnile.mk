@@ -7,8 +7,11 @@ BOARD_AVB_SYSTEM_ALGORITHM := SHA256_RSA2048
 BOARD_AVB_SYSTEM_ROLLBACK_INDEX := 0
 BOARD_AVB_SYSTEM_ROLLBACK_INDEX_LOCATION := 1
 
+
 TARGET_DEFINES_DALVIK_HEAP := true
 $(call inherit-product, device/qcom/common/common64.mk)
+
+TARGET_ENABLE_MLVM := false
 
 #Inherit all except heap growth limit from phone-xhdpi-2048-dalvik-heap.mk
 PRODUCT_PROPERTY_OVERRIDES  += \
@@ -325,3 +328,14 @@ $(call inherit-product, build/make/target/product/product_launched_with_p.mk)
 #Thermal
 PRODUCT_PACKAGES += android.hardware.thermal@1.0-impl \
                     android.hardware.thermal@1.0-service
+
+
+
+# Enable chain partiton for MLVM boot
+ifeq ($(TARGET_ENABLE_MLVM),true)
+BOARD_AVB_MLVM_BOOT := vm-linux
+BOARD_AVB_MLVM_BOOT_KEY := external/avb/test/data/vm-linux.avbpubkey
+BOARD_AVB_MLVM_BOOT_ROLLBACK_INDEX_LOCATION := 2
+
+BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS  += --chain_partition $(BOARD_AVB_MLVM_BOOT):$(BOARD_AVB_MLVM_BOOT_ROLLBACK_INDEX_LOCATION):$(BOARD_AVB_MLVM_BOOT_KEY)
+endif
