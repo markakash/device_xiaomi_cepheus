@@ -10,6 +10,20 @@ BOARD_AVB_SYSTEM_ROLLBACK_INDEX_LOCATION := 1
 TARGET_DEFINES_DALVIK_HEAP := true
 $(call inherit-product, device/qcom/common/common64.mk)
 
+
+# Enable flag to add mlvm_linux partition as chain partition into vbmeta
+TARGET_ENABLE_MLVM ?= true
+
+# Enable chain partiton for MLVM boot
+ifeq ($(TARGET_ENABLE_MLVM),true)
+BOARD_AVB_MLVM_BOOT := vm-linux
+BOARD_AVB_MLVM_BOOT_PUB_KEY := device/qcom/msmnile/mlvm.avbpubkey
+BOARD_AVB_MLVM_BOOT_PRIV_KEY := device/qcom/msmnile/mlvm.avbprivkey
+BOARD_AVB_MLVM_BOOT_ROLLBACK_INDEX_LOCATION := 2
+
+BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS  += --chain_partition $(BOARD_AVB_MLVM_BOOT):$(BOARD_AVB_MLVM_BOOT_ROLLBACK_INDEX_LOCATION):$(BOARD_AVB_MLVM_BOOT_PUB_KEY)
+endif
+
 #Inherit all except heap growth limit from phone-xhdpi-2048-dalvik-heap.mk
 PRODUCT_PROPERTY_OVERRIDES  += \
 	dalvik.vm.heapstartsize=8m \
