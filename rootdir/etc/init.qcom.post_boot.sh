@@ -265,6 +265,7 @@ function configure_read_ahead_kb_values() {
         echo 128 > /sys/block/mmcblk0rpmb/queue/read_ahead_kb
         echo 128 > /sys/block/dm-0/queue/read_ahead_kb
         echo 128 > /sys/block/dm-1/queue/read_ahead_kb
+        echo 128 > /sys/block/dm-2/queue/read_ahead_kb
     else
         echo 512 > /sys/block/mmcblk0/bdi/read_ahead_kb
         echo 512 > /sys/block/mmcblk0/queue/read_ahead_kb
@@ -272,6 +273,7 @@ function configure_read_ahead_kb_values() {
         echo 512 > /sys/block/mmcblk0rpmb/queue/read_ahead_kb
         echo 512 > /sys/block/dm-0/queue/read_ahead_kb
         echo 512 > /sys/block/dm-1/queue/read_ahead_kb
+        echo 512 > /sys/block/dm-2/queue/read_ahead_kb
     fi
 }
 
@@ -332,6 +334,8 @@ if [ "$ProductName" == "msmnile" ]; then
       # Enable ZRAM
       configure_zram_parameters
       configure_read_ahead_kb_values
+      echo 0 > /proc/sys/vm/page-cluster
+      echo 100 > /proc/sys/vm/swappiness
 else
     arch_type=`uname -m`
     MemTotalStr=`cat /proc/meminfo | grep MemTotal`
@@ -2698,7 +2702,7 @@ case "$target" in
 
             # Start Host based Touch processing
             case "$hw_platform" in
-              "MTP" | "Surf" | "RCM" | "QRD" )
+              "MTP" | "Surf" | "RCM" | "QRD" | "HDK" )
                   start_hbtp
                   ;;
             esac
@@ -2844,6 +2848,10 @@ case "$target" in
       echo 85 > /proc/sys/kernel/sched_group_downmigrate
       echo 100 > /proc/sys/kernel/sched_group_upmigrate
       echo 1 > /proc/sys/kernel/sched_walt_rotate_big_tasks
+
+      # colocation v3 settings
+      echo 740000 > /proc/sys/kernel/sched_little_cluster_coloc_fmin_khz
+
 
       # configure governor settings for little cluster
       echo "schedutil" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
@@ -3016,6 +3024,23 @@ case "$target" in
 	            echo 250 > $llccbw/bw_hwmon/up_scale
 	            echo 1600 > $llccbw/bw_hwmon/idle_mbps
 	        done
+
+		for npubw in $device/*npu-npu-ddr-bw/devfreq/*npu-npu-ddr-bw
+		do
+		    echo 1 > /sys/devices/virtual/npu/msm_npu/pwr
+		    echo "bw_hwmon" > $npubw/governor
+		    echo 40 > $npubw/polling_interval
+		    echo "1144 1720 2086 2929 3879 5931 6881" > $npubw/bw_hwmon/mbps_zones
+		    echo 4 > $npubw/bw_hwmon/sample_ms
+		    echo 80 > $npubw/bw_hwmon/io_percent
+		    echo 20 > $npubw/bw_hwmon/hist_memory
+		    echo 10 > $npubw/bw_hwmon/hyst_length
+		    echo 30 > $npubw/bw_hwmon/down_thres
+		    echo 0 > $npubw/bw_hwmon/guard_band_mbps
+		    echo 250 > $npubw/bw_hwmon/up_scale
+		    echo 0 > $npubw/bw_hwmon/idle_mbps
+		    echo 0 > /sys/devices/virtual/npu/msm_npu/pwr
+		done
 
 	        #Enable mem_latency governor for L3, LLCC, and DDR scaling
 	        for memlat in $device/*cpu*-lat/devfreq/*cpu*-lat

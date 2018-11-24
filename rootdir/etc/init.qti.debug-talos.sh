@@ -74,7 +74,8 @@ enable_talos_tracing_events()
 
     #rmph_send_msg
     echo 1 > /sys/kernel/debug/tracing/events/rpmh/rpmh_send_msg/enable
-
+    #SCM Tracing enabling
+    echo 1 > /sys/kernel/debug/tracing/events/scm/enable
     #enable aop with timestamps
     echo 33 0x680000 > /sys/bus/coresight/devices/coresight-tpdm-swao-0/cmb_msr
     echo 48 0xC0 > /sys/bus/coresight/devices/coresight-tpdm-swao-0/cmb_msr
@@ -1312,6 +1313,28 @@ config_talos_dcc_memnoc_mccc()
 
 }
 
+config_talos_dcc_gpu()
+{
+    #GCC
+    echo 0x171004 > $DCC_PATH/config
+    echo 0x171154 > $DCC_PATH/config
+    echo 0x17100C > $DCC_PATH/config
+    echo 0x171018 > $DCC_PATH/config
+
+    #GPUCC
+    echo 0x509106C > $DCC_PATH/config
+    echo 0x509100C > $DCC_PATH/config
+    echo 0x5091010 > $DCC_PATH/config
+    echo 0x5091014 > $DCC_PATH/config
+    echo 0x5091070 > $DCC_PATH/config
+    echo 0x5091074 > $DCC_PATH/config
+    echo 0x5091098 > $DCC_PATH/config
+    echo 0x5091004 > $DCC_PATH/config
+    echo 0x509109C > $DCC_PATH/config
+    echo 0x5091078 > $DCC_PATH/config
+    echo 0x5091054 > $DCC_PATH/config
+}
+
 config_talos_dcc_pdc_display()
 {
     #PDC_DISPLAY
@@ -1738,6 +1761,7 @@ enable_talos_dcc_config()
     #config_talos_dcc_axi_pc
     #config_talos_dcc_apb_pc
     config_talos_dcc_memnoc_mccc
+    config_talos_dcc_gpu
     #config_talos_dcc_pdc_display
     #config_talos_dcc_aop_rpmh
     #config_talos_dcc_lmh
