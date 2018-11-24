@@ -238,6 +238,15 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </interface>
     </hal>
     <hal format="hidl" optional="true">
+        <name>vendor.qti.hardware.data.connection</name>
+        <version>1.0</version>
+        <interface>
+            <name>IDataConnection</name>
+            <instance>slot1</instance>
+            <instance>slot2</instance>
+        </interface>
+    </hal>
+    <hal format="hidl" optional="true">
         <name>vendor.qti.hardware.fm</name>
         <version>1.0</version>
         <interface>
@@ -513,6 +522,18 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
        <interface>
            <name>IWifiStats</name>
            <instance>wifiStats</instance>
+       </interface>
+   </hal>
+   <hal format="hidl" optional="true">
+       <name>vendor.qti.hardware.biometrics.face</name>
+       <version>1.0</version>
+       <interface>
+         <name>IBiometricsFace</name>
+           <instance>default</instance>
+       </interface>
+       <interface>
+         <name>IBiometricsFaceClientCallback</name>
+           <instance>default</instance>
        </interface>
    </hal>
 </compatibility-matrix>
