@@ -30,7 +30,7 @@
 #
 # start atfwd daemon
 #
-atfwd_status=`getprop persist.radio.atfwd.start`
+atfwd_status=`getprop persist.vendor.radio.atfwd.start`
 baseband=`getprop ro.baseband`
 
 #Do not start atfwd for sda, apq, qcs
@@ -39,6 +39,6 @@ case "$baseband" in
         setprop persist.vendor.radio.atfwd.start false;;
     *)
         if [ "$atfwd_status" = "true" ]; then
-            start atfwd
+            start vendor.atfwd
         fi
 esac

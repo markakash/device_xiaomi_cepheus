@@ -348,6 +348,10 @@ else
         echo 0 > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
         echo 0 > /sys/module/process_reclaim/parameters/enable_process_reclaim
         disable_core_ctl
+        # Enable oom_reaper for Go devices
+        if [ -f /proc/sys/vm/reap_mem_on_sigkill ]; then
+            echo 1 > /proc/sys/vm/reap_mem_on_sigkill
+        fi
     else
 
         # Read adj series and set adj threshold for PPR and ALMK.
@@ -2500,7 +2504,9 @@ case "$target" in
             echo "cpufreq" > /sys/class/devfreq/soc:qcom,mincpubw/governor
 
             # Start cdsprpcd only for sdm660 and disable for sdm630
-            start vendor.cdsprpcd
+            if [ "$soc_id" -eq "317" ]; then
+                start vendor.cdsprpcd
+            fi
 
             # Start Host based Touch processing
                 case "$hw_platform" in
@@ -2812,9 +2818,9 @@ case "$target" in
 esac
 
 case "$target" in
-    "talos")
+    "sm6150")
 
-        #Apply settings for talos
+        #Apply settings for sm6150
         # Set the default IRQ affinity to the silver cluster. When a
         # CPU is isolated/hotplugged, the IRQ affinity is adjusted
         # to one of the CPU from the default IRQ affinity mask.
@@ -2916,6 +2922,9 @@ case "$target" in
 	      echo 10 > $memlat/polling_interval
 	      echo 400 > $memlat/mem_latency/ratio_ceil
           done
+
+            #Gold L3 ratio ceil
+          echo 4000 > /sys/class/devfreq/soc:qcom,cpu6-cpu-l3-lat/mem_latency/ratio_ceil
 
 	  #Enable cdspl3 governor for L3 cdsp nodes
 	  for l3cdsp in $device/*cdsp-cdsp-l3-lat/devfreq/*cdsp-cdsp-l3-lat
@@ -3048,6 +3057,12 @@ case "$target" in
 	            echo "mem_latency" > $memlat/governor
 	            echo 10 > $memlat/polling_interval
 	            echo 400 > $memlat/mem_latency/ratio_ceil
+                done
+
+                #Enable cdspl3 governor for L3 cdsp nodes
+                for l3cdsp in $device/*cdsp-cdsp-l3-lat/devfreq/*cdsp-cdsp-l3-lat
+                do
+                    echo "cdspl3" > $l3cdsp/governor
                 done
 
 	        #Enable compute governor for gold latfloor
@@ -3188,7 +3203,9 @@ case "$target" in
 
             # Turn on sleep modes.
             echo 0 > /sys/module/lpm_levels/parameters/sleep_disabled
-            echo 100 > /proc/sys/vm/swappiness
+
+            # Set Memory parameters
+            configure_memory_parameters
             ;;
         esac
     ;;
@@ -4267,7 +4284,7 @@ case "$target" in
         start mpdecision
         echo 512 > /sys/block/mmcblk0/bdi/read_ahead_kb
     ;;
-    "msm8994" | "msm8992" | "msm8996" | "msm8998" | "sdm660" | "apq8098_latv" | "sdm845" | "sdm710" | "msmnile" | "talos")
+    "msm8994" | "msm8992" | "msm8996" | "msm8998" | "sdm660" | "apq8098_latv" | "sdm845" | "sdm710" | "msmnile" | "qcs605" | "sm6150")
         setprop vendor.post_boot.parsed 1
     ;;
     "apq8084")

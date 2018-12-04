@@ -50,7 +50,7 @@ if [ -f /sys/class/drm/card0-DSI-1/modes ]; then
     echo "detect" > /sys/class/drm/card0-DSI-1/status
     mode_file=/sys/class/drm/card0-DSI-1/modes
     while read line; do
-        fb_width=${line%x*};
+        fb_width=${line%%x*};
         break;
     done < $mode_file
 elif [ -f /sys/class/graphics/fb0/virtual_size ]; then
@@ -119,7 +119,7 @@ case "$target" in
         esac
         ;;
 
-    "talos")
+    "sm6150")
         case "$soc_hwplatform" in
             "ADP")
                 setprop vendor.display.lcd_density 160
