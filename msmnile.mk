@@ -11,7 +11,7 @@ BOARD_AVB_SYSTEM_ROLLBACK_INDEX_LOCATION := 1
 TARGET_DEFINES_DALVIK_HEAP := true
 $(call inherit-product, device/qcom/common/common64.mk)
 
-TARGET_ENABLE_MLVM := true
+TARGET_ENABLE_MLVM := false
 
 #Inherit all except heap growth limit from phone-xhdpi-2048-dalvik-heap.mk
 PRODUCT_PROPERTY_OVERRIDES  += \
