@@ -308,24 +308,7 @@ case "$target" in
                 fi
                 ;;
         esac
-        if [ -d  /sys/vservices/server-sessions/microvisor:server.linux_mlvm ]; then
-        	#below is to retrieve the dev block from the commandline
-			vm_system_partition="$(grep -o "vm_system=/dev/sda[0-9]*" /proc/cmdline | awk '{split($0,a, "=");print a[2]}' | awk '{split($0,a, "/");print a[3]}')"
-			echo $vm_system_partition > /sys/vservices/server-sessions/microvisor:server.linux_mlvm/core:0/create_service
-			echo com.ok-labs.block > /sys/vservices/server-sessions/microvisor:server.linux_mlvm/${vm_system_partition}:1/protocol
-			echo 1 > /sys/vservices/server-sessions/microvisor:server.linux_mlvm/${vm_system_partition}:1/start
-			vm_ret=$?
-			vm_retry_count=0
-			while [ $vm_ret != 0 ]; do
-				 echo 1 > /sys/vservices/server-sessions/microvisor:server.linux_mlvm/${vm_system_partition}:1/start
-				 vm_ret=$?
-				 ((vm_retry_count++))
-				 if [ $vm_retry_count == 20 ]; then
-				 	 break
-				 fi
-			done
-		fi
-		;;
+        ;;
     "sdm710" | "msmpeafowl")
         case "$soc_hwplatform" in
             *)
