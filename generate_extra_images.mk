@@ -70,9 +70,9 @@ DUMMY_MLVM_IMAGE := $(PRODUCT_OUT)/dummy_mlvm.img
 ALL_DEFAULT_INSTALLED_MODULES += $(DUMMY_MLVM_IMAGE)
 
 $(DUMMY_MLVM_IMAGE): $(AVBTOOL)
-   $(call pretty,"Target dummy MLVM  image: ")
-   $(shell  dd if=/dev/zero of=$(DUMMY_MLVM_IMAGE) bs=1024 count=1)
-   $(shell  $(AVBTOOL) add_hash_footer \
+	@echo "Target dummy MLVM  image"
+	$(shell  dd if=/dev/zero of=$(DUMMY_MLVM_IMAGE) bs=1024 count=1)
+	$(shell  $(AVBTOOL) add_hash_footer \
         --image $(DUMMY_MLVM_IMAGE) \
         --partition_size 0x02000000 \
         --partition_name vm-linux \
