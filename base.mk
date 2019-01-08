@@ -1014,6 +1014,7 @@ endif
 PRODUCT_PACKAGES += move_wifi_data.sh
 PRODUCT_PACKAGES += librs_jni
 
+PRODUCT_PACKAGES += init.qti.manifest_sku.sh
 # Filesystem management tools
 PRODUCT_PACKAGES += \
     make_ext4fs \
