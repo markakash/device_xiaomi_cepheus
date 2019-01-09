@@ -8,7 +8,7 @@ BOARD_AVB_SYSTEM_ROLLBACK_INDEX := 0
 BOARD_AVB_SYSTEM_ROLLBACK_INDEX_LOCATION := 1
 
 TARGET_DEFINES_DALVIK_HEAP := true
-$(call inherit-product, device/qcom/common/common64.mk)
+$(call inherit-product, device/qcom/qssi/common64.mk)
 
 #Inherit all except heap growth limit from phone-xhdpi-2048-dalvik-heap.mk
 PRODUCT_PROPERTY_OVERRIDES  += \
@@ -48,6 +48,7 @@ TARGET_USES_QMAA_OVERRIDE_VIDEO   := false
 TARGET_USES_QMAA_OVERRIDE_CAMERA  := false
 TARGET_USES_QMAA_OVERRIDE_GFX     := false
 TARGET_USES_QMAA_OVERRIDE_WFD     := false
+TARGET_USES_QMAA_OVERRIDE_DATA    := false
 
 ###########
 #QMAA flags ends
@@ -55,6 +56,20 @@ TARGET_USES_QMAA_OVERRIDE_WFD     := false
 
 # RRO configuration
 TARGET_USES_RRO := true
+
+TARGET_USES_QMAA := false
+###QMAA Indicator Start###
+
+#Full QMAA HAL List
+QMAA_HAL_LIST := audio video camera display sensors
+
+#Indicator for each enabled QMAA HAL for this target. Each tech team
+#locally verified their QMAA HAL and ensure code is updated/merged,
+#then add their HAL module name to QMAA_ENABLED_HAL_MODULES as a QMAA
+#enabling completion indicator.
+QMAA_ENABLED_HAL_MODULES :=
+
+###QMAA Indicator End###
 
 #Default vendor image configuration
 ifeq ($(ENABLE_VENDOR_IMAGE),)
@@ -112,9 +127,9 @@ ifneq ($(TARGET_DISABLE_DASH), true)
     PRODUCT_BOOT_JARS += qcmediaplayer
 endif
 
-ifneq ($(strip $(QCPATH)),)
-    PRODUCT_BOOT_JARS += WfdCommon
-endif
+#ifneq ($(strip $(QCPATH)),)
+#    PRODUCT_BOOT_JARS += WfdCommon
+#endif
 
 ifneq ($(strip $(QCPATH)),)
     PRODUCT_BOOT_JARS += libprotobuf-java_mls
@@ -333,10 +348,6 @@ ifeq ($(ENABLE_VENDOR_IMAGE), true)
  VENDOR_SECURITY_PATCH := 2018-06-05
 endif
 
-#Property to enable/disable scroll pre-obtain view
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.scroll.preobtain.enable := false
-
 TARGET_USES_MKE2FS := true
 
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -344,3 +355,13 @@ ro.crypto.volume.filenames_mode = "aes-256-cts" \
 ro.crypto.allow_encrypt_override = true
 
 $(call inherit-product, build/make/target/product/product_launched_with_p.mk)
+
+
+###################################################################################
+# This is the End of target.mk file.
+# Now, Pickup other split product.mk files:
+###################################################################################
+# TODO: Relocate the system product.mk files pickup into qssi lunch, once it is up.
+$(call inherit-product-if-exists, vendor/qcom/defs/product-defs/system/*.mk)
+$(call inherit-product-if-exists, vendor/qcom/defs/product-defs/vendor/*.mk)
+###################################################################################
