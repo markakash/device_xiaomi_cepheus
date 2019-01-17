@@ -1722,6 +1722,11 @@ config_talos_dcc_bcm_seq_hang()
 
 config_talos_dcc_pll()
 {
+    echo 0x18282004 1 > $DCC_PATH/config
+    echo 0x18325F6C 1 > $DCC_PATH/config
+    echo 0x1808012C 1 > $DCC_PATH/config
+    echo 0x1832582C 1 > $DCC_PATH/config
+    echo 0x18280004 1 > $DCC_PATH/config
     echo 0x18284038 1 > $DCC_PATH/config
     echo 0x18284000 2 > $DCC_PATH/config
 }
