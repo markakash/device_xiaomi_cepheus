@@ -37,4 +37,7 @@
        <item>"wifi_br0"</item>
    </string-array>
 
+   <!-- Device supports Sustained Performance Mode-->
+   <bool name="config_sustainedPerformanceModeSupported">true</bool>
+
 </resources>
