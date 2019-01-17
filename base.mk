@@ -1006,8 +1006,12 @@ PRODUCT_PACKAGES += android.hidl.manager@1.0-java
 
 PRODUCT_PACKAGES += android.hardware.drm@1.0-impl
 PRODUCT_PACKAGES += android.hardware.drm@1.0-service
-PRODUCT_PACKAGES += android.hardware.drm@1.1-service.widevine
 PRODUCT_PACKAGES += android.hardware.drm@1.1-service.clearkey
+
+ifneq ($(strip $(ENABLE_HYP)),false)
+PRODUCT_PACKAGES += android.hardware.drm@1.1-service.widevine
+endif
+
 ifeq ($(strip $(OTA_FLAG_FOR_DRM)),true)
 PRODUCT_PACKAGES += move_widevine_data.sh
 endif
