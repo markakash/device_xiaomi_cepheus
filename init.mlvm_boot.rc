@@ -1,4 +1,4 @@
-service vendor.mlvm_boot /vendor/etc/mlvm_boot.sh
+service vendor.mlvm_boot /vendor/bin/init.mlvm_boot.sh
     class core
     user system
     group system
