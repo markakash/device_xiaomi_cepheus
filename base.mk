@@ -38,6 +38,7 @@ QCOM_BOARD_PLATFORMS += msmnile_au
 QCOM_BOARD_PLATFORMS += qcs605
 QCOM_BOARD_PLATFORMS += $(MSMSTEPPE)
 QCOM_BOARD_PLATFORMS += $(TRINKET)
+QCOM_BOARD_PLATFORMS += sdmshrike_au
 
 QSD8K_BOARD_PLATFORMS := qsd8k
 
@@ -1005,14 +1006,19 @@ PRODUCT_PACKAGES += android.hidl.manager@1.0-java
 
 PRODUCT_PACKAGES += android.hardware.drm@1.0-impl
 PRODUCT_PACKAGES += android.hardware.drm@1.0-service
-PRODUCT_PACKAGES += android.hardware.drm@1.1-service.widevine
 PRODUCT_PACKAGES += android.hardware.drm@1.1-service.clearkey
+
+ifneq ($(strip $(ENABLE_HYP)),false)
+PRODUCT_PACKAGES += android.hardware.drm@1.1-service.widevine
+endif
+
 ifeq ($(strip $(OTA_FLAG_FOR_DRM)),true)
 PRODUCT_PACKAGES += move_widevine_data.sh
 endif
 PRODUCT_PACKAGES += move_wifi_data.sh
 PRODUCT_PACKAGES += librs_jni
 
+PRODUCT_PACKAGES += init.qti.manifest_sku.sh
 # Filesystem management tools
 PRODUCT_PACKAGES += \
     make_ext4fs \
