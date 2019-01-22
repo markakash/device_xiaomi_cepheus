@@ -37,8 +37,8 @@
             Resources="" />
 
         <!--sustained performance-->
-        <!-- B CPU - Cluster min freq ~1.03GHz -->
-        <!-- L CPU - Cluster min freq ~1.05GHz -->
+        <!-- B CPU - Cluster min freq ~1.05GHz -->
+        <!-- L CPU - Cluster min freq ~1.03GHz -->
         <!-- B CPU - Cluster max freq ~1.80GHz -->
         <!-- GPU - min pwrlevel 2 -->
         <!-- GPU - max pwrlevel 0 -->
