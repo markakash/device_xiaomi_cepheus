@@ -755,6 +755,7 @@ THERMAL_HAL += thermal.msm8953
 THERMAL_HAL += thermal.msm8937
 THERMAL_HAL += thermal.msmnile
 THERMAL_HAL += thermal.$(MSMSTEPPE)
+THERMAL_HAL += thermal.$(TRINKET)
 
 #TSLIB_EXTERNAL
 TSLIB_EXTERNAL := corgi
