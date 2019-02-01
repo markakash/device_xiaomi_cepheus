@@ -415,6 +415,7 @@ LIBCAMERA += camera.msm8996
 LIBCAMERA += camera.msm8998
 LIBCAMERA += camera.apq8098_latv
 LIBCAMERA += camera.sdm660
+LIBCAMERA += camera.trinket
 LIBCAMERA += camera.msm8952
 LIBCAMERA += camera.msm8937
 LIBCAMERA += camera.msm8953
