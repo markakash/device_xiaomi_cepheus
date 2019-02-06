@@ -902,10 +902,6 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <name>IBiometricsFace</name>
             <instance>default</instance>
         </interface>
-        <interface>
-            <name>IBiometricsFaceClientCallback</name>
-            <instance>default</instance>
-        </interface>
     </hal>
     <!-- seccam service -->
     <hal format="hidl">

@@ -531,10 +531,6 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
          <name>IBiometricsFace</name>
            <instance>default</instance>
        </interface>
-       <interface>
-         <name>IBiometricsFaceClientCallback</name>
-           <instance>default</instance>
-       </interface>
    </hal>
    <hal format="hidl" optional="true">
        <name>vendor.qti.hardware.seccam</name>
