@@ -282,6 +282,18 @@ config_trinket_dcc_gpu()
     echo 0x5995004 > $DCC_PATH/config
 }
 
+config_trinket_dcc_gcc_mm()
+{
+    echo 0x01480140 > $DCC_PATH/config
+    echo 0x01481140 > $DCC_PATH/config
+    echo 0x0148014C > $DCC_PATH/config
+    echo 0x0148114C > $DCC_PATH/config
+    echo 0x01415004 > $DCC_PATH/config
+    echo 0x01416004 > $DCC_PATH/config
+    echo 0x0146B00C > $DCC_PATH/config
+    echo 0x0146B010 > $DCC_PATH/config
+}
+
 # Function trinket DCC configuration
 enable_trinket_dcc_config()
 {
@@ -302,6 +314,7 @@ enable_trinket_dcc_config()
 
     config_trinket_dcc_bimc
     config_trinket_dcc_gpu
+    config_trinket_dcc_gcc_mm
 
     echo  1 > $DCC_PATH/enable
 }
