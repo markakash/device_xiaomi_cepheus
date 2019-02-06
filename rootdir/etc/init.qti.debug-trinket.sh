@@ -244,6 +244,44 @@ config_trinket_dcc_bimc()
 
 }
 
+config_trinket_dcc_gpu()
+{
+    #GCC
+    echo 0x141102C > $DCC_PATH/config
+    echo 0x1436004 > $DCC_PATH/config
+    echo 0x1471154 > $DCC_PATH/config
+    echo 0x141050C > $DCC_PATH/config
+    echo 0x143600C > $DCC_PATH/config
+    echo 0x1436018 > $DCC_PATH/config
+    echo 0x1480220 > $DCC_PATH/config
+    echo 0x147C000 > $DCC_PATH/config
+    echo 0x147D000 > $DCC_PATH/config
+    echo 0x14800A0 > $DCC_PATH/config
+    echo 0x1480164 > $DCC_PATH/config
+    echo 0x14801E4 > $DCC_PATH/config
+    echo 0x1436048 > $DCC_PATH/config
+    echo 0x1436040 > $DCC_PATH/config
+
+    #GPUCC
+    echo 0x5991004 > $DCC_PATH/config
+    echo 0x599100c > $DCC_PATH/config
+    echo 0x5991010 > $DCC_PATH/config
+    echo 0x5991014 > $DCC_PATH/config
+    echo 0x5991054 > $DCC_PATH/config
+    echo 0x5991060 > $DCC_PATH/config
+    echo 0x599106c > $DCC_PATH/config
+    echo 0x5991070 > $DCC_PATH/config
+    echo 0x5991074 > $DCC_PATH/config
+    echo 0x5991078 > $DCC_PATH/config
+    echo 0x599107c > $DCC_PATH/config
+    echo 0x599108c > $DCC_PATH/config
+    echo 0x5991098 > $DCC_PATH/config
+    echo 0x599109c > $DCC_PATH/config
+    echo 0x5991540 > $DCC_PATH/config
+    echo 0x5995000 > $DCC_PATH/config
+    echo 0x5995004 > $DCC_PATH/config
+}
+
 # Function trinket DCC configuration
 enable_trinket_dcc_config()
 {
@@ -263,6 +301,7 @@ enable_trinket_dcc_config()
     echo 3 > $DCC_PATH/curr_list
 
     config_trinket_dcc_bimc
+    config_trinket_dcc_gpu
 
     echo  1 > $DCC_PATH/enable
 }
