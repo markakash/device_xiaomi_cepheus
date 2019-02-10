@@ -36,7 +36,7 @@ TARGET_USES_QCOM_BSP := false
 #true means QMAA is enabled for system
 #false means QMAA is disabled for system
 
-TARGET_USES_QMAA := true
+TARGET_USES_QMAA := false
 
 #QMAA tech team flag to override global QMAA per tech team
 #true means overriding global QMAA for this tech area
@@ -57,7 +57,6 @@ TARGET_USES_QMAA_OVERRIDE_DATA    := false
 # RRO configuration
 TARGET_USES_RRO := true
 
-TARGET_USES_QMAA := false
 ###QMAA Indicator Start###
 
 #Full QMAA HAL List
@@ -159,7 +158,7 @@ PRODUCT_COPY_FILES += hardware/qcom/media/conf_files/msmnile/system_properties.x
 PRODUCT_PACKAGES += android.hardware.media.omx@1.0-impl
 
 # Audio configuration file
--include $(TOPDIR)hardware/qcom/audio/configs/msmnile/msmnile.mk
+-include $(TOPDIR)vendor/qcom/opensource/audio-hal/primary-hal/configs/msmnile/msmnile.mk
 
 #Audio DLKM
 AUDIO_DLKM := audio_apr.ko
@@ -200,6 +199,14 @@ PRODUCT_PACKAGES += update_engine \
 #Boot control HAL test app
 PRODUCT_PACKAGES_DEBUG += bootctl
 
+PRODUCT_STATIC_BOOT_CONTROL_HAL := \
+  bootctrl.msmnile \
+  librecovery_updater_msm \
+  libz \
+  libcutils
+
+PRODUCT_PACKAGES += \
+  update_engine_sideload
 
 #Healthd packages
 PRODUCT_PACKAGES += \
@@ -227,7 +234,7 @@ PRODUCT_PACKAGES += \
 
 # Display/Graphics
 PRODUCT_PACKAGES += \
-    android.hardware.configstore@1.0-service \
+    android.hardware.configstore@1.2-service \
     android.hardware.broadcastradio@1.0-impl
 
 # FBE support
