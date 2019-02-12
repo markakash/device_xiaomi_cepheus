@@ -126,6 +126,62 @@ enable_talos_stm_events()
     enable_talos_tracing_events
 }
 
+# function to enable ftrace event transfer to Coresight STM specific to Moorea
+enable_moorea_stm_events()
+{
+    # bail out if its perf config
+    if [ ! -d /sys/module/msm_rtb ]
+    then
+        return
+    fi
+    # bail out if coresight isn't present
+    if [ ! -d /sys/bus/coresight ]
+    then
+        return
+    fi
+    # bail out if ftrace events aren't present
+    if [ ! -d /sys/kernel/debug/tracing/events ]
+    then
+        return
+    fi
+
+    echo 0 > /sys/bus/coresight/devices/coresight-stm/hwevent_enable
+    echo 0xff > /sys/bus/coresight/devices/coresight-stm/hwevent_enable
+
+    echo 0x06001020 0xd > /sys/bus/coresight/devices/coresight-hwevent/setreg
+    echo 48 0x7 > /sys/bus/coresight/devices/coresight-tpdm-swao-0/cmb_msr
+    echo 33 0x1b01 > /sys/bus/coresight/devices/coresight-tpdm-swao-0/cmb_msr
+    echo 1 > /sys/bus/coresight/devices/coresight-tpdm-swao-0/mcmb_lanes_select
+    echo 1 0 > /sys/bus/coresight/devices/coresight-tpdm-swao-0/cmb_mode
+    echo 1 > /sys/bus/coresight/devices/coresight-tgu-ipcb/reset_tgu
+    echo 0 0 0 0x11111111 > /sys/bus/coresight/devices/coresight-tgu-ipcb/set_group
+    echo 0 1 0 0x11111111 > /sys/bus/coresight/devices/coresight-tgu-ipcb/set_group
+    echo 0 2 0 0x11111111 > /sys/bus/coresight/devices/coresight-tgu-ipcb/set_group
+    echo 0 3 0 0x11113111 > /sys/bus/coresight/devices/coresight-tgu-ipcb/set_group
+    echo 0 4 0 0x11111111 > /sys/bus/coresight/devices/coresight-tgu-ipcb/set_group
+    echo 0 0 0x3 > /sys/bus/coresight/devices/coresight-tgu-ipcb/set_condition
+    echo 0 1 0x40000 > /sys/bus/coresight/devices/coresight-tgu-ipcb/set_condition
+    echo 0 2 0x20000 > /sys/bus/coresight/devices/coresight-tgu-ipcb/set_condition
+    echo 0 0 0x2000 > /sys/bus/coresight/devices/coresight-tgu-ipcb/set_select
+    echo 1 > /sys/bus/coresight/devices/coresight-tgu-ipcb/enable_tgu
+
+
+    echo $etr_size > /sys/bus/coresight/devices/coresight-tmc-etr/mem_size
+    echo contig > /sys/bus/coresight/devices/coresight-tmc-etr/mem_type
+    echo 1 > /sys/bus/coresight/devices/coresight-tmc-etr/$sinkenable
+    echo 1 > /sys/bus/coresight/devices/coresight-stm/$srcenable
+
+    echo 1 > /sys/kernel/debug/tracing/events/rpmh/rpmh_send_msg/enable
+
+    echo 1 > /sys/kernel/debug/tracing/tracing_on
+
+    echo 64 > /sys/bus/coresight/devices/coresight-tpdm-swao-0/enable_datasets
+    echo 1 > /sys/bus/coresight/devices/coresight-tpdm-swao-0/enable_source
+
+    echo {class: aopetb, sink: CIRC} > /sys/kernel/debug/aop_send_message
+    enable_talos_tracing_events
+}
+
 config_talos_dcc_gladiator()
 {
     #Gladiator
@@ -1854,8 +1910,22 @@ enable_talos_debug()
     echo "talos debug"
     srcenable="enable_source"
     sinkenable="enable_sink"
-    echo "Enabling STM events on talos."
-    enable_talos_stm_events
+    if [ -f /sys/devices/soc0/soc_id ]
+    then
+        soc_id=`cat /sys/devices/soc0/soc_id`
+    else
+        soc_id=`cat /sys/devices/system/soc/soc0/soc_id`
+    fi
+    # Check for Moorea/ talos stm trace
+    if [ "$soc_id" = 365 ] || [ "$soc_id" = 366 ]
+    then
+        echo "Enabling STM events on Moorea."
+        enable_moorea_stm_events
+    else
+        echo "Enabling STM events on talos."
+        enable_talos_stm_events
+    fi
+
     if [ "$ftrace_disable" != "Yes" ]; then
         enable_talos_ftrace_event_tracing
     fi
