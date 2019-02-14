@@ -1731,6 +1731,57 @@ config_talos_dcc_pll()
     echo 0x18284000 2 > $DCC_PATH/config
 }
 
+enable_moorea_specific_register()
+{
+    #LLCC1_LLCC_FEWC_FIFO_STATUS
+    echo 0x92B2100 > $DCC_PATH/config
+
+    #ADSP registers
+    echo 0x62B90210 > $DCC_PATH/config
+    echo 0x62B90230 > $DCC_PATH/config
+    echo 0x62B90250 > $DCC_PATH/config
+    echo 0x62B90270 > $DCC_PATH/config
+    echo 0x62B90290 > $DCC_PATH/config
+    echo 0x62B902B0 > $DCC_PATH/config
+    echo 0x62B90208 > $DCC_PATH/config
+    echo 0x62B90228 > $DCC_PATH/config
+    echo 0x62B90248 > $DCC_PATH/config
+    echo 0x62B90268 > $DCC_PATH/config
+    echo 0x62B90288 > $DCC_PATH/config
+    echo 0x62B902A8 > $DCC_PATH/config
+    echo 0x62B9020C > $DCC_PATH/config
+    echo 0x62B9022C > $DCC_PATH/config
+    echo 0x62B9024C > $DCC_PATH/config
+    echo 0x62B9026C > $DCC_PATH/config
+    echo 0x62B9028C > $DCC_PATH/config
+    echo 0x62B902AC > $DCC_PATH/config
+    echo 0x62B90404 > $DCC_PATH/config
+    echo 0x62B90408 > $DCC_PATH/config
+    echo 0x62B90400 > $DCC_PATH/config
+    echo 0x62402028 > $DCC_PATH/config
+    echo 0x624B0210 > $DCC_PATH/config
+    echo 0x624B0230 > $DCC_PATH/config
+    echo 0x624B0250 > $DCC_PATH/config
+    echo 0x624B0270 > $DCC_PATH/config
+    echo 0x624B0290 > $DCC_PATH/config
+    echo 0x624B02B0 > $DCC_PATH/config
+    echo 0x624B0208 > $DCC_PATH/config
+    echo 0x624B0228 > $DCC_PATH/config
+    echo 0x624B0248 > $DCC_PATH/config
+    echo 0x624B0268 > $DCC_PATH/config
+    echo 0x624B0288 > $DCC_PATH/config
+    echo 0x624B02A8 > $DCC_PATH/config
+    echo 0x624B020C > $DCC_PATH/config
+    echo 0x624B022C > $DCC_PATH/config
+    echo 0x624B024C > $DCC_PATH/config
+    echo 0x624B026C > $DCC_PATH/config
+    echo 0x624B028C > $DCC_PATH/config
+    echo 0x624B02AC > $DCC_PATH/config
+    echo 0x624B0400 > $DCC_PATH/config
+    echo 0x624B0404 > $DCC_PATH/config
+    echo 0x624B0408 > $DCC_PATH/config
+}
+
 # Function talos DCC configuration
 enable_talos_dcc_config()
 {
@@ -1780,7 +1831,16 @@ enable_talos_dcc_config()
     #Enable below function with relaxed AC
     #config_talos_regs_no_ac
     #Apply configuration and enable DCC
-
+    if [ -f /sys/devices/soc0/soc_id ]
+    then
+        soc_id=`cat /sys/devices/soc0/soc_id`
+    else
+        soc_id=`cat /sys/devices/system/soc/soc0/soc_id`
+    fi
+    if [ "$soc_id" = 365 ] || [ "$soc_id" = 366 ]
+    then
+        enable_moorea_specific_register
+    fi
     echo  1 > $DCC_PATH/enable
 }
 
