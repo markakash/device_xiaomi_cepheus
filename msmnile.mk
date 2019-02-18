@@ -24,7 +24,7 @@ BOARD_AVB_MLVM_BOOT_ROLLBACK_INDEX_LOCATION := 2
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS  += --chain_partition $(BOARD_AVB_MLVM_BOOT):$(BOARD_AVB_MLVM_BOOT_ROLLBACK_INDEX_LOCATION):$(BOARD_AVB_MLVM_BOOT_PUB_KEY)
 
 PRODUCT_COPY_FILES += \
-    device/qcom/msmnile/init.mlvm_boot.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.mlvm_boot.rc \
+    device/qcom/msmnile/init.mlvm_boot.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.mlvm_boot.rc \
     device/qcom/msmnile/init.mlvm_boot.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.mlvm_boot.sh
 endif
 

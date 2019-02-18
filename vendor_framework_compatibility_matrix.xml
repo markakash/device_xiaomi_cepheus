@@ -80,7 +80,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </hal>
     <hal format="hidl" optional="true">
         <name>vendor.display.config</name>
-        <version>1.0-7</version>
+        <version>1.0-8</version>
         <interface>
              <name>IDisplayConfig</name>
              <instance>default</instance>
@@ -529,10 +529,6 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
        <version>1.0</version>
        <interface>
          <name>IBiometricsFace</name>
-           <instance>default</instance>
-       </interface>
-       <interface>
-         <name>IBiometricsFaceClientCallback</name>
            <instance>default</instance>
        </interface>
    </hal>
