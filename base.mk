@@ -1153,8 +1153,13 @@ endif
 ifneq ($(strip $(TARGET_USES_RRO)),true)
 # enable overlays to use our version of
 # source/resources etc.
+ifneq ($(strip $(TARGET_BOARD_AUTO)),true)
 DEVICE_PACKAGE_OVERLAYS += device/qcom/common/device/overlay
 PRODUCT_PACKAGE_OVERLAYS += device/qcom/common/product/overlay
+else
+DEVICE_PACKAGE_OVERLAYS += device/qcom/common/auto/device/overlay
+PRODUCT_PACKAGE_OVERLAYS += device/qcom/common/auto/product/overlay
+endif
 endif
 
 # Set up flags to determine the kernel version
