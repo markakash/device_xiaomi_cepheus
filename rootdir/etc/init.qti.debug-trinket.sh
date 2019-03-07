@@ -78,7 +78,7 @@ enable_trinket_ftrace_event_tracing()
     then
         return
     fi
-    echo 0x4096 > /sys/kernel/debug/tracing/buffer_size_kb
+    echo 4096 > /sys/kernel/debug/tracing/buffer_size_kb
     enable_trinket_tracing_events
 }
 
@@ -292,6 +292,181 @@ config_trinket_dcc_gcc_mm()
     echo 0x01416004 > $DCC_PATH/config
     echo 0x0146B00C > $DCC_PATH/config
     echo 0x0146B010 > $DCC_PATH/config
+
+    echo 0x0147700C > $DCC_PATH/config
+    echo 0x01477008 > $DCC_PATH/config
+    echo 0x0146B01C > $DCC_PATH/config
+    echo 0x0141F02C > $DCC_PATH/config
+    echo 0x01439014 > $DCC_PATH/config
+    echo 0x0143900C > $DCC_PATH/config
+}
+
+config_trinket_dcc_lpm()
+{
+    #APCS_ALIAS0_SAW4
+    echo 0xf189000 > $DCC_PATH/config
+    echo 0xf18900c > $DCC_PATH/config
+    echo 0xf189c0c > $DCC_PATH/config
+    echo 0xf189c10 > $DCC_PATH/config
+    echo 0xf189c20 > $DCC_PATH/config
+    #APCS_ALIAS1_SAW4
+    echo 0xf199000 > $DCC_PATH/config
+    echo 0xf19900c > $DCC_PATH/config
+    echo 0xf199c0c > $DCC_PATH/config
+    echo 0xf199c10 > $DCC_PATH/config
+    echo 0xf199c20 > $DCC_PATH/config
+    #APCS_ALIAS2_SAW4
+    echo 0xf1a9000 > $DCC_PATH/config
+    echo 0xf1a900c > $DCC_PATH/config
+    echo 0xf1a9c0c > $DCC_PATH/config
+    echo 0xf1a9c10 > $DCC_PATH/config
+    echo 0xf1a9c20 > $DCC_PATH/config
+    #APCS_ALIAS3_SAW4
+    echo 0xf1b9000 > $DCC_PATH/config
+    echo 0xf1b900c > $DCC_PATH/config
+    echo 0xf1b9c0c > $DCC_PATH/config
+    echo 0xf1b9c10 > $DCC_PATH/config
+    echo 0xf1b9c18 > $DCC_PATH/config
+    #APCS_ALIAS4_SAW4
+    echo 0xf089000 > $DCC_PATH/config
+    echo 0xf08900c > $DCC_PATH/config
+    echo 0xf089c0c > $DCC_PATH/config
+    echo 0xf089c10 > $DCC_PATH/config
+    echo 0xf089c20 > $DCC_PATH/config
+    #APCS_ALIAS5_SAW4
+    echo 0xf099000 > $DCC_PATH/config
+    echo 0xf09900c > $DCC_PATH/config
+    echo 0xf099c0c > $DCC_PATH/config
+    echo 0xf099c10 > $DCC_PATH/config
+    echo 0xf099c20 > $DCC_PATH/config
+    #APCS_ALIAS6_SAW4
+    echo 0xf0a9000 > $DCC_PATH/config
+    echo 0xf0a900c > $DCC_PATH/config
+    echo 0xf0a9c0c > $DCC_PATH/config
+    echo 0xf0a9c10 > $DCC_PATH/config
+    echo 0xf0a9c20 > $DCC_PATH/config
+    #APCS_ALIAS7_SAW4
+    echo 0xf0b9000 > $DCC_PATH/config
+    echo 0xf0b900c > $DCC_PATH/config
+    echo 0xf0b9c0c > $DCC_PATH/config
+    echo 0xf0a9c10 > $DCC_PATH/config
+    echo 0xf0b9c20 > $DCC_PATH/config
+
+    #APCLUS0_L2_SAW4
+    echo 0xf112000 > $DCC_PATH/config
+    echo 0xf11200c > $DCC_PATH/config
+    echo 0xf112c0c > $DCC_PATH/config
+    echo 0xf112c10 > $DCC_PATH/config
+    echo 0xf112c20 > $DCC_PATH/config
+
+    #APCLUS1_L2_SAW4
+    echo 0xf012000 > $DCC_PATH/config
+    echo 0xf01200c > $DCC_PATH/config
+    echo 0xf012c0c > $DCC_PATH/config
+    echo 0xf012c10 > $DCC_PATH/config
+    echo 0xf112c20 > $DCC_PATH/config
+
+    #CCI_SAW4
+    echo 0xf1d2000 > $DCC_PATH/config
+    echo 0xf1d200c > $DCC_PATH/config
+    echo 0xf1d2c0c > $DCC_PATH/config
+    echo 0xf1d2c10 > $DCC_PATH/config
+    echo 0xf1d2c20 > $DCC_PATH/config
+
+    #APCS_ALIAS1_L2
+    echo 0xf011014 > $DCC_PATH/config
+    echo 0xf011018 > $DCC_PATH/config
+    echo 0xf011218 > $DCC_PATH/config
+    echo 0xf011234 > $DCC_PATH/config
+    echo 0xf011220 > $DCC_PATH/config
+    echo 0xf011264 > $DCC_PATH/config
+    echo 0xf011290 > $DCC_PATH/config
+
+    #APCS_ALIAS0_L2
+    echo 0xf111014 > $DCC_PATH/config
+    echo 0xf111018 > $DCC_PATH/config
+    echo 0xf111218 > $DCC_PATH/config
+    echo 0xf111234 > $DCC_PATH/config
+    echo 0xf111264 > $DCC_PATH/config
+    echo 0xf111290 > $DCC_PATH/config
+
+    #Curr Frequency
+    echo 0x0F521700 > $DCC_PATH/config
+    echo 0x0F523700 > $DCC_PATH/config
+
+    #PIMEM
+    echo 0x01B6007C > $DCC_PATH/config
+}
+
+config_trinket_dcc_noc()
+{
+    #SNOC
+    echo 0x1880100 > $DCC_PATH/config
+    echo 0x1880108 > $DCC_PATH/config
+    echo 0x1880110 > $DCC_PATH/config
+    echo 0x1880120 8 > $DCC_PATH/config
+
+    echo 0x1880300 8 > $DCC_PATH/config
+    echo 0x1880500 > $DCC_PATH/config
+    echo 0x1880700 2 > $DCC_PATH/config
+    echo 0x1880900 > $DCC_PATH/config
+    echo 0x1880B00 2 > $DCC_PATH/config
+    echo 0x1880D00 > $DCC_PATH/config
+    echo 0x1881100 > $DCC_PATH/config
+    echo 0x18E0100 > $DCC_PATH/config
+
+    #CNOC
+    echo 0x1900000 > $DCC_PATH/config
+    echo 0x1900010 > $DCC_PATH/config
+    echo 0x1900020 8  > $DCC_PATH/config
+
+    echo 0x1900300 5 > $DCC_PATH/config
+    echo 0x1900500 > $DCC_PATH/config
+    echo 0x1900900 > $DCC_PATH/config
+    echo 0x1900B00 > $DCC_PATH/config
+    echo 0x1900D00 > $DCC_PATH/config
+    echo 0x1908100 > $DCC_PATH/config
+    echo 0x1908104 > $DCC_PATH/config
+
+    #BIMC
+    echo 0x44B0120 5 > $DCC_PATH/config
+    echo 0x44B0100 > $DCC_PATH/config
+    echo 0x44B0020 > $DCC_PATH/config
+
+    echo 0x44C4000 > $DCC_PATH/config
+    echo 0x44C4020 > $DCC_PATH/config
+    echo 0x44C4030 > $DCC_PATH/config
+    echo 0x44C4400 > $DCC_PATH/config
+    echo 0x44C4410 > $DCC_PATH/config
+    echo 0x44C4420 > $DCC_PATH/config
+    echo 0x44C410C > $DCC_PATH/config
+    echo 0x44C4100 > $DCC_PATH/config
+}
+
+config_trinket_dcc_qdsp()
+{
+    echo 0xB3B0208 > $DCC_PATH/config
+    echo 0xB3B0228 > $DCC_PATH/config
+    echo 0xB3B0248 > $DCC_PATH/config
+    echo 0xB3B0268 > $DCC_PATH/config
+    echo 0xB3B0288 > $DCC_PATH/config
+    echo 0xB3B02A8 > $DCC_PATH/config
+    echo 0xB3B020C > $DCC_PATH/config
+    echo 0xB3B022C > $DCC_PATH/config
+    echo 0xB3B024C > $DCC_PATH/config
+    echo 0xB3B026C > $DCC_PATH/config
+    echo 0xB3B028C > $DCC_PATH/config
+    echo 0xB3B02AC > $DCC_PATH/config
+    echo 0xB3B0210 > $DCC_PATH/config
+    echo 0xB3B0230 > $DCC_PATH/config
+    echo 0xB3B0250 > $DCC_PATH/config
+    echo 0xB3B0270 > $DCC_PATH/config
+    echo 0xB3B0290 > $DCC_PATH/config
+    echo 0xB3B02B0 > $DCC_PATH/config
+    echo 0xB3B0400 > $DCC_PATH/config
+    echo 0xB3B0404 > $DCC_PATH/config
+    echo 0xB3B0408 > $DCC_PATH/config
+    echo 0xB3B0010 > $DCC_PATH/config
 }
 
 # Function trinket DCC configuration
@@ -315,6 +490,9 @@ enable_trinket_dcc_config()
     config_trinket_dcc_bimc
     config_trinket_dcc_gpu
     config_trinket_dcc_gcc_mm
+    config_trinket_dcc_lpm
+    config_trinket_dcc_noc
+    config_trinket_dcc_qdsp
 
     echo  1 > $DCC_PATH/enable
 }
