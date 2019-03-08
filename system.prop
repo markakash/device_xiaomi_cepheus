@@ -41,7 +41,6 @@ media.aac_51_output_enabled=true
 mm.enable.smoothstreaming=true
 #13631487 is decimal sum of supported codecs in AAL
 #codecs:(PARSER_)AAC AC3 AMR_NB AMR_WB ASF AVI DTS FLV 3GP 3G2 MKV MP2PS MP2TS MP3 OGG QCP WAV FLAC AIFF APE DSD MOV XVID
-media.settings.xml=/vendor/etc/media_profiles_vendor.xml
 vendor.mm.enable.qcom_parser=63963135
 persist.mm.enable.prefetch=true
 
@@ -155,15 +154,6 @@ persist.sys.force_sw_gles=1
 persist.vendor.radio.atfwd.start=true
 ro.kernel.qemu.gles=0
 qemu.hw.mainkeys=0
-
-#Increase cached app limit
-ro.vendor.qti.sys.fw.bg_apps_limit=60
-
-#IOP properties
-vendor.iop.enable_uxe=1
-vendor.perf.iop_v3.enable=true
-#Property to enable perf boosts from System Server
-vendor.perf.gestureflingboost.enable=true
 
 #Expose aux camera for below packages
 vendor.camera.aux.packagelist=org.codeaurora.snapcam

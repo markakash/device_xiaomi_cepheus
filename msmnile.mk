@@ -94,7 +94,10 @@ KERNEL_LLVM_SUPPORT := true
 #Enable sd-llvm suppport for kernel
 KERNEL_SD_LLVM_SUPPORT := true
 
+ifeq ($(TARGET_FWK_SUPPORTS_FULL_VALUEADDS),true)
 TARGET_USES_NQ_NFC := true
+endif
+
 ifeq ($(TARGET_USES_NQ_NFC),true)
 PRODUCT_COPY_FILES += \
     device/qcom/common/nfc/libnfc-brcm.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nci.conf
@@ -109,7 +112,6 @@ BOARD_FRP_PARTITION_NAME := frp
 PRODUCT_PACKAGES += libGLES_android
 
 -include $(QCPATH)/common/config/qtic-config.mk
--include hardware/qcom/display/config/msmnile.mk
 
 # Video seccomp policy files
 PRODUCT_COPY_FILES += \
@@ -136,12 +138,16 @@ endif
 #    PRODUCT_BOOT_JARS += WfdCommon
 #endif
 
+ifeq ($(TARGET_FWK_SUPPORTS_FULL_VALUEADDS),true)
 ifneq ($(strip $(QCPATH)),)
     PRODUCT_BOOT_JARS += libprotobuf-java_mls
 endif
+endif
 
+ifeq ($(TARGET_FWK_SUPPORTS_FULL_VALUEADDS),true)
 #Vendor media profiles
 PRODUCT_COPY_FILES += device/qcom/msmnile/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_vendor.xml
+endif
 
 # Video codec configuration files
 ifeq ($(TARGET_ENABLE_QC_AV_ENHANCEMENTS), true)
@@ -165,6 +171,8 @@ PRODUCT_PACKAGES += android.hardware.media.omx@1.0-impl
 
 # Codec2.0 system service and libs
 PRODUCT_PACKAGES += \
+    com.android.media.swcodec \
+    libsfplugin_ccodec \
     libmedia_codecserviceregistrant \
     libstagefright_ccodec \
     vendor.qti.media.c2@1.0-service \

@@ -29,8 +29,6 @@ TARGET_NO_BOOTLOADER := false
 TARGET_USES_UEFI := true
 TARGET_NO_KERNEL := false
 
-TARGET_USES_IOPHAL := true
-
 -include $(QCPATH)/common/msmnile/BoardConfigVendor.mk
 
 # Some framework code requires this to enable BT
@@ -131,7 +129,12 @@ endif
 TARGET_USES_ION := true
 TARGET_USES_NEW_ION_API :=true
 TARGET_USES_QCOM_BSP := false
+
+ifeq ($(TARGET_FWK_SUPPORTS_FULL_VALUEADDS),true)
 BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200n8 earlycon=msm_geni_serial,0xa90000 androidboot.hardware=qcom androidboot.console=ttyMSM0 androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 swiotlb=2048 loop.max_part=7 androidboot.usbcontroller=a600000.dwc3
+else
+BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200n8 earlycon=msm_geni_serial,0xa90000 androidboot.hardware=qcom androidboot.console=ttyMSM0 androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 swiotlb=2048 loop.max_part=7 androidboot.usbcontroller=a600000.dwc3 androidboot.selinux=permissive
+endif
 
 BOARD_EGL_CFG := device/qcom/$(TARGET_BOARD_PLATFORM)/egl.cfg
 
@@ -173,6 +176,8 @@ TARGET_PD_SERVICE_ENABLED := true
 TARGET_PER_MGR_ENABLED := true
 
 # Enable dex pre-opt to speed up initial boot
+WITH_DEXPREOPT := false
+WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := true
 ifeq ($(HOST_OS),linux)
     ifeq ($(WITH_DEXPREOPT),)
       WITH_DEXPREOPT := true
@@ -194,9 +199,6 @@ ADD_RADIO_FILES := true
 
 #Generate DTBO image
 BOARD_KERNEL_SEPARATED_DTBO := true
-
-#Enable LM
-TARGET_USES_LM := true
 
 #Enable INTERACTION_BOOST
 TARGET_USES_INTERACTION_BOOST := true
