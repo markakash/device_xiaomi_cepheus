@@ -44,6 +44,8 @@ mm.enable.smoothstreaming=true
 vendor.mm.enable.qcom_parser=63963135
 persist.mm.enable.prefetch=true
 
+media.settings.xml=/vendor/etc/media_profiles_vendor.xml
+
 #
 # system props for the data modules
 #
