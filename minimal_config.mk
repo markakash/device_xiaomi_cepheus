@@ -70,6 +70,7 @@ INIT += init.qcom.crashdata.sh
 INIT += init.qcom.vendor.rc
 INIT += init.target.vendor.rc
 INIT += init.qti.fm.sh
+INIT += init.qti.charger.sh
 PRODUCT_PACKAGES += $(INIT)
 
 ifneq ($(strip $(TARGET_USES_RRO)),true)
