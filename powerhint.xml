@@ -231,6 +231,44 @@
             Resources="0x40C68100, 0xFFFFFFF6, 0x40C68110, 0xFFFFFFF6, 0x40C68120, 0xFFFFFFF6,
             0x40C68130, 0xFFFFFFF6,0x41444100, 0, 0x41440100, 0x63,
             0x4300C000, 0xA ,0x41820000, 0xA, 0x43004000, 0x64 ,0x41808000, 0x64, 0x4180C000, 0, 0x43008000, 0, 0x43420000, 0x64"/>
+
+        <!-- camera 60fps -->
+        <!--L CPU CORE 0 SCHED LOAD BOOST -->
+        <!--L CPU CORE 1 SCHED LOAD BOOST -->
+        <!--L CPU CORE 2 SCHED LOAD BOOST -->
+        <!--L CPU CORE 3 SCHED LOAD BOOST -->
+        <!--L CPU - Disable schedutil PL -->
+        <!--L CPU - Set hispeed load 95 -->
+        <!--LLC-DDR BWMON - Set sample_ms 20 -->
+        <!--CPU-LLC BWMON - Set sample_ms 20 -->
+        <Config
+            Id="0x00001332" Enable="true" Timeout="0" Target="msmnile"
+            Resources="0x40C68100, 0xFFFFFFF6, 0x40C68110, 0xFFFFFFF6, 0x40C68120, 0xFFFFFFF6,
+            0x40C68130, 0xFFFFFFF6,0x41444100, 0, 0x41440100, 0x5F, 0x4300C000, 0x14 ,0x41820000, 0x14"/>
+
+        <!-- camera HFR -->
+        <!--L CPU CORE 0 SCHED LOAD BOOST -->
+        <!--L CPU CORE 1 SCHED LOAD BOOST -->
+        <!--L CPU CORE 2 SCHED LOAD BOOST -->
+        <!--L CPU CORE 3 SCHED LOAD BOOST -->
+        <!--LLC-DDR BWMON - Set sample_ms 10 -->
+        <!--CPU-LLC BWMON - Set sample_ms 10 -->
+        <Config
+            Id="0x00001333" Enable="true" Timeout="0" Target="msmnile"
+            Resources="0x40C68100, 0xFFFFFFF6, 0x40C68110, 0xFFFFFFF6, 0x40C68120, 0xFFFFFFF6,
+            0x40C68130, 0xFFFFFFF6, 0x4300C000, 0xA ,0x41820000, 0xA"/>
+
+        <!-- camera 480fps - HFR -->
+        <!--L CPU CORE 0 SCHED LOAD BOOST -->
+        <!--L CPU CORE 1 SCHED LOAD BOOST -->
+        <!--L CPU CORE 2 SCHED LOAD BOOST -->
+        <!--L CPU CORE 3 SCHED LOAD BOOST -->
+        <!--LLC-DDR BWMON - Set sample_ms 10 -->
+        <!--CPU-LLC BWMON - Set sample_ms 10 -->
+        <Config
+            Id="0x00001334" Enable="true" Timeout="0" Target="msmnile"
+            Resources="0x40C68100, 0xFFFFFFF6, 0x40C68110, 0xFFFFFFF6, 0x40C68120, 0xFFFFFFF6,
+            0x40C68130, 0xFFFFFFF6, 0x4300C000, 0xA ,0x41820000, 0xA"/>
     </Powerhint>
 </HintConfigs>
 
