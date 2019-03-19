@@ -115,69 +115,25 @@ PRODUCT_PACKAGES += libGLES_android
 
 # Video seccomp policy files
 PRODUCT_COPY_FILES += \
-    device/qcom/msmnile/seccomp/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
-    device/qcom/msmnile/seccomp/mediaextractor-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy \
     $(LOCAL_PATH)/seccomp/codec2.software.ext.policy:$(TARGET_COPY_OUT)/etc/seccomp_policy/codec2.software.ext.policy \
-    $(LOCAL_PATH)/seccomp/codec2.vendor.ext.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/codec2.vendor.ext.policy \
 
 PRODUCT_BOOT_JARS += tcmiface
 PRODUCT_BOOT_JARS += telephony-ext
 PRODUCT_PACKAGES += telephony-ext
 
-
 TARGET_ENABLE_QC_AV_ENHANCEMENTS := false
-
-TARGET_DISABLE_DASH := true
-TARGET_DISABLE_QTI_VPP := false
-
-ifneq ($(TARGET_DISABLE_DASH), true)
-    PRODUCT_BOOT_JARS += qcmediaplayer
-endif
 
 #ifneq ($(strip $(QCPATH)),)
 #    PRODUCT_BOOT_JARS += WfdCommon
 #endif
 
 ifeq ($(TARGET_FWK_SUPPORTS_FULL_VALUEADDS),true)
-ifneq ($(strip $(QCPATH)),)
-    PRODUCT_BOOT_JARS += libprotobuf-java_mls
-endif
-endif
-
-ifeq ($(TARGET_FWK_SUPPORTS_FULL_VALUEADDS),true)
-#Vendor media profiles
-PRODUCT_COPY_FILES += device/qcom/msmnile/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_vendor.xml
-endif
-
-# Video codec configuration files
-ifeq ($(TARGET_ENABLE_QC_AV_ENHANCEMENTS), true)
-PRODUCT_COPY_FILES += device/qcom/msmnile/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_vendor.xml
-
-PRODUCT_COPY_FILES += device/qcom/msmnile/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml
-PRODUCT_COPY_FILES += device/qcom/msmnile/media_codecs_vendor.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_vendor.xml
-
-PRODUCT_COPY_FILES += device/qcom/msmnile/media_codecs_vendor_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_vendor_audio.xml
-
-PRODUCT_COPY_FILES += device/qcom/msmnile/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml
-
+#BT library
 PRODUCT_PROPERTY_OVERRIDES += \
-    media.settings.xml=/vendor/etc/media_profiles_vendor.xml
-
-endif #TARGET_ENABLE_QC_AV_ENHANCEMENTS
-
-PRODUCT_COPY_FILES += hardware/qcom/media/conf_files/msmnile/system_properties.xml:$(TARGET_COPY_OUT_VENDOR)/etc/system_properties.xml
+    ro.bluetooth.library_name=libbluetooth_qti.so
+endif
 
 PRODUCT_PACKAGES += android.hardware.media.omx@1.0-impl
-
-# Codec2.0 system service and libs
-PRODUCT_PACKAGES += \
-    com.android.media.swcodec \
-    libsfplugin_ccodec \
-    libmedia_codecserviceregistrant \
-    libstagefright_ccodec \
-    vendor.qti.media.c2@1.0-service \
-    vendor.qti.media.c2@1.0-service.rc \
-    qcodec2_test
 
 # Audio configuration file
 -include $(TOPDIR)vendor/qcom/opensource/audio-hal/primary-hal/configs/msmnile/msmnile.mk
@@ -273,12 +229,6 @@ PRODUCT_COPY_FILES += device/qcom/msmnile/msm_irqbalance.conf:$(TARGET_COPY_OUT_
 # Powerhint configuration file
 PRODUCT_COPY_FILES += device/qcom/msmnile/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
 
-# Camera configuration file. Shared by passthrough/binderized camera HAL
-PRODUCT_PACKAGES += camera.device@3.2-impl
-PRODUCT_PACKAGES += camera.device@1.0-impl
-PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-impl
-# Enable binderized camera HAL
-PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-service_64
 
 # Vibrator
 PRODUCT_PACKAGES += \
@@ -389,6 +339,9 @@ ro.crypto.allow_encrypt_override = true
 
 $(call inherit-product, build/make/target/product/product_launched_with_p.mk)
 
+ifneq ($(GENERIC_ODM_IMAGE),true)
+    PRODUCT_COPY_FILE += $(LOCAL_PATH)/manifest-qva.xml:/$(TARGET_ODM_OUT_ETC)/vintf/manifest.xml
+endif
 
 ###################################################################################
 # This is the End of target.mk file.
