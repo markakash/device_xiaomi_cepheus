@@ -78,7 +78,7 @@ enable_trinket_ftrace_event_tracing()
     then
         return
     fi
-    echo 4096 > /sys/kernel/debug/tracing/buffer_size_kb
+    echo 0x4096 > /sys/kernel/debug/tracing/buffer_size_kb
     enable_trinket_tracing_events
 }
 
@@ -299,6 +299,12 @@ config_trinket_dcc_gcc_mm()
     echo 0x0141F02C > $DCC_PATH/config
     echo 0x01439014 > $DCC_PATH/config
     echo 0x0143900C > $DCC_PATH/config
+    echo 0x01439004 > $DCC_PATH/config
+    echo 0x01439000 > $DCC_PATH/config
+    echo 0x01439008 > $DCC_PATH/config
+    echo 0x01415010 > $DCC_PATH/config
+    echo 0x01416010 > $DCC_PATH/config
+    echo 0x0142A00C > $DCC_PATH/config
 }
 
 config_trinket_dcc_lpm()
@@ -467,6 +473,67 @@ config_trinket_dcc_qdsp()
     echo 0xB3B0404 > $DCC_PATH/config
     echo 0xB3B0408 > $DCC_PATH/config
     echo 0xB3B0010 > $DCC_PATH/config
+    echo 0xB302028 > $DCC_PATH/config
+
+    #LPASS Register
+    echo 0xABB0208 > $DCC_PATH/config
+    echo 0xABB0228 > $DCC_PATH/config
+    echo 0xABB0248 > $DCC_PATH/config
+    echo 0xABB0268 > $DCC_PATH/config
+    echo 0xABB0288 > $DCC_PATH/config
+    echo 0xABB02A8 > $DCC_PATH/config
+    echo 0xABB020C > $DCC_PATH/config
+    echo 0xABB022C > $DCC_PATH/config
+    echo 0xABB024C > $DCC_PATH/config
+    echo 0xABB026C > $DCC_PATH/config
+    echo 0xABB028C > $DCC_PATH/config
+    echo 0xABB02AC > $DCC_PATH/config
+    echo 0xABB0210 > $DCC_PATH/config
+    echo 0xABB0230 > $DCC_PATH/config
+    echo 0xABB0250 > $DCC_PATH/config
+    echo 0xABB0270 > $DCC_PATH/config
+    echo 0xABB0290 > $DCC_PATH/config
+    echo 0xABB02B0 > $DCC_PATH/config
+    echo 0xABB0400 > $DCC_PATH/config
+    echo 0xABB0404 > $DCC_PATH/config
+    echo 0xABB0408 > $DCC_PATH/config
+    echo 0xABB0010 > $DCC_PATH/config
+    echo 0xAB02028 > $DCC_PATH/config
+
+    #Modem
+    echo 0x6130208 > $DCC_PATH/config
+    echo 0x6130228 > $DCC_PATH/config
+    echo 0x6130248 > $DCC_PATH/config
+    echo 0x6130268 > $DCC_PATH/config
+    echo 0x6130288 > $DCC_PATH/config
+    echo 0x61302A8 > $DCC_PATH/config
+    echo 0x613020C > $DCC_PATH/config
+    echo 0x613022C > $DCC_PATH/config
+    echo 0x613024C > $DCC_PATH/config
+    echo 0x613026C > $DCC_PATH/config
+    echo 0x613028C > $DCC_PATH/config
+    echo 0x61302AC > $DCC_PATH/config
+    echo 0x6130210 > $DCC_PATH/config
+    echo 0x6130230 > $DCC_PATH/config
+    echo 0x6130250 > $DCC_PATH/config
+    echo 0x6130270 > $DCC_PATH/config
+    echo 0x6130290 > $DCC_PATH/config
+    echo 0x61302B0 > $DCC_PATH/config
+    echo 0x6130400 > $DCC_PATH/config
+    echo 0x6130404 > $DCC_PATH/config
+    echo 0x6130408 > $DCC_PATH/config
+    echo 0x6130010 > $DCC_PATH/config
+    echo 0x6082028 > $DCC_PATH/config
+}
+
+config_trinket_dcc_misc()
+{
+    echo 0xF017000 > $DCC_PATH/config
+    echo 0xF01700C > $DCC_PATH/config
+    echo 0xF017010 > $DCC_PATH/config
+    echo 0xF017014 > $DCC_PATH/config
+    echo 0xF017018 > $DCC_PATH/config
+    echo 0xF017020 > $DCC_PATH/config
 }
 
 # Function trinket DCC configuration
@@ -493,6 +560,7 @@ enable_trinket_dcc_config()
     config_trinket_dcc_lpm
     config_trinket_dcc_noc
     config_trinket_dcc_qdsp
+    config_trinket_dcc_misc
 
     echo  1 > $DCC_PATH/enable
 }
