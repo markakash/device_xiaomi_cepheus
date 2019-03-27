@@ -536,6 +536,14 @@ config_trinket_dcc_misc()
     echo 0xF017020 > $DCC_PATH/config
 }
 
+# Function to send ASYNC package in TPDA
+dcc_async_package()
+{
+    echo 0x08004FB0 0xc5acce55 > $DCC_PATH/config_write
+    echo 0x0800408c 0xff > $DCC_PATH/config_write
+    echo 0x08004FB0 0x0 > $DCC_PATH/config_write
+}
+
 # Function trinket DCC configuration
 enable_trinket_dcc_config()
 {
@@ -549,21 +557,27 @@ enable_trinket_dcc_config()
     fi
 
     echo 0 > $DCC_PATH/enable
+    echo 2 > $DCC_PATH/curr_list
     echo cap > $DCC_PATH/func_type
     echo sram > $DCC_PATH/data_sink
     echo 1 > $DCC_PATH/config_reset
-    echo 3 > $DCC_PATH/curr_list
-
     config_trinket_dcc_bimc
     config_trinket_dcc_gpu
-    config_trinket_dcc_gcc_mm
     config_trinket_dcc_lpm
     config_trinket_dcc_noc
     config_trinket_dcc_qdsp
     config_trinket_dcc_misc
 
+    #configure sink for LL3 as atb
+    echo 1 > /sys/bus/coresight/devices/coresight-tpdm-dcc/enable_source
+    echo 3 > $DCC_PATH/curr_list
+    echo cap > $DCC_PATH/func_type
+    echo atb > $DCC_PATH/data_sink
+    dcc_async_package
+    config_trinket_dcc_gcc_mm
     echo  1 > $DCC_PATH/enable
 }
+
 enable_trinket_stm_hw_events()
 {
    #TODO: Add HW events
