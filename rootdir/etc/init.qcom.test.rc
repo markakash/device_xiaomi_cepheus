@@ -72,9 +72,9 @@ service vendor.modem_qdss_script /vendor/bin/sh /mnt/vendor/persist/coresight/mo
     seclabel u:r:qti-testscripts:s0
 
 on property:vendor.notify_after_powerup.subsys=adsp
-    start vendor.lpass_qdss_script
+    start vendor.adsp_qdss_script
 
-service vendor.lpass_qdss_script /vendor/bin/sh /mnt/vendor/persist/coresight/lpass_qdss_reconfigure.sh
+service vendor.adsp_qdss_script /vendor/bin/sh /mnt/vendor/persist/coresight/adsp_qdss_reconfigure.sh
     user root
     oneshot
     disabled
@@ -84,6 +84,42 @@ on property:vendor.notify_after_powerup.subsys=cdsp
     start vendor.cdsp_qdss_script
 
 service vendor.cdsp_qdss_script /vendor/bin/sh /mnt/vendor/persist/coresight/cdsp_qdss_reconfigure.sh
+    user root
+    oneshot
+    disabled
+    seclabel u:r:qti-testscripts:s0
+
+on property:vendor.notify_after_powerup.subsys=npu
+    start vendor.npu_qdss_script
+
+service vendor.npu_qdss_script /vendor/bin/sh /mnt/vendor/persist/coresight/npu_qdss_reconfigure.sh
+    user root
+    oneshot
+    disabled
+    seclabel u:r:qti-testscripts:s0
+
+on property:vendor.notify_after_powerup.subsys=wcnss
+    start vendor.wcnss_qdss_script
+
+service vendor.wcnss_qdss_script /vendor/bin/sh /mnt/vendor/persist/coresight/wcn_qdss_reconfigure.sh
+    user root
+    oneshot
+    disabled
+    seclabel u:r:qti-testscripts:s0
+
+on property:vendor.notify_after_powerup.subsys=slpi
+    start vendor.sensor_qdss_script
+
+service vendor.sensor_qdss_script /vendor/bin/sh /mnt/vendor/persist/coresight/sensor_qdss_reconfigure.sh
+    user root
+    oneshot
+    disabled
+    seclabel u:r:qti-testscripts:s0
+
+on property:vendor.notify_after_powerup.subsys=venus
+    start vendor.venus_qdss_script
+
+service vendor.venus_qdss_script /vendor/bin/sh /mnt/vendor/persist/coresight/venus_qdss_reconfigure.sh
     user root
     oneshot
     disabled
