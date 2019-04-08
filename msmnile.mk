@@ -33,6 +33,22 @@ TARGET_USES_AOSP := false
 TARGET_USES_AOSP_FOR_AUDIO := false
 TARGET_USES_QCOM_BSP := false
 
+ifeq ($(TARGET_FWK_SUPPORTS_FULL_VALUEADDS),true)
+  $(warning "Compiling with full value-added framework")
+else
+  $(warning "Compiling without full value-added framework - enabling GENERIC_ODM_IMAGE")
+  GENERIC_ODM_IMAGE := true
+endif
+
+# Enable Codec2.0 HAL as default for pure AOSP variants.
+# WA till ODM properties start taking effect
+ifeq ($(GENERIC_ODM_IMAGE),true)
+  $(warning "Forcing codec2.0 for generic odm build variant")
+  PRODUCT_PROPERTY_OVERRIDES += debug.media.codec2=2
+  PRODUCT_PROPERTY_OVERRIDES += debug.stagefright.ccodec=4
+  PRODUCT_PROPERTY_OVERRIDES += debug.stagefright.omx_default_rank=1000
+endif
+
 ###########
 #QMAA flags starts
 ###########
@@ -135,6 +151,13 @@ endif
 
 PRODUCT_PACKAGES += android.hardware.media.omx@1.0-impl
 
+# Camera configuration file. Shared by passthrough/binderized camera HAL
+PRODUCT_PACKAGES += camera.device@3.2-impl
+PRODUCT_PACKAGES += camera.device@1.0-impl
+PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-impl
+# Enable binderized camera HAL
+PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-service_64
+
 # Audio configuration file
 -include $(TOPDIR)vendor/qcom/opensource/audio-hal/primary-hal/configs/msmnile/msmnile.mk
 
@@ -173,6 +196,10 @@ PRODUCT_PACKAGES += update_engine \
     brillo_update_payload \
     android.hardware.boot@1.0-impl \
     android.hardware.boot@1.0-service
+
+PRODUCT_HOST_PACKAGES += \
+    brillo_update_payload \
+    configstore_xmlparser
 
 #Boot control HAL test app
 PRODUCT_PACKAGES_DEBUG += bootctl
@@ -254,6 +281,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # MIDI feature
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.midi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.midi.xml
+
+# Pro Audio feature
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.audio.pro.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.pro.xml
 
 # USB default HAL
 PRODUCT_PACKAGES += \
@@ -340,7 +371,7 @@ ro.crypto.allow_encrypt_override = true
 $(call inherit-product, build/make/target/product/product_launched_with_p.mk)
 
 ifneq ($(GENERIC_ODM_IMAGE),true)
-    PRODUCT_COPY_FILE += $(LOCAL_PATH)/manifest-qva.xml:/$(TARGET_ODM_OUT_ETC)/vintf/manifest.xml
+    PRODUCT_COPY_FILES += device/qcom/msmnile/manifest-qva.xml:$(TARGET_COPY_OUT_ODM)/etc/vintf/manifest.xml
 endif
 
 ###################################################################################
