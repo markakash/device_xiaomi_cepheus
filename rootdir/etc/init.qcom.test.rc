@@ -1,4 +1,4 @@
-# Copyright (c) 2016, 2018, The Linux Foundation. All rights reserved.
+# Copyright (c) 2016, 2018-2019, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -61,3 +61,31 @@ service DiagDaemon /system/vendor/bin/diag_socket_log -f /sdcard/ipaddress.txt
     disabled
     user root
     group root system log diag net_raw
+
+on property:vendor.notify_after_powerup.subsys=modem
+    start vendor.modem_qdss_script
+
+service vendor.modem_qdss_script /vendor/bin/sh /mnt/vendor/persist/coresight/modem_qdss_reconfigure.sh
+    user root
+    oneshot
+    disabled
+    seclabel u:r:qti-testscripts:s0
+
+on property:vendor.notify_after_powerup.subsys=adsp
+    start vendor.lpass_qdss_script
+
+service vendor.lpass_qdss_script /vendor/bin/sh /mnt/vendor/persist/coresight/lpass_qdss_reconfigure.sh
+    user root
+    oneshot
+    disabled
+    seclabel u:r:qti-testscripts:s0
+
+on property:vendor.notify_after_powerup.subsys=cdsp
+    start vendor.cdsp_qdss_script
+
+service vendor.cdsp_qdss_script /vendor/bin/sh /mnt/vendor/persist/coresight/cdsp_qdss_reconfigure.sh
+    user root
+    oneshot
+    disabled
+    seclabel u:r:qti-testscripts:s0
+
