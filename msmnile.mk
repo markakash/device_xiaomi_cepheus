@@ -110,15 +110,6 @@ KERNEL_LLVM_SUPPORT := true
 #Enable sd-llvm suppport for kernel
 KERNEL_SD_LLVM_SUPPORT := true
 
-ifeq ($(TARGET_FWK_SUPPORTS_FULL_VALUEADDS),true)
-TARGET_USES_NQ_NFC := true
-endif
-
-ifeq ($(TARGET_USES_NQ_NFC),true)
-PRODUCT_COPY_FILES += \
-    device/qcom/common/nfc/libnfc-brcm.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nci.conf
-endif
-
 # default is nosdcard, S/W button enabled in resource
 PRODUCT_CHARACTERISTICS := nosdcard
 
@@ -193,7 +184,6 @@ PRODUCT_PACKAGES += update_engine \
     update_engine_client \
     update_verifier \
     bootctrl.msmnile \
-    brillo_update_payload \
     android.hardware.boot@1.0-impl \
     android.hardware.boot@1.0-service
 
