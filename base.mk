@@ -1159,8 +1159,8 @@ ifneq ($(strip $(TARGET_BOARD_AUTO)),true)
 DEVICE_PACKAGE_OVERLAYS += device/qcom/common/device/overlay
 PRODUCT_PACKAGE_OVERLAYS += device/qcom/common/product/overlay
 else
-DEVICE_PACKAGE_OVERLAYS += device/qcom/common/auto/device/overlay
-PRODUCT_PACKAGE_OVERLAYS += device/qcom/common/auto/product/overlay
+DEVICE_PACKAGE_OVERLAYS += device/qcom/common/automotive/device/overlay
+PRODUCT_PACKAGE_OVERLAYS += device/qcom/common/automotive/product/overlay
 endif
 endif
 
