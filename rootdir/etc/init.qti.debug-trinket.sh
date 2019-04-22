@@ -451,31 +451,8 @@ config_trinket_dcc_noc()
 
 config_trinket_dcc_qdsp()
 {
-    echo 0xB3B0208 > $DCC_PATH/config
-    echo 0xB3B0228 > $DCC_PATH/config
-    echo 0xB3B0248 > $DCC_PATH/config
-    echo 0xB3B0268 > $DCC_PATH/config
-    echo 0xB3B0288 > $DCC_PATH/config
-    echo 0xB3B02A8 > $DCC_PATH/config
-    echo 0xB3B020C > $DCC_PATH/config
-    echo 0xB3B022C > $DCC_PATH/config
-    echo 0xB3B024C > $DCC_PATH/config
-    echo 0xB3B026C > $DCC_PATH/config
-    echo 0xB3B028C > $DCC_PATH/config
-    echo 0xB3B02AC > $DCC_PATH/config
-    echo 0xB3B0210 > $DCC_PATH/config
-    echo 0xB3B0230 > $DCC_PATH/config
-    echo 0xB3B0250 > $DCC_PATH/config
-    echo 0xB3B0270 > $DCC_PATH/config
-    echo 0xB3B0290 > $DCC_PATH/config
-    echo 0xB3B02B0 > $DCC_PATH/config
-    echo 0xB3B0400 > $DCC_PATH/config
-    echo 0xB3B0404 > $DCC_PATH/config
-    echo 0xB3B0408 > $DCC_PATH/config
-    echo 0xB3B0010 > $DCC_PATH/config
-    echo 0xB302028 > $DCC_PATH/config
-
     #LPASS Register
+    echo 0xAB00000 > $DCC_PATH/config
     echo 0xABB0208 > $DCC_PATH/config
     echo 0xABB0228 > $DCC_PATH/config
     echo 0xABB0248 > $DCC_PATH/config
@@ -499,6 +476,31 @@ config_trinket_dcc_qdsp()
     echo 0xABB0408 > $DCC_PATH/config
     echo 0xABB0010 > $DCC_PATH/config
     echo 0xAB02028 > $DCC_PATH/config
+
+    #QDSP6 Register
+    echo 0xB3B0208 > $DCC_PATH/config
+    echo 0xB3B0228 > $DCC_PATH/config
+    echo 0xB3B0248 > $DCC_PATH/config
+    echo 0xB3B0268 > $DCC_PATH/config
+    echo 0xB3B0288 > $DCC_PATH/config
+    echo 0xB3B02A8 > $DCC_PATH/config
+    echo 0xB3B020C > $DCC_PATH/config
+    echo 0xB3B022C > $DCC_PATH/config
+    echo 0xB3B024C > $DCC_PATH/config
+    echo 0xB3B026C > $DCC_PATH/config
+    echo 0xB3B028C > $DCC_PATH/config
+    echo 0xB3B02AC > $DCC_PATH/config
+    echo 0xB3B0210 > $DCC_PATH/config
+    echo 0xB3B0230 > $DCC_PATH/config
+    echo 0xB3B0250 > $DCC_PATH/config
+    echo 0xB3B0270 > $DCC_PATH/config
+    echo 0xB3B0290 > $DCC_PATH/config
+    echo 0xB3B02B0 > $DCC_PATH/config
+    echo 0xB3B0400 > $DCC_PATH/config
+    echo 0xB3B0404 > $DCC_PATH/config
+    echo 0xB3B0408 > $DCC_PATH/config
+    echo 0xB3B0010 > $DCC_PATH/config
+    echo 0xB302028 > $DCC_PATH/config
 
     #Modem
     echo 0x6130208 > $DCC_PATH/config
@@ -561,11 +563,11 @@ enable_trinket_dcc_config()
     echo cap > $DCC_PATH/func_type
     echo sram > $DCC_PATH/data_sink
     echo 1 > $DCC_PATH/config_reset
+    config_trinket_dcc_qdsp
     config_trinket_dcc_bimc
     config_trinket_dcc_gpu
     config_trinket_dcc_lpm
     config_trinket_dcc_noc
-    config_trinket_dcc_qdsp
     config_trinket_dcc_misc
 
     #configure sink for LL3 as atb

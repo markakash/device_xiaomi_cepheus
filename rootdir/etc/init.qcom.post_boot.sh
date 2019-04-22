@@ -2794,10 +2794,6 @@ case "$target" in
             echo 0 > /proc/sys/kernel/sched_boost
 
             # Turn on sleep modes.
-	    echo N > /sys/module/lpm_levels/system/pwr/pwr-l2-gdhs/idle_enabled
-	    echo N > /sys/module/lpm_levels/system/perf/perf-l2-gdhs/idle_enabled
-            echo N > /sys/module/lpm_levels/system/pwr/pwr-l2-gdhs/suspend_enabled
-	    echo N > /sys/module/lpm_levels/system/perf/perf-l2-gdhs/suspend_enabled
             echo 0 > /sys/module/lpm_levels/parameters/sleep_disabled
 
             ;;
@@ -3934,9 +3930,6 @@ case "$target" in
 	echo 85 85 > /proc/sys/kernel/sched_downmigrate
 	echo 100 > /proc/sys/kernel/sched_group_upmigrate
 	echo 10 > /proc/sys/kernel/sched_group_downmigrate
-	echo 0 > /proc/sys/kernel/sched_min_task_util_for_boost
-	echo 0 > /proc/sys/kernel/sched_min_task_util_for_colocation
-	echo 0 > /proc/sys/kernel/sched_little_cluster_coloc_fmin_khz
 	echo 1 > /proc/sys/kernel/sched_walt_rotate_big_tasks
 
 	# cpuset parameters
