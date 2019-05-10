@@ -65,7 +65,7 @@ ifneq ($(AB_OTA_UPDATER),true)
     TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_msm
 endif
 
-TARGET_RECOVERY_FSTAB := device/qcom/msmnile/fstab.qcom
+TARGET_RECOVERY_FSTAB := device/qcom/msmnile/recovery_vendor_variant.fstab
 
 #Enable split vendor image
 ENABLE_VENDOR_IMAGE := true
