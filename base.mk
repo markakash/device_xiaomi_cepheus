@@ -1013,7 +1013,11 @@ PRODUCT_PACKAGES += android.hardware.drm@1.0-impl
 PRODUCT_PACKAGES += android.hardware.drm@1.0-service
 PRODUCT_PACKAGES += android.hardware.drm@1.1-service.clearkey
 
-ifneq ($(strip $(ENABLE_HYP)),false)
+
+#Disabling the widevine service in Automotive guest vms.
+#ENABLE_HYP get set in device/qcom/msmnile_gvmq/msmnile_gvmq.mk
+#ENABLE_HYP get set in device/qcom/sm6150_au_gvmq/sm6150_au_gvmq.mk
+ifneq ($(strip $(ENABLE_HYP)),true)
 PRODUCT_PACKAGES += android.hardware.drm@1.1-service.widevine
 endif
 
