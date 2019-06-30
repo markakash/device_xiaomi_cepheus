@@ -18,15 +18,17 @@ $(call inherit-product, device/xiaomi/cepheus/device.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-CUSTOM_BUILD_TYPE := OFFICIAL
 TARGET_BOOT_ANIMATION_RES := 1080
-TARGET_GAPPS_ARCH := arm64
 
-# Inherit some common PixelExperience stuff.
-$(call inherit-product, vendor/aosp/config/common_full_phone.mk)
+# Inherit some common MK stuff.
+$(call inherit-product, vendor/mk/config/common_full_phone.mk)
+
+# Device Maintainer
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.mk.maintainer=markakash
 
 # Device identifier. This must come after all inclusions.
-PRODUCT_NAME := aosp_cepheus
+PRODUCT_NAME := mk_cepheus
 PRODUCT_DEVICE := cepheus
 PRODUCT_BRAND := Xiaomi
 PRODUCT_MODEL := MI 9
