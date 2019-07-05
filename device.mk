@@ -71,6 +71,10 @@ PRODUCT_PACKAGES += \
     libqdMetaData.system \
     libvulkan
 
+# Fingerprint
+PRODUCT_PACKAGES += \
+    mokee.biometrics.fingerprint.inscreen@1.0-service.xiaomi_cepheus
+
 # HIDL
 PRODUCT_PACKAGES += \
     android.hidl.base@1.0_system \
