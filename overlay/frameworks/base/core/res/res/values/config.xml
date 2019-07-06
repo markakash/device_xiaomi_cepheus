@@ -1040,4 +1040,7 @@
 
     <!-- Whether to allow sending active app broadcast -->
     <bool name="config_allowActivePackageBroadcast">true</bool>
+
+    <!-- Pocket Lock -->
+    <bool name="config_pocketModeSupported">false</bool>
 </resources>
