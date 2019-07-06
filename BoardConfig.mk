@@ -52,13 +52,12 @@ TARGET_NO_KERNEL := false
 -include vendor/qcom/prebuilt/msmnile/BoardConfigVendor.mk
 -include $(QCPATH)/common/msmnile/BoardConfigVendor.mk
 
-# Some framework code requires this to enable BT
-BOARD_HAVE_BLUETOOTH := true
-BOARD_USES_WIPOWER := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/qcom/common
-
 USE_OPENGL_RENDERER := true
 BOARD_USE_LEGACY_UI := true
+
+# Set Header version for bootimage
+BOARD_BOOTIMG_HEADER_VERSION := 1
+BOARD_MKBOOTIMG_ARGS := --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 
 # Defines for enabling A/B builds
 AB_OTA_UPDATER := true

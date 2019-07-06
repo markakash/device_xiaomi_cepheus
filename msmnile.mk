@@ -1,9 +1,17 @@
 #####Dynamic partition Handling
 ####
-#### Turning this flag to TRUE will enable dynamic partition/super image creation.
+#### Turning BOARD_DYNAMIC_PARTITION_ENABLE flag to TRUE will enable dynamic partition/super image creation.
 
 ifeq ($(TARGET_FWK_SUPPORTS_FULL_VALUEADDS),true)
-BOARD_DYNAMIC_PARTITION_ENABLE ?=true
+  # By default this target is new-launch config, so set the default shipping level to 29 (if not set explictly earlier)
+  SHIPPING_API_LEVEL ?= 29
+
+  # Enable Dynamic partitions only for Q new launch devices.
+  ifeq ($(SHIPPING_API_LEVEL),29)
+    BOARD_DYNAMIC_PARTITION_ENABLE := true
+  else ifeq ($(SHIPPING_API_LEVEL),28)
+    BOARD_DYNAMIC_PARTITION_ENABLE := false
+  endif
 endif
 
 ifneq ($(strip $(BOARD_DYNAMIC_PARTITION_ENABLE)),true)
@@ -178,12 +186,6 @@ PRODUCT_BOOT_JARS += tcmiface
 #    PRODUCT_BOOT_JARS += WfdCommon
 #endif
 
-ifeq ($(TARGET_FWK_SUPPORTS_FULL_VALUEADDS),true)
-#BT library
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.bluetooth.library_name=libbluetooth_qti.so
-endif
-
 PRODUCT_PACKAGES += android.hardware.media.omx@1.0-impl
 
 # Camera configuration file. Shared by passthrough/binderized camera HAL
@@ -249,9 +251,6 @@ PRODUCT_PACKAGES += \
 
 #Healthd packages
 PRODUCT_PACKAGES += \
-    android.hardware.health@1.0-impl \
-    android.hardware.health@1.0-convert \
-    android.hardware.health@1.0-service \
     libhealthd.msm
 
 # Fingerprint feature
@@ -263,13 +262,8 @@ DEVICE_MATRIX_FILE   := device/qcom/common/compatibility_matrix.xml
 DEVICE_FRAMEWORK_MANIFEST_FILE := device/qcom/msmnile/framework_manifest.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := vendor/qcom/opensource/core-utils/vendor_framework_compatibility_matrix.xml
 
-
-#ANT+ stack
-PRODUCT_PACKAGES += \
-    AntHalService \
-    libantradio \
-    antradio_app \
-    libvolumelistener
+#audio related module
+PRODUCT_PACKAGES += libvolumelistener
 
 # Display/Graphics
 PRODUCT_PACKAGES += \
@@ -291,10 +285,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.contexthub@1.0-impl.generic \
     android.hardware.contexthub@1.0-service
-
-# system prop for Bluetooth SOC type
-PRODUCT_PROPERTY_OVERRIDES += \
-    vendor.qcom.bluetooth.soc=cherokee
 
 #vendor prop to enable advanced network scanning
 PRODUCT_PROPERTY_OVERRIDES += \
