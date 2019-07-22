@@ -29,6 +29,12 @@ BOARD_EXT4_SHARE_DUP_BLOCKS := true
 endif
 ### Dynamic partition Handling
 
+ifeq ($(SHIPPING_API_LEVEL),29)
+BOARD_SYSTEMSDK_VERSIONS:=29
+else
+BOARD_SYSTEMSDK_VERSIONS:=28
+endif
+
 BUILD_BROKEN_ANDROIDMK_EXPORTS=true
 BUILD_BROKEN_DUP_COPY_HEADERS=true
 # TODO(b/124534788): Temporarily allow eng and debug LOCAL_MODULE_TAGS
@@ -102,7 +108,7 @@ TARGET_RECOVERY_FSTAB := device/qcom/msmnile/recovery.fstab
 endif
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x06000000
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 10737418240
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 48318382080
 BOARD_PERSISTIMAGE_PARTITION_SIZE := 33554432
 BOARD_METADATAIMAGE_PARTITION_SIZE := 16777216
 BOARD_PREBUILT_DTBOIMAGE := out/target/product/msmnile/prebuilt_dtbo.img
@@ -239,10 +245,6 @@ endif
 ifeq ($(ENABLE_VENDOR_IMAGE), false)
   $(error "Vendor Image is mandatory !!")
 endif
-
-#Flag to enable System SDK Requirements.
-#All vendor APK will be compiled against system_current API set.
-BOARD_SYSTEMSDK_VERSIONS:=28
 
 BUILD_BROKEN_DUP_RULES := true
 
