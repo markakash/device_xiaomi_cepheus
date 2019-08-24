@@ -328,9 +328,6 @@ PRODUCT_PACKAGES += \
     vendor.qti.power.pasrmanager@1.0-service \
     vendor.qti.power.pasrmanager@1.0-impl \
     pasrservice
-#Property to enable/disable PASR
-PRODUCT_PROPERTY_OVERRIDES += \
-    vendor.power.pasr.enabled=true
 
 # Sensor conf files
 PRODUCT_COPY_FILES += \
