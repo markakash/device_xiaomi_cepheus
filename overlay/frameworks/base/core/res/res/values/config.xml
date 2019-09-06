@@ -1054,8 +1054,8 @@
 
     <!-- Total height of QQS (quick_qs_offset_height + 128dp) -->
     <dimen name="quick_qs_total_height">156dp</dimen>
-    <dimen name="rounded_corner_radius_top">110px</dimen>
-    <dimen name="rounded_corner_radius_bottom">100px</dimen>
+    <dimen name="rounded_corner_radius_top">100px</dimen>
+    <dimen name="rounded_corner_radius_bottom">110px</dimen>
 
     <!-- How much we expand the touchable region of the status bar below the notch to catch touches
         that just start below the notch. -->
