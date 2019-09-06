@@ -18,7 +18,6 @@
 -->
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-
     <!-- Flag indicating whether the we should enable the automatic brightness in Settings.
          Software implementation will be used if config_hardware_auto_brightness_available is not set -->
      <bool name="config_automatic_brightness_available">true</bool>
@@ -92,11 +91,6 @@
          * The device must be provisioned with HDCP keys (for protected content).
     -->
      <bool name="config_enableWifiDisplay">false</bool>
-
-    <!-- Whether the display cutout region of the main built-in display should be forced to
-         black in software (to avoid aliasing or emulate a cutout that is not physically existent).
-    -->
-     <bool name="config_fillMainBuiltInDisplayCutout">false</bool>
 
     <!-- Is the device capable of hot swapping an ICC Card -->
      <bool name="config_hotswapCapable">true</bool>
@@ -229,27 +223,21 @@
     <!-- The restoring is handled by modem if it is true-->
      <bool name="skip_restoring_network_selection">true</bool>
 
-    <!-- Height of the status bar -->
-     <dimen name="status_bar_height_portrait">74px</dimen>
-
-    <!-- Height of the status bar in landscape -->
-     <dimen name="status_bar_height_landscape">24dp</dimen>
-
     <!-- The maximum range of gamma adjustment possible using the screen
          auto-brightness adjustment setting. -->
      <fraction name="config_autoBrightnessAdjustmentMaxGamma">300.0%</fraction>
 
     <!-- User activity timeout: Maximum screen dim duration as a percentage of screen off timeout.
-    
+
          This resource is similar to config_maximumScreenDimDuration but the maximum
          screen dim duration is defined as a ratio of the overall screen off timeout
          instead of as an absolute value in milliseconds.  This is useful for reducing
          the dim duration when the screen off timeout is very short.
-    
+
          When computing the screen dim duration, the power manager uses the lesser
          of the effective durations expressed by config_maximumScreenDimDuration and
          config_maximumScreenDimRatio.
-    
+
          This value must be between 0% and 100%.  If the value is zero, the screen will not
          dim before the device goes to sleep.
     -->
@@ -313,20 +301,6 @@
          Note that doze dreams are not subject to the same start conditions as ordinary dreams.
          Doze dreams will run whenever the power manager is in a dozing state. -->
      <string name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
-
-    <!-- The bounding path of the cutout region of the main built-in display.
-         Must either be empty if there is no cutout region, or a string that is parsable by
-         {@link android.util.PathParser}.
-    
-         The path is assumed to be specified in display coordinates with pixel units and in
-         the display's native orientation, with the origin of the coordinate system at the
-         center top of the display.
-    
-         To facilitate writing device-independent emulation overlays, the marker `@dp` can be
-         appended after the path string to interpret coordinates in dp instead of px units.
-         Note that a physical cutout should be configured in pixels for the best results.
-    -->
-     <string name="config_mainBuiltInDisplayCutout">M-128,0 C-93.0495212,0 -73.0986004,10.7268852 -52.7866989,44.7100544 C-41.8225823,63.0604145 -22.0817847,75 0.00269388614,75 C22.0871725,75 41.8225823,63.0604145 52.7920867,44.7100544 C73.0986004,10.7268852 93.054909,0 128,0 L-128,0 Z</string>
 
     <!--  Define Google play service package for FRP-->
      <string name="config_persistentDataPackageName">com.google.android.gms</string>
@@ -1023,11 +997,106 @@
         <item>9,1</item>
     </string-array>
 
-    <!-- Shows the required view for in-display fingerprint -->
-    <bool name="config_supportsInDisplayFingerprint">true</bool>
+    <!-- List supported color modes. -->
+    <integer-array name="config_availableColorModes">
+        <item>0</item> <!-- COLOR_MODE_NATURAL -->
+        <item>1</item> <!-- COLOR_MODE_BOOSTED -->
+        <item>3</item> <!-- COLOR_MODE_AUTOMATIC -->
+    </integer-array>
+
+    <!-- Whether the main built-in display is round. This will affect
+         Configuration.screenLayout's SCREENLAYOUT_ROUND_MASK flags for Configurations on the
+         main built-in display. Change this in device-specific overlays.
+         Defaults to the older, deprecated config_windowIsRound already used in
+         some existing device-specific resource overlays. -->
+    <bool name="config_mainBuiltInDisplayIsRound">true</bool>
+
+    <!-- The bounding path of the cutout region of the main built-in display.
+         Must either be empty if there is no cutout region, or a string that is parsable by
+         {@link android.util.PathParser}.
+         The path is assumed to be specified in display coordinates with pixel units and in
+         the display's native orientation, with the origin of the coordinate system at the
+         center top of the display.
+         To facilitate writing device-independent emulation overlays, the marker `@dp` can be
+         appended after the path string to interpret coordinates in dp instead of px units.
+         Note that a physical cutout should be configured in pixels for the best results.
+         Example for a 10px x 10px square top-center cutout:
+                <string ...>M -5,0 L -5,10 L 5,10 L 5,0 Z</string>
+         Example for a 10dp x 10dp square top-center cutout:
+                <string ...>M -5,0 L -5,10 L 5,10 L 5,0 Z @dp</string>
+         @see https://www.w3.org/TR/SVG/paths.html#PathData
+         -->
+    <string translatable="false" name="config_mainBuiltInDisplayCutout">
+        M-76.9985203,12.6526029 C-66.7142769,24.2251334 -58.6436698,34.9109506 -52.7866989,44.7100544 C-41.8225823,63.0604145 -22.0817847,75 0.00269388614,75 C22.0871725,75 41.8225823,63.0604145 52.7920867,44.7100544 C58.6467515,34.9122099 66.7153603,24.2272938 76.9979132,12.6553061 L77,0 L-76.9991414,0 L-76.9985203,12.6526029 Z
+    </string>
+
+    <!-- Like config_mainBuiltInDisplayCutout, but this path is used to report the
+         one single bounding rect per device edge to the app via
+         {@link DisplayCutout#getBoundingRect}. Note that this path should try to match the visual
+         appearance of the cutout as much as possible, and may be smaller than
+         config_mainBuiltInDisplayCutout
+         -->
+    <string translatable="false" name="config_mainBuiltInDisplayCutoutRectApproximation">
+        @*android:string/config_mainBuiltInDisplayCutout
+    </string>
+
+    <!-- Whether the display cutout region of the main built-in display should be forced to
+         black in software (to avoid aliasing or emulate a cutout that is not physically existent).
+     -->
+    <bool name="config_fillMainBuiltInDisplayCutout">true</bool>
+
+    <!-- Height of the status bar -->
+    <dimen name="status_bar_height_portrait">75px</dimen>
+    <dimen name="status_bar_height_landscape">28dp</dimen>
+
+    <!-- Height of area above QQS where battery/time go (equal to status bar height if > 48dp) -->
+    <dimen name="quick_qs_offset_height">75px</dimen>
+
+    <!-- Total height of QQS (quick_qs_offset_height + 128dp) -->
+    <dimen name="quick_qs_total_height">156dp</dimen>
+    <dimen name="rounded_corner_radius_top">110px</dimen>
+    <dimen name="rounded_corner_radius_bottom">100px</dimen>
+
+    <!-- How much we expand the touchable region of the status bar below the notch to catch touches
+        that just start below the notch. -->
+    <dimen name="display_cutout_touchable_region_size">33px</dimen>
+
+    <!-- BEGINNING OF PIXEL EXPERIENCE RESOURCES -->
+
+    <!-- Taken from https://github.com/PixelExperience/frameworks_base/blob/pie/core/res/res/values/custom_config.xml#L79 -->
+    <!-- Hardware keys present on the device, stored as a bit field.
+         This integer should equal the sum of the corresponding value for each
+         of the following keys present:
+             1 - Home
+             2 - Back
+             4 - Menu
+             8 - Assistant (search)
+            16 - App switch
+            32 - Camera
+            64 - Volume rocker
+         For example, a device with Home, Back and Menu keys would set this
+         config to 7. -->
+    <integer name="config_deviceHardwareKeys">72</integer>
+
+    <!-- Hardware keys present on the device with the ability to wake, stored as a bit field.
+         This integer should equal the sum of the corresponding value for each
+         of the following keys present:
+             1 - Home
+             2 - Back
+             4 - Menu
+             8 - Assistant (search)
+            16 - App switch
+            32 - Camera
+            64 - Volume rocker
+         For example, a device with Home, Back and Menu keys would set this
+         config to 7. -->
+    <integer name="config_deviceHardwareWakeKeys">72</integer>
 
     <!-- Whether device has a physical display cutout -->
     <bool name="config_physicalDisplayCutout">true</bool>
+
+    <!-- Shows the required view for in-display fingerprint -->
+    <bool name="config_supportsInDisplayFingerprint">true</bool>
 
     <!-- Enable dual LTE capability support-->
     <bool name="config_dual_LTE_capability">true</bool>
@@ -1037,13 +1106,6 @@
 
     <!-- Pocket Lock -->
     <bool name="config_pocketModeSupported">false</bool>
-
-    <!-- List supported color modes. -->
-    <integer-array name="config_availableColorModes">
-        <item>0</item> <!-- COLOR_MODE_NATURAL -->
-        <item>1</item> <!-- COLOR_MODE_BOOSTED -->
-        <item>3</item> <!-- COLOR_MODE_AUTOMATIC -->
-    </integer-array>
 
     <!-- Display mode remapping table.
          If the mode names returned by the backend do not match
@@ -1060,4 +1122,5 @@
 
     <!-- Should we filter any display modes which are unampped? -->
     <bool name="config_filterDisplayModes">true</bool>
+
 </resources>

@@ -11,10 +11,22 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
     <!-- Whether to show Connected MAC Randomization in Developer Options
          as not all devices can support dynamic MAC address change.  -->
     <bool name="config_wifi_support_connected_mac_randomization">true</bool>
 
+    <!-- BEGINNING OF PIXEL EXPERIENCE RESOURCES -->
+
+    <!-- Taken from https://github.com/PixelExperience/packages_apps_Settings/blob/pie/res/values/custom_config.xml#L25 -->
+    <!-- Defines the location of the fingerprint sensor on the device
+         0 = back
+         1 = front
+         2 = left side
+         3 = right side
+    -->
+    <integer name="config_fingerprintSensorLocation">1</integer>
+
     <!-- Device specific doze package -->
-    <string name="config_customDozePackage">org.lineageos.settings/org.lineageos.settings.doze.DozeSettingsActivity</string>
+    <string name="config_customDozePackage" translatable="false">org.lineageos.settings/org.lineageos.settings.doze.DozeSettingsActivity</string>
 </resources>

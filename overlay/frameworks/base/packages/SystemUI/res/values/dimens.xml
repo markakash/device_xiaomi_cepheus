@@ -15,21 +15,25 @@
 */
 -->
 <resources>
-    <!-- The maximum count of notifications on Keyguard (only when ambient play indication is showing o$         The rest will be collapsed in an overflow card.
-     -->
-    <integer name="keyguard_max_notification_count_ambient_play">2</integer>
+    <!-- Taken from https://android.googlesource.com/device/google/crosshatch/+/refs/heads/master/crosshatch/overlay/frameworks/base/packages/SystemUI/res/values/dimens.xml -->
 
+    <!-- <dimen name="rounded_corner_content_padding">28px</dimen> TODO: find appropriate value for cepheus -->
+
+    <dimen name="display_cutout_margin_consumption">0px</dimen>
+
+    <!-- Height of the status bar header bar when on Keyguard (match status_bar_portrait) -->
+    <dimen name="status_bar_header_height_keyguard">28dp</dimen>
+
+    <!-- Margin end of the system icons super container when the avatar is missing. -->
+    <!-- <dimen name="system_icons_super_container_avatarless_margin_end">10dp</dimen> TODO: find appropriate value for cepheus -->
+
+    <!-- end margin for multi user switch in collapsed quick settings -->
+    <!-- <dimen name="multi_user_switch_keyguard_margin">7dp</dimen> TODO: find appropriate value for cepheus -->
+
+    <!-- BEGINNING OF PIXEL EXPERIENCE RESOURCES -->
+
+    <!-- Taken from https://github.com/PixelExperience/frameworks_base/blob/pie/packages/SystemUI/res/values/custom_dimens.xml#L34 -->
     <!-- Bottom margin size when fingerprint in display is active -->
     <dimen name="keyguard_indication_margin_bottom_fingerprint_in_display">140dp</dimen>
 
-    <!-- Default radius of the software rounded corners. -->
-    <dimen name="rounded_corner_radius">9dp</dimen>
-
-    <!-- Radius of the software rounded corners at the top of the display in its natural
-        orientation. If zero, the value of rounded_corner_radius is used. -->
-    <dimen name="rounded_corner_radius_top">100px</dimen>
-
-    <!-- Radius of the software rounded corners at the bottom of the display in its natural
-        orientation. If zero, the value of rounded_corner_radius is used. -->
-    <dimen name="rounded_corner_radius_bottom">110px</dimen>
 </resources>
