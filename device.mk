@@ -62,18 +62,14 @@ PRODUCT_PACKAGES += \
     services-ext
 
 # Device-specific settings
-PRODUCT_PACKAGES += \
-    XiaomiParts
+#PRODUCT_PACKAGES += \
+#    XiaomiParts
 
 # Display
 PRODUCT_PACKAGES += \
     libdisplayconfig \
     libqdMetaData.system \
     libvulkan
-
-# Fingerprint
-PRODUCT_PACKAGES += \
-    lineage.biometrics.fingerprint.inscreen@1.0-service.xiaomi_cepheus
 
 # HIDL
 PRODUCT_PACKAGES += \
@@ -118,16 +114,6 @@ PRODUCT_PACKAGES += \
     netutils-wrapper-1.0
 
 # NFC
-PRODUCT_PACKAGES += \
-    com.android.nfc_extras \
-    com.gsma.services.nfc \
-    com.nxp.nfc.nq \
-    libnqnfc-nci \
-    nqnfcee_access.xml \
-    nqnfcse_access.xml \
-    NQNfcNci \
-    SecureElement \
-    Tag
 
 # Power
 PRODUCT_PACKAGES += \
@@ -155,9 +141,6 @@ PRODUCT_PACKAGES += \
 
 # Telephony
 PRODUCT_PACKAGES += \
-    telephony-ext
-
-PRODUCT_BOOT_JARS += \
     telephony-ext
 
 # TextClassifier
