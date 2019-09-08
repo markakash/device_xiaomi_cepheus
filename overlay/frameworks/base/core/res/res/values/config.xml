@@ -1063,6 +1063,11 @@
 
     <!-- BEGINNING OF PIXEL EXPERIENCE RESOURCES -->
 
+    <!-- Taken from: https://github.com/PixelExperience/frameworks_base/blob/pie/core/res/res/values/custom_config.xml#L28 -->
+    <!-- Full screen aspect ratio -->
+    <bool name="config_haveHigherAspectRatioScreen">true</bool>
+    <item name="config_screenAspectRatio" format="float" type="dimen">2.166667</item>
+
     <!-- Taken from https://github.com/PixelExperience/frameworks_base/blob/pie/core/res/res/values/custom_config.xml#L79 -->
     <!-- Hardware keys present on the device, stored as a bit field.
          This integer should equal the sum of the corresponding value for each
