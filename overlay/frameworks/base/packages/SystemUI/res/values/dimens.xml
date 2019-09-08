@@ -34,6 +34,6 @@
 
     <!-- Taken from https://github.com/PixelExperience/frameworks_base/blob/pie/packages/SystemUI/res/values/custom_dimens.xml#L34 -->
     <!-- Bottom margin size when fingerprint in display is active -->
-    <dimen name="keyguard_indication_margin_bottom_fingerprint_in_display">140dp</dimen>
+    <dimen name="keyguard_indication_margin_bottom_fingerprint_in_display">192dp</dimen>
 
 </resources>
