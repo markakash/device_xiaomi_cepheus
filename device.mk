@@ -28,6 +28,9 @@ TARGET_SCREEN_WIDTH := 1080
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay
 
+PRODUCT_PACKAGES += \
+    NoCutoutOverlay
+
 # Properties
 -include $(LOCAL_PATH)/system_prop.mk
 
@@ -163,7 +166,3 @@ PRODUCT_BOOT_JARS += \
 # TextClassifier
 PRODUCT_PACKAGES += \
     textclassifier.bundle1
-
-# NoCutoutOverlay
-PRODUCT_PACKAGES += \
-    NoCutoutOverlay
