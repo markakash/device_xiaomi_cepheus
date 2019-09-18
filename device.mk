@@ -163,3 +163,7 @@ PRODUCT_BOOT_JARS += \
 # TextClassifier
 PRODUCT_PACKAGES += \
     textclassifier.bundle1
+
+# NoCutoutOverlay
+PRODUCT_PACKAGES += \
+    NoCutoutOverlay
