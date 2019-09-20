@@ -254,10 +254,10 @@ config_atoll_dcc_noc_err_regs()
     echo 0x1700308 > $DCC_PATH/config
     echo 0x170030C > $DCC_PATH/config
     echo 0x1700310 > $DCC_PATH/config
-    echo 0x1700500 > $DCC_PATH/config
-    echo 0x1700504 > $DCC_PATH/config
-    echo 0x1700508 > $DCC_PATH/config
-    echo 0x170050C > $DCC_PATH/config
+    # echo 0x1700500 > $DCC_PATH/config
+    # echo 0x1700504 > $DCC_PATH/config
+    # echo 0x1700508 > $DCC_PATH/config
+    # echo 0x170050C > $DCC_PATH/config
     echo 0x1700900 > $DCC_PATH/config
     echo 0x1700904 > $DCC_PATH/config
     echo 0x1700908 > $DCC_PATH/config
