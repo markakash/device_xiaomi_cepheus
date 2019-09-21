@@ -10,6 +10,10 @@ ifeq ($(TARGET_FWK_SUPPORTS_FULL_VALUEADDS),true)
   ifeq ($(SHIPPING_API_LEVEL),29)
     BOARD_DYNAMIC_PARTITION_ENABLE := true
     PRODUCT_SHIPPING_API_LEVEL := 29
+
+    # Enable the crypto set_dun AOSP property, needed for devices with -
+    # UDC + ext4 + FBE + metadata-encryption enabled (not needed if metadata encryption is disabled).
+    PRODUCT_PROPERTY_OVERRIDES += ro.crypto.set_dun=true
   else ifeq ($(SHIPPING_API_LEVEL),28)
     BOARD_DYNAMIC_PARTITION_ENABLE := false
     $(call inherit-product, build/make/target/product/product_launched_with_p.mk)
