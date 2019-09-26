@@ -40,6 +40,7 @@ QCOM_BOARD_PLATFORMS += qcs605
 QCOM_BOARD_PLATFORMS += $(MSMSTEPPE)
 QCOM_BOARD_PLATFORMS += kona
 QCOM_BOARD_PLATFORMS += lito
+QCOM_BOARD_PLATFORMS += bengal
 QCOM_BOARD_PLATFORMS += atoll
 QCOM_BOARD_PLATFORMS += $(TRINKET)
 
@@ -165,6 +166,7 @@ AUDIO_HARDWARE += audio.primary.sdmshrike
 AUDIO_HARDWARE += audio.primary.$(MSMSTEPPE)
 AUDIO_HARDWARE += audio.primary.kona
 AUDIO_HARDWARE += audio.primary.lito
+AUDIO_HARDWARE += audio.primary.bengal
 AUDIO_HARDWARE += audio.primary.$(TRINKET)
 #
 AUDIO_POLICY := audio_policy.mpq8064
