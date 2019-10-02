@@ -56,6 +56,9 @@ ro.incremental.enable=1
 # Set lmkd options
 ro.config.low_ram = false
 
+# IORap
+iorapd.readahead.enable=true
+
 # Media
 media.aac_51_output_enabled=true
 media.stagefright.enable-aac=true
