@@ -1335,6 +1335,11 @@ config_kona_sysco_ack()
 
 }
 
+config_boot_misc()
+{
+    echo 0x01FD3000 1 > $DCC_PATH/config
+}
+
 # Function kona DCC configuration
 enable_kona_dcc_config()
 {
@@ -1360,6 +1365,7 @@ enable_kona_dcc_config()
     config_kona_dcc_lpm_pcu
     config_kona_dcc_ddr
     config_kona_sysco_ack
+    config_boot_misc
 
     echo 4 > $DCC_PATH/curr_list
     echo cap > $DCC_PATH/func_type
