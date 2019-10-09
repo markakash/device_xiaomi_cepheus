@@ -1117,16 +1117,16 @@ config_kona_dcc_sys_agnoc_error()
     echo 0x16E0038 1 > $DCC_PATH/config
     echo 0x16E003C 1 > $DCC_PATH/config
     echo 0x16E0248 1 > $DCC_PATH/config
-    echo 0x1700010 1 > $DCC_PATH/config
-    echo 0x1700020 1 > $DCC_PATH/config
-    echo 0x1700024 1 > $DCC_PATH/config
-    echo 0x1700028 1 > $DCC_PATH/config
-    echo 0x170002C 1 > $DCC_PATH/config
-    echo 0x1700030 1 > $DCC_PATH/config
-    echo 0x1700034 1 > $DCC_PATH/config
-    echo 0x1700038 1 > $DCC_PATH/config
-    echo 0x170003C 1 > $DCC_PATH/config
-    echo 0x1700448 1 > $DCC_PATH/config
+    #echo 0x1700010 1 > $DCC_PATH/config
+    #echo 0x1700020 1 > $DCC_PATH/config
+    #echo 0x1700024 1 > $DCC_PATH/config
+    #echo 0x1700028 1 > $DCC_PATH/config
+    #echo 0x170002C 1 > $DCC_PATH/config
+    #echo 0x1700030 1 > $DCC_PATH/config
+    #echo 0x1700034 1 > $DCC_PATH/config
+    #echo 0x1700038 1 > $DCC_PATH/config
+    #echo 0x170003C 1 > $DCC_PATH/config
+    #echo 0x1700448 1 > $DCC_PATH/config
     #Agnoc Error syndrome end
 
     #DCNOC Error Start
@@ -1188,36 +1188,36 @@ config_kona_dcc_sys_agnoc_error()
 config_kona_dcc_sys_agnoc()
 {
     #SYSNOC start
-    echo 0x162C100 1 > $DCC_PATH/config
-    echo 0x162C104 1 > $DCC_PATH/config
-    echo 0x162C108 1 > $DCC_PATH/config
-    echo 0x162C10C 1 > $DCC_PATH/config
-    echo 0x162C300 1 > $DCC_PATH/config
-    echo 0x162C304 1 > $DCC_PATH/config
-    echo 0x162C308 1 > $DCC_PATH/config
-    echo 0x162C30C 1 > $DCC_PATH/config
-    echo 0x162C500 1 > $DCC_PATH/config
-    echo 0x162C504 1 > $DCC_PATH/config
-    echo 0x162C700 1 > $DCC_PATH/config
-    echo 0x162C900 1 > $DCC_PATH/config
+    #echo 0x162C100 1 > $DCC_PATH/config
+    #echo 0x162C104 1 > $DCC_PATH/config
+    #echo 0x162C108 1 > $DCC_PATH/config
+    #echo 0x162C10C 1 > $DCC_PATH/config
+    #echo 0x162C300 1 > $DCC_PATH/config
+    #echo 0x162C304 1 > $DCC_PATH/config
+    #echo 0x162C308 1 > $DCC_PATH/config
+    #echo 0x162C30C 1 > $DCC_PATH/config
+    #echo 0x162C500 1 > $DCC_PATH/config
+    #echo 0x162C504 1 > $DCC_PATH/config
+    #echo 0x162C700 1 > $DCC_PATH/config
+    #echo 0x162C900 1 > $DCC_PATH/config
     #SYSNOC End
 
     #AGNOC start
-    echo 0x16E0300 1 > $DCC_PATH/config
-    echo 0x16E0304 1 > $DCC_PATH/config
-    echo 0x16E0308 1 > $DCC_PATH/config
-    echo 0x16E030C 1 > $DCC_PATH/config
-    echo 0x16E0310 1 > $DCC_PATH/config
-    echo 0x16E0700 1 > $DCC_PATH/config
-    echo 0x1700500 1 > $DCC_PATH/config
-    echo 0x1700504 1 > $DCC_PATH/config
-    echo 0x1700508 1 > $DCC_PATH/config
-    echo 0x170050C 1 > $DCC_PATH/config
-    echo 0x1700900 1 > $DCC_PATH/config
-    echo 0x1700904 1 > $DCC_PATH/config
-    echo 0x1700908 1 > $DCC_PATH/config
-    echo 0x1700B00 1 > $DCC_PATH/config
-    echo 0x1700B04 1 > $DCC_PATH/config
+    #echo 0x16E0300 1 > $DCC_PATH/config
+    #echo 0x16E0304 1 > $DCC_PATH/config
+    #echo 0x16E0308 1 > $DCC_PATH/config
+    #echo 0x16E030C 1 > $DCC_PATH/config
+    #echo 0x16E0310 1 > $DCC_PATH/config
+    #echo 0x16E0700 1 > $DCC_PATH/config
+    #echo 0x1700500 1 > $DCC_PATH/config
+    #echo 0x1700504 1 > $DCC_PATH/config
+    #echo 0x1700508 1 > $DCC_PATH/config
+    #echo 0x170050C 1 > $DCC_PATH/config
+    #echo 0x1700900 1 > $DCC_PATH/config
+    #echo 0x1700904 1 > $DCC_PATH/config
+    #echo 0x1700908 1 > $DCC_PATH/config
+    #echo 0x1700B00 1 > $DCC_PATH/config
+    #echo 0x1700B04 1 > $DCC_PATH/config
     #AGNOC End
 
     #cdspnoc start
