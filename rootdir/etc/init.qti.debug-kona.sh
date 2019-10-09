@@ -137,6 +137,51 @@ enable_stm_events_kona()
     enable_kona_tracing_events
 }
 
+config_kona_pos_register()
+{
+    echo 0x9102010 1 > $DCC_PATH/config
+    echo 0x9102410 1 > $DCC_PATH/config
+    echo 0x9142010 1 > $DCC_PATH/config
+    echo 0x9142410 1 > $DCC_PATH/config
+    echo 0x9102810 1 > $DCC_PATH/config
+    echo 0x9102C10 1 > $DCC_PATH/config
+    echo 0x9142810 1 > $DCC_PATH/config
+    echo 0x9142C10 1 > $DCC_PATH/config
+    echo 0x9110010 1 > $DCC_PATH/config
+    echo 0x9110410 1 > $DCC_PATH/config
+    echo 0x9150010 1 > $DCC_PATH/config
+    echo 0x9150410 1 > $DCC_PATH/config
+    echo 0x9100008 1 > $DCC_PATH/config
+    echo 0x910000C 1 > $DCC_PATH/config
+    echo 0x9100408 1 > $DCC_PATH/config
+    echo 0x910040C 1 > $DCC_PATH/config
+    echo 0x9140008 1 > $DCC_PATH/config
+    echo 0x914000C 1 > $DCC_PATH/config
+    echo 0x9140408 1 > $DCC_PATH/config
+    echo 0x914040C 1 > $DCC_PATH/config
+    echo 0x9180008 1 > $DCC_PATH/config
+    echo 0x918000C 1 > $DCC_PATH/config
+    echo 0x9180408 1 > $DCC_PATH/config
+    echo 0x918040C 1 > $DCC_PATH/config
+    echo 0x9100810 1 > $DCC_PATH/config
+    echo 0x9100C10 1 > $DCC_PATH/config
+    echo 0x9140810 1 > $DCC_PATH/config
+    echo 0x9140C10 1 > $DCC_PATH/config
+    echo 0x9100820 1 > $DCC_PATH/config
+    echo 0x9100C20 1 > $DCC_PATH/config
+    echo 0x9140820 1 > $DCC_PATH/config
+    echo 0x9140C20 1 > $DCC_PATH/config
+    echo 0x9100828 1 > $DCC_PATH/config
+    echo 0x910082C 1 > $DCC_PATH/config
+    echo 0x9100C28 1 > $DCC_PATH/config
+    echo 0x9100C2C 1 > $DCC_PATH/config
+    echo 0x9140828 1 > $DCC_PATH/config
+    echo 0x914082C 1 > $DCC_PATH/config
+    echo 0x9140C28 1 > $DCC_PATH/config
+    echo 0x9140C2C 1 > $DCC_PATH/config
+
+}
+
 config_kona_dcc_ddr()
 {
     #DDR -DCC starts here.
@@ -1274,6 +1319,22 @@ kona_dcc_async_package()
     echo 0x06004FB0 0x0 > $DCC_PATH/config_write
 }
 
+config_kona_sysco_ack()
+{
+    echo 0x09084124 1 > $DCC_PATH/config
+    echo 0x09084130 1 > $DCC_PATH/config
+    echo 0x09084080 1 > $DCC_PATH/config
+    echo 0x09084068 2 > $DCC_PATH/config
+    echo 0x09084070 1 > $DCC_PATH/config
+    echo 0x09084084 1 > $DCC_PATH/config
+    echo 0x09084060 2 > $DCC_PATH/config
+    echo 0x09084058 2 > $DCC_PATH/config
+    echo 0x09084078 2 > $DCC_PATH/config
+    echo 0x0908415C 1 > $DCC_PATH/config
+    echo 0x09084150 1 > $DCC_PATH/config
+
+}
+
 # Function kona DCC configuration
 enable_kona_dcc_config()
 {
@@ -1298,6 +1359,7 @@ enable_kona_dcc_config()
     config_kona_dcc_edu
     config_kona_dcc_lpm_pcu
     config_kona_dcc_ddr
+    config_kona_sysco_ack
 
     echo 4 > $DCC_PATH/curr_list
     echo cap > $DCC_PATH/func_type
@@ -1316,6 +1378,7 @@ enable_kona_dcc_config()
     kona_dcc_async_package
     config_kona_dcc_lpm
     config_kona_dcc_sys_agnoc_error
+    config_kona_pos_register
 
     echo  1 > $DCC_PATH/enable
 }
