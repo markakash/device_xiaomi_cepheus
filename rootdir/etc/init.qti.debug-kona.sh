@@ -136,6 +136,68 @@ enable_stm_events_kona()
     echo 0 > /sys/bus/coresight/devices/coresight-stm/hwevent_enable
     enable_kona_tracing_events
 }
+enable_kona_lpm_with_dcvs_tracing
+{
+    echo "Configure SW EVENTS Settings"
+    echo 1 > /sys/kernel/debug/tracing/events/msm_low_power/cpu_idle_enter/enable
+    echo 1 > /sys/kernel/debug/tracing/events/msm_low_power/cpu_idle_exit/enable
+    echo 1 > /sys/kernel/debug/tracing/events/msm_low_power/cluster_enter/enable
+    echo 1 > /sys/kernel/debug/tracing/events/msm_low_power/cluster_exit/enable
+    echo 1 >/sys/kernel/debug/tracing/tracing_on
+
+    echo "Configure LPM HW Events at Top TPDM"
+
+    echo 1 > /sys/bus/coresight/devices/coresight-tpdm-apss/reset
+    echo 0x0 0x3 0x1 > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_edge_ctrl_mask
+    echo 0x0 0x3 0 > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_edge_ctrl
+    echo 0x4 0x4 0x1 > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_edge_ctrl_mask
+    echo 0x4 0x4 0 > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_edge_ctrl
+    echo 0x5 0x5 0x1 > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_edge_ctrl_mask
+    echo 0x5 0x5 0 > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_edge_ctrl
+    echo 0x6 0x8 0x1 > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_edge_ctrl_mask
+    echo 0x6 0x8 0 > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_edge_ctrl
+    echo 0xc 0xf 0x1 > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_edge_ctrl_mask
+    echo 0xc 0xf 0x1 > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_edge_ctrl_mask
+    echo 0xc 0xf 0 > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_edge_ctrl
+    echo 0x1d 0x1d 0x1 > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_edge_ctrl_mask
+    echo 0x1d 0x1d 0 > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_edge_ctrl
+    echo 0x2b 0x3f 0x1 > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_edge_ctrl_mask
+    echo 0x2b 0x3f 0 > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_edge_ctrl
+    echo 0x80 0x9a 0x1 > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_edge_ctrl_mask
+    echo 0x80 0x9a 0 > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_edge_ctrl
+    echo 0 0x11111111  > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_msr
+    echo 1 0x66660001  > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_msr
+    echo 2 0x00000000  > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_msr
+    echo 3 0x00100000  > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_msr
+    echo 5 0x11111000  > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_msr
+    echo 6 0x11111111  > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_msr
+    echo 7 0x11111111  > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_msr
+    echo 16 0x11111111  > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_msr
+    echo 17 0x11111111  > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_msr
+    echo 18 0x11111111  > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_msr
+    echo 19 0x00000111  > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_msr
+    echo 0 0xFFFFFFFF > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_patt_mask
+    echo 1 0xFFFFFFFF > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_patt_mask
+    echo 2 0xFFFFFFFF > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_patt_mask
+    echo 3 0xFFFFFFFF > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_patt_mask
+    echo 4 0xFFFFFFFF > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_patt_mask
+    echo 5 0xFFFFFFFF > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_patt_mask
+    echo 6 0xFFFFFFFF > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_patt_mask
+    echo 7 0xFFFFFFFF > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_patt_mask
+    echo 1 > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_patt_ts
+    echo 1 > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_patt_type
+    echo 0 > /sys/bus/coresight/devices/coresight-tpdm-apss/dsb_trig_ts
+
+    echo "Configure EPSS HW Traces"
+    echo 1 > /sys/bus/coresight/devices/coresight-tpdm-actpm/cmb_ts_all
+    echo 4 > /sys/bus/coresight/devices/coresight-tpdm-actpm/enable_datasets
+    echo 1 0 > /sys/bus/coresight/devices/coresight-tpdm-actpm/cmb_mode
+    echo 1 > /sys/bus/coresight/devices/coresight-tpdm-actpm/enable_source
+
+    echo "Configure Trace Sink settings and start traces"
+    echo 2 > /sys/bus/coresight/devices/coresight-tpdm-apss/enable_datasets
+    echo 1 > /sys/bus/coresight/devices/coresight-tpdm-apss/enable_source
+}
 
 config_kona_pos_register()
 {
@@ -4241,5 +4303,6 @@ enable_kona_debug()
     fi
     enable_kona_dcc_config
     enable_kona_stm_hw_events
+    enable_kona_lpm_with_dcvs_tracing
     enable_kona_cpu_register
 }
