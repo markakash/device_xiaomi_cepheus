@@ -1328,10 +1328,10 @@ config_kona_dcc_sys_agnoc()
     #AGNOC End
 
     #cdspnoc start
-    echo 0x1700D00 1 > $DCC_PATH/config
-    echo 0x1700D04 1 > $DCC_PATH/config
-    echo 0x1700D08 1 > $DCC_PATH/config
-    echo 0x1700D0C 1 > $DCC_PATH/config
+    #echo 0x1700D00 1 > $DCC_PATH/config
+    #echo 0x1700D04 1 > $DCC_PATH/config
+    #echo 0x1700D08 1 > $DCC_PATH/config
+    #echo 0x1700D0C 1 > $DCC_PATH/config
     #End
 
     #DCNOC Start
@@ -1402,6 +1402,12 @@ config_boot_misc()
     echo 0x01FD3000 1 > $DCC_PATH/config
 }
 
+config_apss_pwr_state()
+{
+    #APSS_L3_PWR_GATE_STATUS
+    echo 0x18080010 0x1 > $DCC_PATH/config_write
+}
+
 # Function kona DCC configuration
 enable_kona_dcc_config()
 {
@@ -1420,6 +1426,7 @@ enable_kona_dcc_config()
     echo cap > $DCC_PATH/func_type
     echo sram > $DCC_PATH/data_sink
     #config_kona_dcc_tcs
+    config_apss_pwr_state
     config_kona_dcc_core
     config_kona_dcc_gemnoc
     config_kona_dcc_sys_agnoc
@@ -1428,6 +1435,7 @@ enable_kona_dcc_config()
     config_kona_dcc_ddr
     config_kona_sysco_ack
     config_boot_misc
+
 
     echo 4 > $DCC_PATH/curr_list
     echo cap > $DCC_PATH/func_type
@@ -1442,7 +1450,7 @@ enable_kona_dcc_config()
     echo 1 > /sys/bus/coresight/devices/coresight-tpdm-dcc/enable_source
     echo 3 > $DCC_PATH/curr_list
     echo cap > $DCC_PATH/func_type
-    echo atb > $DCC_PATH/data_sink
+    echo sram > $DCC_PATH/data_sink
     kona_dcc_async_package
     config_kona_dcc_lpm
     config_kona_dcc_sys_agnoc_error
