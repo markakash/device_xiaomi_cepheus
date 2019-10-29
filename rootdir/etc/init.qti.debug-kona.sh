@@ -1425,7 +1425,6 @@ enable_kona_dcc_config()
     echo 6 > $DCC_PATH/curr_list
     echo cap > $DCC_PATH/func_type
     echo sram > $DCC_PATH/data_sink
-    #config_kona_dcc_tcs
     config_apss_pwr_state
     config_kona_dcc_core
     config_kona_dcc_gemnoc
@@ -1435,7 +1434,6 @@ enable_kona_dcc_config()
     config_kona_dcc_ddr
     config_kona_sysco_ack
     config_boot_misc
-
 
     echo 4 > $DCC_PATH/curr_list
     echo cap > $DCC_PATH/func_type
