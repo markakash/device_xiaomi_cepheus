@@ -849,72 +849,12 @@ config_lito_dcc_rsc_tcs()
     echo 0xb2b4520 > $DCC_PATH/config
 
     #QDSP6 General
-    echo 0x8300044 > $DCC_PATH/config
     echo 0x8300468 > $DCC_PATH/config
     echo 0x8302000 > $DCC_PATH/config
-    echo 0x8302028 > $DCC_PATH/config
     echo 0x8390380 32 > $DCC_PATH/config
 }
 
 config_lito_dcc_lpass_rsc(){
-    #LPASS RSC
-    echo 0x3500010 > $DCC_PATH/config
-    echo 0x3500014 > $DCC_PATH/config
-    echo 0x3500018 > $DCC_PATH/config
-    echo 0x3500030 > $DCC_PATH/config
-    echo 0x3500038 > $DCC_PATH/config
-    echo 0x3500040 > $DCC_PATH/config
-    echo 0x3500048 > $DCC_PATH/config
-    echo 0x35000d0 > $DCC_PATH/config
-    echo 0x3500208 > $DCC_PATH/config
-    echo 0x350020c > $DCC_PATH/config
-    echo 0x3500210 > $DCC_PATH/config
-    echo 0x3500228 > $DCC_PATH/config
-    echo 0x350022c > $DCC_PATH/config
-    echo 0x3500230 > $DCC_PATH/config
-    echo 0x3500248 > $DCC_PATH/config
-    echo 0x350024c > $DCC_PATH/config
-    echo 0x3500250 > $DCC_PATH/config
-    echo 0x3500268 > $DCC_PATH/config
-    echo 0x350026c > $DCC_PATH/config
-    echo 0x3500270 > $DCC_PATH/config
-    echo 0x3500288 > $DCC_PATH/config
-    echo 0x350028c > $DCC_PATH/config
-    echo 0x3500290 > $DCC_PATH/config
-    echo 0x35002a8 > $DCC_PATH/config
-    echo 0x35002ac > $DCC_PATH/config
-    echo 0x35002b0 > $DCC_PATH/config
-    echo 0x3500400 > $DCC_PATH/config
-    echo 0x3500404 > $DCC_PATH/config
-    echo 0x3500408 > $DCC_PATH/config
-    echo 0x3500d04 > $DCC_PATH/config
-
-    #LPASS RSCc
-    echo 0x30b0010 > $DCC_PATH/config
-    echo 0x30b0014 > $DCC_PATH/config
-    echo 0x30b0018 > $DCC_PATH/config
-    echo 0x30b0208 > $DCC_PATH/config
-    echo 0x30b020c > $DCC_PATH/config
-    echo 0x30b0210 > $DCC_PATH/config
-    echo 0x30b0228 > $DCC_PATH/config
-    echo 0x30b022c > $DCC_PATH/config
-    echo 0x30b0230 > $DCC_PATH/config
-    echo 0x30b0248 > $DCC_PATH/config
-    echo 0x30b024c > $DCC_PATH/config
-    echo 0x30b0250 > $DCC_PATH/config
-    echo 0x30b0268 > $DCC_PATH/config
-    echo 0x30b026c > $DCC_PATH/config
-    echo 0x30b0270 > $DCC_PATH/config
-    echo 0x30b0288 > $DCC_PATH/config
-    echo 0x30b028c > $DCC_PATH/config
-    echo 0x30b0290 > $DCC_PATH/config
-    echo 0x30b02a8 > $DCC_PATH/config
-    echo 0x30b02ac > $DCC_PATH/config
-    echo 0x30b02b0 > $DCC_PATH/config
-    echo 0x30b0400 > $DCC_PATH/config
-    echo 0x30b0404 > $DCC_PATH/config
-    echo 0x30b0408 > $DCC_PATH/config
-
     #Audio PDC
     echo 0xb250010 > $DCC_PATH/config
     echo 0xb250014 > $DCC_PATH/config
@@ -944,11 +884,9 @@ config_lito_dcc_lpass_rsc(){
     echo 0xb254520 > $DCC_PATH/config
 
     #LPASS General
-    echo 0x3000044 > $DCC_PATH/config
     echo 0x3000468 > $DCC_PATH/config
     echo 0x3002000 > $DCC_PATH/config
     echo 0x3002004 > $DCC_PATH/config
-    echo 0x3002028 > $DCC_PATH/config
     echo 0x3090380 32 > $DCC_PATH/config
 
     #WDOG
@@ -1771,7 +1709,6 @@ config_lito_dcc_mss_rsc(){
 
     #MSS General
     echo 0x18a004 > $DCC_PATH/config
-    echo 0x4080044 > $DCC_PATH/config
     echo 0x40800b0 > $DCC_PATH/config
     echo 0x4080304 > $DCC_PATH/config
     echo 0x4080438 > $DCC_PATH/config
@@ -1779,7 +1716,6 @@ config_lito_dcc_mss_rsc(){
     echo 0x4080468 > $DCC_PATH/config
     echo 0x4082000 > $DCC_PATH/config
     echo 0x4082004 > $DCC_PATH/config
-    echo 0x4082028 > $DCC_PATH/config
     echo 0x4110380 32 > $DCC_PATH/config
     echo 0x41a802c > $DCC_PATH/config
     echo 0x4402028 > $DCC_PATH/config
@@ -2445,6 +2381,71 @@ config_lito_dcc_pimem()
 config_lito_dcc_misc()
 {
     echo 0xC2A2040 > $DCC_PATH/config
+    #LPASS RSC
+    echo 0x3500010 > $DCC_PATH/config
+    echo 0x3500014 > $DCC_PATH/config
+    echo 0x3500018 > $DCC_PATH/config
+    echo 0x3500030 > $DCC_PATH/config
+    echo 0x3500038 > $DCC_PATH/config
+    echo 0x3500040 > $DCC_PATH/config
+    echo 0x3500048 > $DCC_PATH/config
+    echo 0x35000d0 > $DCC_PATH/config
+    echo 0x3500208 > $DCC_PATH/config
+    echo 0x350020c > $DCC_PATH/config
+    echo 0x3500210 > $DCC_PATH/config
+    echo 0x3500228 > $DCC_PATH/config
+    echo 0x350022c > $DCC_PATH/config
+    echo 0x3500230 > $DCC_PATH/config
+    echo 0x3500248 > $DCC_PATH/config
+    echo 0x350024c > $DCC_PATH/config
+    echo 0x3500250 > $DCC_PATH/config
+    echo 0x3500268 > $DCC_PATH/config
+    echo 0x350026c > $DCC_PATH/config
+    echo 0x3500270 > $DCC_PATH/config
+    echo 0x3500288 > $DCC_PATH/config
+    echo 0x350028c > $DCC_PATH/config
+    echo 0x3500290 > $DCC_PATH/config
+    echo 0x35002a8 > $DCC_PATH/config
+    echo 0x35002ac > $DCC_PATH/config
+    echo 0x35002b0 > $DCC_PATH/config
+    echo 0x3500400 > $DCC_PATH/config
+    echo 0x3500404 > $DCC_PATH/config
+    echo 0x3500408 > $DCC_PATH/config
+    echo 0x3500d04 > $DCC_PATH/config
+
+    #LPASS RSCc
+    echo 0x30b0010 > $DCC_PATH/config
+    echo 0x30b0014 > $DCC_PATH/config
+    echo 0x30b0018 > $DCC_PATH/config
+    echo 0x30b0208 > $DCC_PATH/config
+    echo 0x30b020c > $DCC_PATH/config
+    echo 0x30b0210 > $DCC_PATH/config
+    echo 0x30b0228 > $DCC_PATH/config
+    echo 0x30b022c > $DCC_PATH/config
+    echo 0x30b0230 > $DCC_PATH/config
+    echo 0x30b0248 > $DCC_PATH/config
+    echo 0x30b024c > $DCC_PATH/config
+    echo 0x30b0250 > $DCC_PATH/config
+    echo 0x30b0268 > $DCC_PATH/config
+    echo 0x30b026c > $DCC_PATH/config
+    echo 0x30b0270 > $DCC_PATH/config
+    echo 0x30b0288 > $DCC_PATH/config
+    echo 0x30b028c > $DCC_PATH/config
+    echo 0x30b0290 > $DCC_PATH/config
+    echo 0x30b02a8 > $DCC_PATH/config
+    echo 0x30b02ac > $DCC_PATH/config
+    echo 0x30b02b0 > $DCC_PATH/config
+    echo 0x30b0400 > $DCC_PATH/config
+    echo 0x30b0404 > $DCC_PATH/config
+    echo 0x30b0408 > $DCC_PATH/config
+
+    #Core status and NMI for modem / Lpass / Turing
+    echo 0x8300044 > $DCC_PATH/config
+    echo 0x8302028 > $DCC_PATH/config
+    echo 0x3002028 > $DCC_PATH/config
+    echo 0x3000044 > $DCC_PATH/config
+    echo 0x4082028 > $DCC_PATH/config
+    echo 0x4080044 > $DCC_PATH/config
 }
 
 config_lito_dcc_gic()
