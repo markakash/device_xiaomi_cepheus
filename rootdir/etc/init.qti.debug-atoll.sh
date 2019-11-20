@@ -375,6 +375,24 @@ config_atoll_dcc_noc_err_regs()
     echo 0x63041D00 > $DCC_PATH/config
     #NPU_SB_SENSEIN
     echo 0x9991500 8 > $DCC_PATH/config
+    #GEMNOC_HM_GEM_NOC_SBM_SAFE_SHAPING_SENSEIN
+    echo 0x96B8100  > $DCC_PATH/config
+    #AGGRE_NOC_CDSP_NOC_SENSEIN
+    echo 0x1700500 4 > $DCC_PATH/config
+    #VAPSS_SB_SENSEIN
+    echo 0x82D1500 5 > $DCC_PATH/config
+    #GCC_CDSP_NOC_TBU_GDS_HW_CTRL_IRQ_STATUS
+    echo 0x145384 > $DCC_PATH/config
+    #GCC_TURING_TBU_CBCR
+    echo 0x145000 > $DCC_PATH/config
+    #GCC_SYS_NOC_SF_TCU_CBCR
+    echo 0x183004 > $DCC_PATH/config
+    #GCC_MMU_TCU_CBCR
+    echo 0x183008 > $DCC_PATH/config
+    #GCC_NPU_CFG_AHB_CBCR
+    echo 0x14D004 > $DCC_PATH/config
+    #GCC_AGGRE_NOC_AHB_CBCR
+    echo 0x182008 > $DCC_PATH/config
 }
 
 config_atoll_dcc_shrm()

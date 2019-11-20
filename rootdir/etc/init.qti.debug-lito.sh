@@ -31,11 +31,11 @@ enable_tracing_events_lito()
     # timer
     echo 1 > /sys/kernel/debug/tracing/events/timer/timer_expire_entry/enable
     echo 1 > /sys/kernel/debug/tracing/events/timer/timer_expire_exit/enable
-    echo 1 > /sys/kernel/debug/tracing/events/timer/hrtimer_cancel/enable
+    #echo 1 > /sys/kernel/debug/tracing/events/timer/hrtimer_cancel/enable
     echo 1 > /sys/kernel/debug/tracing/events/timer/hrtimer_expire_entry/enable
     echo 1 > /sys/kernel/debug/tracing/events/timer/hrtimer_expire_exit/enable
-    echo 1 > /sys/kernel/debug/tracing/events/timer/hrtimer_init/enable
-    echo 1 > /sys/kernel/debug/tracing/events/timer/hrtimer_start/enable
+    #echo 1 > /sys/kernel/debug/tracing/events/timer/hrtimer_init/enable
+    #echo 1 > /sys/kernel/debug/tracing/events/timer/hrtimer_start/enable
     #enble FTRACE for softirq events
     echo 1 > /sys/kernel/debug/tracing/events/irq/enable
     #enble FTRACE for Workqueue events
@@ -58,7 +58,9 @@ enable_tracing_events_lito()
     # regulator
     echo 1 > /sys/kernel/debug/tracing/events/regulator/enable
     # power
-    echo 1 > /sys/kernel/debug/tracing/events/msm_low_power/enable
+    #echo 1 > /sys/kernel/debug/tracing/events/msm_low_power/enable
+    echo 1 > /sys/kernel/debug/tracing/events/msm_low_power/cpu_idle_enter/enable
+    echo 1 > /sys/kernel/debug/tracing/events/msm_low_power/cpu_idle_exit/enable
     #thermal
     echo 1 > /sys/kernel/debug/tracing/events/thermal/enable
     #scm
@@ -2445,6 +2447,12 @@ config_lito_dcc_misc()
     echo 0xC2A2040 > $DCC_PATH/config
 }
 
+config_lito_dcc_gic()
+{
+    echo 0x17A00104 29 > $DCC_PATH/config
+    echo 0x17A00204 29 > $DCC_PATH/config
+}
+
 config_lito_dcc_apps_rsc_pdc()
 {
     #APPS RSC
@@ -2845,6 +2853,7 @@ enable_lito_dcc_config()
     config_lito_dcc_gcc
     config_lito_dcc_pimem
     config_lito_dcc_misc
+    config_lito_dcc_gic
     config_lito_dcc_ddr
     config_lito_dcc_ddr
 
