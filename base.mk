@@ -1294,7 +1294,8 @@ PRODUCT_PACKAGES_DEBUG += \
     init.qti.debug-kona.sh \
     init.qti.debug-lito.sh \
     init.qti.debug-trinket.sh \
-    init.qti.debug-atoll.sh
+    init.qti.debug-atoll.sh \
+    init.qti.debug-bengal.sh
 
 PRODUCT_PACKAGES += liboemaids_system
 PRODUCT_PACKAGES += liboemaids_vendor
