@@ -36,6 +36,7 @@ source $HERE/init.qti.debug-kona.sh
 source $HERE/init.qti.debug-lito.sh
 source $HERE/init.qti.debug-trinket.sh
 source $HERE/init.qti.debug-atoll.sh
+source $HERE/init.qti.debug-bengal.sh
 
 enable_tracing_events()
 {
@@ -2563,6 +2564,11 @@ case "$coresight_config" in
             "atoll")
                 echo "Enabling DCC/STM/Debug events for atoll"
                 enable_atoll_debug
+                setprop ro.dbg.coresight.stm_cfg_done 1
+            ;;
+            "bengal")
+                echo "Enabling DCC/STM/Debug events for bengal"
+                enable_bengal_debug
                 setprop ro.dbg.coresight.stm_cfg_done 1
             ;;
             *)
