@@ -31,11 +31,11 @@ enable_atoll_tracing_events()
     # timer
     echo 1 > /sys/kernel/debug/tracing/events/timer/timer_expire_entry/enable
     echo 1 > /sys/kernel/debug/tracing/events/timer/timer_expire_exit/enable
-    echo 1 > /sys/kernel/debug/tracing/events/timer/hrtimer_cancel/enable
+    #echo 1 > /sys/kernel/debug/tracing/events/timer/hrtimer_cancel/enable
     echo 1 > /sys/kernel/debug/tracing/events/timer/hrtimer_expire_entry/enable
     echo 1 > /sys/kernel/debug/tracing/events/timer/hrtimer_expire_exit/enable
-    echo 1 > /sys/kernel/debug/tracing/events/timer/hrtimer_init/enable
-    echo 1 > /sys/kernel/debug/tracing/events/timer/hrtimer_start/enable
+    #echo 1 > /sys/kernel/debug/tracing/events/timer/hrtimer_init/enable
+    #echo 1 > /sys/kernel/debug/tracing/events/timer/hrtimer_start/enable
     #enble FTRACE for softirq events
     echo 1 > /sys/kernel/debug/tracing/events/irq/enable
     #enble FTRACE for Workqueue events
@@ -63,7 +63,8 @@ enable_atoll_tracing_events()
     # regulator
     echo 1 > /sys/kernel/debug/tracing/events/regulator/enable
     # power
-    echo 1 > /sys/kernel/debug/tracing/events/msm_low_power/enable
+    echo 1 > /sys/kernel/debug/tracing/events/msm_low_power/cpu_idle_enter/enable
+    echo 1 > /sys/kernel/debug/tracing/events/msm_low_power/cpu_idle_exit/enable
     #thermal
     echo 1 > /sys/kernel/debug/tracing/events/thermal/thermal_zone_trip/enable
     echo 1 > /sys/kernel/debug/tracing/events/thermal/thermal_temperature/enable
@@ -1457,6 +1458,11 @@ config_atoll_dcc_core_hang(){
     echo 0x17C0003C 1 > $DCC_PATH/config
 }
 
+config_atoll_dcc_gic(){
+    echo 0x17A00104 29 > $DCC_PATH/config
+    echo 0x17A00204 29 > $DCC_PATH/config
+}
+
 config_atoll_dcc_async_package(){
     echo 0x06004FB0 0xc5acce55 > $DCC_PATH/config_write
     echo 0x0600408c 0xff > $DCC_PATH/config_write
@@ -1505,6 +1511,7 @@ enable_atoll_dcc_config()
     config_atoll_dcc_rscc_lpass
     config_atoll_dcc_rscc_modem
     config_atoll_dcc_rscc_cdsp
+    config_atoll_dcc_gic
     #config_atoll_dcc_axi_pc
     #config_atoll_dcc_apb_pc
     #config_atoll_dcc_pdc_display
