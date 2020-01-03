@@ -4,7 +4,7 @@
 
 ifeq ($(TARGET_FWK_SUPPORTS_FULL_VALUEADDS),true)
   # By default this target is new-launch config, so set the default shipping level to 29 (if not set explictly earlier)
-  SHIPPING_API_LEVEL ?= 29
+  SHIPPING_API_LEVEL := 28
 
   # Enable Dynamic partitions only for Q new launch devices.
   ifeq ($(SHIPPING_API_LEVEL),29)
@@ -59,6 +59,8 @@ PRODUCT_BUILD_CACHE_IMAGE := false
 PRODUCT_BUILD_RAMDISK_IMAGE := true
 PRODUCT_BUILD_USERDATA_IMAGE := true
 
+DEVICE_PATH := device/xiaomi/cepheus
+
 # Also, since we're going to skip building the system image, we also skip
 # building the OTA package. We'll build this at a later step. We also don't
 # need to build the OTA tools package (we'll use the one from the system build).
@@ -69,17 +71,10 @@ TARGET_SKIP_OTATOOLS_PACKAGE := true
 BOARD_AVB_ENABLE := true
 
 PRODUCT_SOONG_NAMESPACES += \
-    hardware/google/av \
-    hardware/google/interfaces
-
-# privapp-permissions whitelisting (To Fix CTS :privappPermissionsMustBeEnforced)
-ifeq ($(TARGET_FWK_SUPPORTS_FULL_VALUEADDS),true)
-PRODUCT_PROPERTY_OVERRIDES += ro.control_privapp_permissions=enforce
-endif
+    $(LOCAL_PATH)
 
 TARGET_DEFINES_DALVIK_HEAP := true
 TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
-$(call inherit-product, device/qcom/qssi/common64.mk)
 
 #Inherit all except heap growth limit from phone-xhdpi-2048-dalvik-heap.mk
 PRODUCT_PROPERTY_OVERRIDES  += \
@@ -89,11 +84,6 @@ PRODUCT_PROPERTY_OVERRIDES  += \
 	dalvik.vm.heapminfree=512k \
 	dalvik.vm.heapmaxfree=8m
 
-
-PRODUCT_NAME := msmnile
-PRODUCT_DEVICE := msmnile
-PRODUCT_BRAND := qti
-PRODUCT_MODEL := msmnile for arm64
 
 #Initial bringup flags
 TARGET_USES_AOSP := false
@@ -199,21 +189,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_BOOT_JARS += tcmiface
 
-#ifneq ($(strip $(QCPATH)),)
-#    PRODUCT_BOOT_JARS += WfdCommon
-#endif
-
 PRODUCT_PACKAGES += android.hardware.media.omx@1.0-impl
-
-# Camera configuration file. Shared by passthrough/binderized camera HAL
-PRODUCT_PACKAGES += camera.device@3.2-impl
-PRODUCT_PACKAGES += camera.device@1.0-impl
-PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-impl
-# Enable binderized camera HAL
-PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-service_64
-
-# Audio configuration file
--include $(TOPDIR)vendor/qcom/opensource/audio-hal/primary-hal/configs/msmnile/msmnile.mk
 
 #Audio DLKM
 AUDIO_DLKM := audio_apr.ko
@@ -242,30 +218,6 @@ PRODUCT_PACKAGES += $(AUDIO_DLKM)
 
 PRODUCT_PACKAGES += fs_config_files
 
-#A/B related packages
-PRODUCT_PACKAGES += update_engine \
-    update_engine_client \
-    update_verifier \
-    bootctrl.msmnile \
-    android.hardware.boot@1.0-impl \
-    android.hardware.boot@1.0-service
-
-PRODUCT_HOST_PACKAGES += \
-    brillo_update_payload \
-    configstore_xmlparser
-
-#Boot control HAL test app
-PRODUCT_PACKAGES_DEBUG += bootctl
-
-PRODUCT_STATIC_BOOT_CONTROL_HAL := \
-  bootctrl.msmnile \
-  librecovery_updater_msm \
-  libz \
-  libcutils
-
-PRODUCT_PACKAGES += \
-  update_engine_sideload
-
 #Healthd packages
 PRODUCT_PACKAGES += \
     libhealthd.msm
@@ -278,9 +230,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.ipsec_tunnels.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.ipsec_tunnels.xml \
 
-DEVICE_MANIFEST_FILE := device/qcom/msmnile/manifest.xml
-DEVICE_MATRIX_FILE   := device/qcom/common/compatibility_matrix.xml
-DEVICE_FRAMEWORK_MANIFEST_FILE := device/qcom/msmnile/framework_manifest.xml
+DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
+DEVICE_MATRIX_FILE   := $(DEVICE_PATH)/compatibility_matrix.xml
+DEVICE_FRAMEWORK_MANIFEST_FILE := $(DEVICE_PATH)/framework_manifest.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := vendor/qcom/opensource/core-utils/vendor_framework_compatibility_matrix.xml
 
 #audio related module
@@ -293,10 +245,6 @@ PRODUCT_PACKAGES += \
 
 # MSM IRQ Balancer configuration file
 PRODUCT_COPY_FILES += device/qcom/msmnile/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf
-
-# Powerhint configuration file
-PRODUCT_COPY_FILES += device/qcom/msmnile/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
-
 
 # Vibrator
 PRODUCT_PACKAGES += \
@@ -357,19 +305,10 @@ KERNEL_MODULES_OUT := out/target/product/$(PRODUCT_NAME)/$(KERNEL_MODULES_INSTAL
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml
 
-#Exclude vibrator from InputManager
-PRODUCT_COPY_FILES += \
-    device/qcom/msmnile/excluded-input-devices.xml:system/etc/excluded-input-devices.xml
-
 #Enable full treble flag
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 PRODUCT_VENDOR_MOVE_ENABLED := true
 PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := true
-
-ifneq ($(strip $(TARGET_USES_RRO)),true)
-DEVICE_PACKAGE_OVERLAYS += device/qcom/msmnile/overlay
-endif
-
 
 #Enable vndk-sp Libraries
 PRODUCT_PACKAGES += vndk_package
