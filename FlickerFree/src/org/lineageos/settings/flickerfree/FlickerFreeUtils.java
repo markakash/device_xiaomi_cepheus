@@ -16,7 +16,7 @@
 
 package org.lineageos.settings.flickerfree;
 
-import org.lineageos.internal.util.FileUtils;
+import org.lineageos.settings.utils.FileUtils;
 
 class FlickerFreeUtils {
 

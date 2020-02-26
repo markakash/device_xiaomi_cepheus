@@ -24,11 +24,8 @@ public class Startup extends BroadcastReceiver {
 
     @Override
     public void onReceive(final Context context, final Intent intent) {
-        final String action = intent.getAction();
-        if (Constants.ACTION_INITIALIZE_LINEAGE_HARDWARE.equals(action)) {
             FlickerFreeSettingsActivity.restoreState(context);
             Utils.restoreNodePrefs(context);
-        }
     }
 
 }

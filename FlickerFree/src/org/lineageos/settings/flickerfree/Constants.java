@@ -21,9 +21,6 @@ import java.util.Map;
 
 class Constants {
 
-    static final String ACTION_INITIALIZE_LINEAGE_HARDWARE =
-            lineageos.content.Intent.ACTION_INITIALIZE_LINEAGE_HARDWARE;
-
     // Holds <preference_key> -> <proc_node> mapping
     static final Map<String, String> sBooleanNodePreferenceMap = new HashMap<>();
     static final Map<String, String> sStringNodePreferenceMap = new HashMap<>();

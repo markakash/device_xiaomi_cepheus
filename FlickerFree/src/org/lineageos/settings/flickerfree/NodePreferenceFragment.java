@@ -24,7 +24,7 @@ import androidx.preference.Preference;
 import android.text.TextUtils;
 import android.view.MenuItem;
 
-import org.lineageos.internal.util.FileUtils;
+import org.lineageos.settings.utils.FileUtils;
 
 public abstract class NodePreferenceFragment extends PreferenceFragment
         implements Preference.OnPreferenceChangeListener {
