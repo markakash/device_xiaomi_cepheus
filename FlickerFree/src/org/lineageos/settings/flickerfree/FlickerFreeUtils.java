@@ -24,4 +24,8 @@ class FlickerFreeUtils {
         return FileUtils.fileExists(FlickerFreeConstants.FLICKER_FREE_NODE);
     }
 
+    static boolean isCurrentlyEnabled(){
+        return FileUtils.readOneLine(FlickerFreeConstants.FLICKER_FREE_NODE).equals("1") ? true : false;
+    }
+
 }

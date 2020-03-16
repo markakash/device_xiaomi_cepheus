@@ -21,5 +21,6 @@
     <string name="flicker_free_settings_summary">Avoid screen flicker on low brightness</string>
     <string name="flicker_free_toggle_title">Avoid screen flicker on low brightness</string>
     <string name="flicker_free_toggle_summary">May reduce image quality</string>
+    <string name="flicker_free_tile_title">Flicker-free</string>
 
 </resources>
