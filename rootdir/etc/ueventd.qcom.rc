@@ -397,3 +397,4 @@ firmware_directories /vendor/firmware_mnt/image/
 /sys/class/graphics/fb0     modes                    0664    system  graphics
 /sys/class/graphics/fb0     mode                     0664    system  graphics
 /sys/class/graphics/fb0     msm_cmd_autorefresh_en   0664    system  graphics
+/sys/devices/platform/soc/soc:qcom,dsi-display-primary    msm_fb_ea_enable 0660    system   system
