@@ -375,6 +375,10 @@ PRODUCT_PACKAGES += \
     libril \
     librilutils
 
+PRODUCT_PACKAGES += \
+    libprotobuf-cpp-lite-vendorcompat \
+    libprotobuf-cpp-full-vendorcompat \
+
 # Recovery
 PRODUCT_PACKAGES += \
     librecovery_updater_cepheus
