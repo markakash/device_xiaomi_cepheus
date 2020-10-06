@@ -43,16 +43,17 @@ void property_override(char const prop[], char const value[])
         __system_property_add(prop, strlen(prop), value, strlen(value));
 }
 
-void property_override_dual(char const system_prop[], char const vendor_prop[],
+void property_override_multi(char const system_prop[], char const vendor_prop[],char const bootimage_prop[],
     char const value[])
 {
     property_override(system_prop, value);
     property_override(vendor_prop, value);
+    property_override(bootimage_prop, value);
 }
 
 void vendor_load_properties()
 {
     // fingerprint
     property_override("ro.build.description", "cepheus-user 10 QKQ1.190825.002 V11.0.9.0.QFAEUXM release-keys");
-    property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "google/coral/coral:10/QQ3A.200805.001/6578210:user/release-keys");
+    property_override_multi("ro.build.fingerprint", "ro.vendor.build.fingerprint","ro.bootimage.build.fingerprint", "google/coral/coral:10/QQ3A.200805.001/6578210:user/release-keys");
 }
