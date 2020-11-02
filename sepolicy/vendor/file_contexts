@@ -23,6 +23,9 @@
 # Mlipay
 /vendor/bin/mlipayd@1\.1                                                                               u:object_r:hal_mlipay_default_exec:s0
 
+#Android NN Driver
+/(vendor|system/vendor)/bin/hw/android\.hardware\.neuralnetworks@1\.2-service-qti                      u:object_r:vendor_hal_neuralnetworks_default_exec:s0
+
 # Remosaic
 /vendor/bin/remosaic_daemon                                                                            u:object_r:remosaic_daemon_exec:s0
 
