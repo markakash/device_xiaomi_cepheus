@@ -1,4 +1,4 @@
-Copyright (C) 2019 Paranoid Android
+Copyright (C) 2020 Project 404
 
 Device configuration for Xiaomi Mi 9
 =========================================

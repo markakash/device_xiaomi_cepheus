@@ -1,6 +1,6 @@
 #
 # Copyright 2019 The Android Open Source Project
-# Copyright 2019 Paranoid Android
+# Copyright 2020 Project 404
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -57,6 +57,7 @@ BOARD_KERNEL_SEPARATED_DTBO := true
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_CLANG_COMPILE := true
 TARGET_KERNEL_CONFIG := cepheus_defconfig
+TARGET_COMPILE_WITH_MSM_KERNEL := true
 ifeq ($(TARGET_PREBUILT_KERNEL),)
   TARGET_KERNEL_SOURCE := kernel/xiaomi/sm8150
 endif

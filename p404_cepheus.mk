@@ -1,4 +1,4 @@
-# Copyright (C) 2020 The PixelExperience Project
+# Copyright (C) 2020 Project 404
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 # Inherit from those products. Most specific first.
 $(call inherit-product, device/xiaomi/cepheus/msmnile.mk)
 
-# Inherit some common PixelExperience stuff.
+# Inherit some common 404 stuff
 $(call inherit-product, vendor/404/configs/common.mk)
 
 TARGET_BOOT_ANIMATION_RES := 1080
