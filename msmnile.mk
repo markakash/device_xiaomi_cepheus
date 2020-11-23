@@ -363,7 +363,8 @@ PRODUCT_COPY_FILES += \
 
 # QTI Common
 TARGET_BOARD_PLATFORM := msmnile
-TARGET_COMMON_QTI_COMPONENTS := \
+TARGET_COMMON_QTI_COMPONENTS += \
+    av \
     bt \
     display \
     perf \
