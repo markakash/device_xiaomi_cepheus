@@ -120,7 +120,7 @@ persist.vendor.data.mode=concurrent
 persist.vendor.data.iwlan.enable=true
 	
 # Display
-debug.hwui.renderer=skiavk
+debug.hwui.renderer=skiagl
 	
 # FRP
 ro.frp.pst=/dev/block/bootdevice/by-name/frp
