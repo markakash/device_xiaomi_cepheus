@@ -223,10 +223,12 @@ PRODUCT_PACKAGES += \
     init.target.rc \
     ueventd.qcom.rc
 
-# IPA
+# IPCM
 PRODUCT_PACKAGES += \
     ipacm \
-    IPACM_cfg.xml
+    IPACM_cfg.xml \
+    libipanat \
+    liboffloadhal
 
 # IR
 PRODUCT_PACKAGES += \
