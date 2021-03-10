@@ -589,17 +589,17 @@ vendor/lib64/libgsl.so|a1945d563de95c966f5aad71cd40f538525c68f4
 vendor/lib64/libllvm-glnext.so|bd2d7c63fd03b3ddd86ed8342fcec47994c9ec7f
 vendor/lib64/libllvm-qcom.so|0a8f97f37c6027d896aef5654513989d9e7e60ca
 
-# Graphics (firmware)
-vendor/firmware/a612_rgmu.bin
-vendor/firmware/a618_gmu.bin
-vendor/firmware/a630_gmu.bin
-vendor/firmware/a630_sqe.fw
-vendor/firmware/a640_gmu.bin
-vendor/firmware/a640_zap.b00
-vendor/firmware/a640_zap.b01
-vendor/firmware/a640_zap.b02
-vendor/firmware/a640_zap.elf
-vendor/firmware/a640_zap.mdt
+# Graphics (firmware) - from LA.UM.9.1.r1-08300-SMxxx0.0
+vendor/firmware/a612_rgmu.bin|cb8705d5bc417e53863ed16ab0bed2fc1489646f
+vendor/firmware/a618_gmu.bin|0c211ef8a3246d649a4ae52a926d128b61e3c264
+vendor/firmware/a630_gmu.bin|32bb4acc7767c47ddb487ed7cb998d465ee462f2
+vendor/firmware/a630_sqe.fw|e25094f97b44244775cc38a9d909fba6bd4cf76b
+vendor/firmware/a640_gmu.bin|fb1eab0dd5f313abf31441e2209c9398da7df98b
+vendor/firmware/a640_zap.b00|7afc31984d7eeacdd0fc78118ad8fa46c9b3e4ee
+vendor/firmware/a640_zap.b01|091b579062426651174be644aaae880dea64b65f
+vendor/firmware/a640_zap.b02|27d26ca0ae982c065fb7ab58be73bf3ca2e8bdf3
+vendor/firmware/a640_zap.elf|6562d35d543d7d646ed695e19b658c9ae6ec51fb
+vendor/firmware/a640_zap.mdt|7c61ba39f9d842f571260d76ef92774a2e023a0c
 
 # IRQ balance
 vendor/etc/msm_irqbalance.conf
