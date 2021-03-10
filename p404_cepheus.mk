@@ -23,7 +23,7 @@ TARGET_BOOT_ANIMATION_RES := 1080
 TARGET_GAPPS_ARCH := arm64
 
 $(call inherit-product, vendor/google/pixel/config.mk)
-$(call inherit-product, vendor/google/gms/gapps.mk)
+$(call inherit-product, vendor/google/gms/config.mk)
 
 # Device identifier. This must come after all inclusions.
 PRODUCT_NAME := p404_cepheus
