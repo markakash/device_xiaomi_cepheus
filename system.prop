@@ -1,4 +1,5 @@
 # Bluetooth
+persist.bluetooth.a2dp_aac.vbr_supported=true
 persist.bt.enableAptXHD=true
 persist.service.btui.use_aptx=1
 persist.vendor.bt.a2dp.aac_whitelist=false
@@ -18,6 +19,8 @@ persist.vendor.camera.enableTOFInterface=TRUE
 persist.vendor.camera.mfnrframenum=8
 persist.vendor.camera.multicam=TRUE
 vendor.camera.aux.packagelist=org.codeaurora.snapcam,com.android.camera,org.lineageos.snap
+vidc.enc.dcvs.extra-buff-count=2
+vidc.enc.disable.pq=1
 
 # Charger
 ro.charger.enable_suspend=true
