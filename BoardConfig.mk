@@ -204,6 +204,9 @@ TARGET_INIT_VENDOR_LIB := libinit_msm
 
 TARGET_COMPILE_WITH_MSM_KERNEL := true
 
+#Audio policy
+USE_XML_AUDIO_POLICY_CONF := 1
+
 #Enable PD locater/notifier
 TARGET_PD_SERVICE_ENABLED := true
 
