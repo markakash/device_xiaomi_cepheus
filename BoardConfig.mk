@@ -207,6 +207,9 @@ TARGET_COMPILE_WITH_MSM_KERNEL := true
 #Audio policy
 USE_XML_AUDIO_POLICY_CONF := 1
 
+# Audio features
+AUDIO_FEATURE_ENABLED_A2DP_OFFLOAD := true
+
 #Enable PD locater/notifier
 TARGET_PD_SERVICE_ENABLED := true
 
