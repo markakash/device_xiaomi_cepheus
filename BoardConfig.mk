@@ -174,27 +174,23 @@ BOARD_DO_NOT_STRIP_VENDOR_MODULES := true
 TARGET_USES_ION := true
 TARGET_USES_NEW_ION_API :=true
 TARGET_USES_QCOM_BSP := false
-BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200n8 earlycon=msm_geni_serial,0xa90000 androidboot.hardware=qcom androidboot.console=ttyMSM0 androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 swiotlb=2048 loop.max_part=7 androidboot.usbcontroller=a600000.dwc3 kpti=off
+BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200n8 earlycon=msm_geni_serial,0xa90000 androidboot.hardware=qcom androidboot.console=ttyMSM0 service_locator.enable=1 firmware_class.path=/vendor/firmware_mnt/image loop.max_part=16 androidboot.usbcontroller=a600000.dwc3
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 
 BOARD_EGL_CFG := device/qcom/$(TARGET_BOARD_PLATFORM)/egl.cfg
 
 BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 4096
-BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
-BOARD_RAMDISK_OFFSET     := 0x02000000
+BOARD_KERNEL_TAGS_OFFSET := 0x00000100
+BOARD_RAMDISK_OFFSET     := 0x01000000
+BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := $(shell pwd)/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-linux-androidkernel-
-
-KERN_CONF_PATH := kernel/msm-4.14/arch/arm64/configs/vendor/
-KERN_CONF_FILE := $(shell ls $(KERN_CONF_PATH) | grep sm8..._defconfig)
-KERNEL_UNCOMPRESSED_DEFCONFIG := $(shell grep "CONFIG_BUILD_ARM64_UNCOMPRESSED_KERNEL=y" $(KERN_CONF_PATH)$(KERN_CONF_FILE))
-ifeq ($(KERNEL_UNCOMPRESSED_DEFCONFIG),)
-	TARGET_USES_UNCOMPRESSED_KERNEL := false
-else
-	TARGET_USES_UNCOMPRESSED_KERNEL := true
-endif
+TARGET_KERNEL_CLANG_COMPILE := true
+TARGET_KERNEL_SOURCE := kernel/xiaomi/sm8150
+TARGET_USES_UNCOMPRESSED_KERNEL := false
 
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
@@ -202,9 +198,6 @@ MAX_EGL_CACHE_SIZE := 2048*1024
 #File system for ODM
 TARGET_COPY_OUT_ODM := odm
 BOARD_ODMIMAGE_FILE_SYSTEM_TYPE := ext4
-
-BOARD_USES_GENERIC_AUDIO := true
-TARGET_NO_RPC := true
 
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 TARGET_INIT_VENDOR_LIB := libinit_msm
