@@ -58,7 +58,7 @@ TARGET_HW_DISK_ENCRYPTION_PERF := true
 
 BOARD_SECCOMP_POLICY := device/qcom/$(TARGET_BOARD_PLATFORM)/seccomp
 
-TARGET_NO_BOOTLOADER := false
+TARGET_NO_BOOTLOADER := true
 TARGET_USES_UEFI := true
 TARGET_NO_KERNEL := false
 -include vendor/qcom/prebuilt/msmnile/BoardConfigVendor.mk
