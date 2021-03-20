@@ -30,13 +30,11 @@ TARGET_2ND_CPU_VARIANT_RUNTIME := kryo385
 TARGET_HW_DISK_ENCRYPTION := true
 TARGET_HW_DISK_ENCRYPTION_PERF := true
 
-BOARD_SECCOMP_POLICY := device/qcom/$(TARGET_BOARD_PLATFORM)/seccomp
+BOARD_SECCOMP_POLICY := device/xiaomi/cepheus/seccomp
 
 TARGET_NO_BOOTLOADER := true
 TARGET_USES_UEFI := true
 TARGET_NO_KERNEL := false
-
--include $(QCPATH)/common/msmnile/BoardConfigVendor.mk
 
 USE_OPENGL_RENDERER := true
 
@@ -76,54 +74,6 @@ BOARD_VENDORIMAGE_PARTITION_SIZE := 1610612736
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_COPY_OUT_VENDOR := vendor
 
-#----------------------------------------------------------------------
-# Compile Linux Kernel
-#----------------------------------------------------------------------
-ifeq ($(TARGET_BUILD_VARIANT),user)
-     KERNEL_DEFCONFIG := $(shell ls ./kernel/msm-4.14/arch/arm64/configs/vendor/ | grep sm8...-perf_defconfig)
-endif
-
-ifeq ($(KERNEL_DEFCONFIG),)
-     KERNEL_DEFCONFIG := $(shell ls ./kernel/msm-4.14/arch/arm64/configs/vendor/ | grep sm8..._defconfig)
-endif
-
-BOARD_VENDOR_KERNEL_MODULES := \
-    $(KERNEL_MODULES_OUT)/audio_apr.ko \
-    $(KERNEL_MODULES_OUT)/audio_wglink.ko \
-    $(KERNEL_MODULES_OUT)/audio_q6_pdr.ko \
-    $(KERNEL_MODULES_OUT)/audio_q6_notifier.ko \
-    $(KERNEL_MODULES_OUT)/audio_adsp_loader.ko \
-    $(KERNEL_MODULES_OUT)/audio_q6.ko \
-    $(KERNEL_MODULES_OUT)/audio_usf.ko \
-    $(KERNEL_MODULES_OUT)/audio_pinctrl_wcd.ko \
-    $(KERNEL_MODULES_OUT)/audio_swr.ko \
-    $(KERNEL_MODULES_OUT)/audio_wcd_core.ko \
-    $(KERNEL_MODULES_OUT)/audio_swr_ctrl.ko \
-    $(KERNEL_MODULES_OUT)/audio_wsa881x.ko \
-    $(KERNEL_MODULES_OUT)/audio_platform.ko \
-    $(KERNEL_MODULES_OUT)/audio_hdmi.ko \
-    $(KERNEL_MODULES_OUT)/audio_stub.ko \
-    $(KERNEL_MODULES_OUT)/audio_wcd9xxx.ko \
-    $(KERNEL_MODULES_OUT)/audio_mbhc.ko \
-    $(KERNEL_MODULES_OUT)/audio_wcd934x.ko \
-    $(KERNEL_MODULES_OUT)/audio_wcd9360.ko \
-    $(KERNEL_MODULES_OUT)/audio_wcd_spi.ko \
-    $(KERNEL_MODULES_OUT)/audio_native.ko \
-    $(KERNEL_MODULES_OUT)/audio_machine_msmnile.ko \
-    $(KERNEL_MODULES_OUT)/wil6210.ko \
-    $(KERNEL_MODULES_OUT)/msm_11ad_proxy.ko \
-    $(KERNEL_MODULES_OUT)/mpq-adapter.ko \
-    $(KERNEL_MODULES_OUT)/mpq-dmx-hw-plugin.ko \
-    $(KERNEL_MODULES_OUT)/tspp.ko \
-
-# install lkdtm only for userdebug and eng build variants
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
-    ifeq (,$(findstring perf_defconfig, $(KERNEL_DEFCONFIG)))
-        BOARD_VENDOR_KERNEL_MODULES += $(KERNEL_MODULES_OUT)/lkdtm.ko
-    endif
-endif
-
-BOARD_DO_NOT_STRIP_VENDOR_MODULES := true
 TARGET_USES_ION := true
 TARGET_USES_NEW_ION_API :=true
 TARGET_USES_QCOM_BSP := false
@@ -202,9 +152,6 @@ TARGET_USES_MKE2FS := true
 # RIL
 ENABLE_VENDOR_RIL_SERVICE := true
 
-#Add non-hlos files to ota packages
-ADD_RADIO_FILES := true
-
 #Enable INTERACTION_BOOST
 TARGET_USES_INTERACTION_BOOST := true
 
@@ -225,7 +172,6 @@ endif
 BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_PREBUILT_ELF_FILES := true
 
-BUILD_BROKEN_NINJA_USES_ENV_VARS := SDCLANG_AE_CONFIG SDCLANG_CONFIG SDCLANG_SA_ENABLED SDCLANG_CONFIG_AOSP
 BUILD_BROKEN_NINJA_USES_ENV_VARS += TEMPORARY_DISABLE_PATH_RESTRICTIONS
 BUILD_BROKEN_NINJA_USES_ENV_VARS += RTIC_MPGEN
 BUILD_BROKEN_PREBUILT_ELF_FILES := true
@@ -234,20 +180,7 @@ BUILD_BROKEN_USES_BUILD_HOST_STATIC_LIBRARY := true
 BUILD_BROKEN_USES_BUILD_HOST_EXECUTABLE := true
 BUILD_BROKEN_USES_BUILD_COPY_HEADERS := true
 
-#Enable VNDK Compliance
-BOARD_VNDK_VERSION:=current
-Q_BU_DISABLE_MODULE := true
-
-
-#################################################################################
-# This is the End of BoardConfig.mk file.
-# Now, Pickup other split Board.mk files:
-#################################################################################
-# TODO: Relocate the system Board.mk files pickup into qssi lunch, once it is up.
--include vendor/qcom/defs/board-defs/system/*.mk
--include vendor/qcom/defs/board-defs/vendor/*.mk
-#################################################################################
-
+# SEpolicy
 include device/qcom/sepolicy_vndr/SEPolicy.mk
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/xiaomi/cepheus/sepolicy/private
 BOARD_PLAT_PUBLIC_SEPOLICY_DIR += device/xiaomi/cepheus/sepolicy/public
