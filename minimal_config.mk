@@ -71,3 +71,6 @@ DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/product/overlay \
     $(LOCAL_PATH)/overlay \
     $(LOCAL_PATH)/overlay-404
+
+# Properties
+TARGET_VENDOR_PROP += device/xiaomi/cepheus/vendor.prop
