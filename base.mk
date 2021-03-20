@@ -1,3 +1,6 @@
+$(call inherit-product, device/xiaomi/cepheus/msmnile.mk)
+$(call inherit-product, device/xiaomi/cepheus/minimal_config.mk)
+
 TARGET_USE_VENDOR_CAMERA_EXT := true
 
 #skip boot jars check
