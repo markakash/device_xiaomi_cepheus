@@ -64,3 +64,10 @@ INIT += init.target.vendor.rc
 INIT += init.qti.fm.sh
 INIT += init.veth_ipa_config.sh
 PRODUCT_PACKAGES += $(INIT)
+
+# Overlays
+DEVICE_PACKAGE_OVERLAYS += \
+    $(LOCAL_PATH)/device/overlay \
+    $(LOCAL_PATH)/product/overlay \
+    $(LOCAL_PATH)/overlay \
+    $(LOCAL_PATH)/overlay-404
