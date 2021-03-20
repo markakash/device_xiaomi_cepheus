@@ -40,6 +40,9 @@ TARGET_NO_KERNEL := false
 
 USE_OPENGL_RENDERER := true
 
+# Filesystem
+TARGET_FS_CONFIG_GEN := device/xiaomi/cepheus/config.fs
+
 # Partitions (Boot)
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x06000000
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
