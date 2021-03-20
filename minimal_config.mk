@@ -65,6 +65,9 @@ INIT += init.qti.fm.sh
 INIT += init.veth_ipa_config.sh
 PRODUCT_PACKAGES += $(INIT)
 
+PRODUCT_COPY_FILES += \
+    device/xiaomi/cepheus/rootdir/etc/fstab.qcom:$(TARGET_COPY_OUT_RAMDISK)/fstab.qcom
+
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/device/overlay \
