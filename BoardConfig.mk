@@ -240,3 +240,6 @@ include device/qcom/sepolicy_vndr/SEPolicy.mk
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/xiaomi/cepheus/sepolicy/private
 BOARD_PLAT_PUBLIC_SEPOLICY_DIR += device/xiaomi/cepheus/sepolicy/public
 BOARD_SEPOLICY_DIRS += device/xiaomi/cepheus/sepolicy/vendor
+
+# Inherit proprietary blobs
+-include vendor/xiaomi/cepheus/BoardConfigVendor.mk
