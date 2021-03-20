@@ -310,8 +310,6 @@ include device/qcom/wlan/msmnile/wlan.mk
 
 TARGET_MOUNT_POINTS_SYMLINKS := false
 
-TARGET_USES_MKE2FS := true
-
 PRODUCT_PROPERTY_OVERRIDES += \
 ro.crypto.volume.filenames_mode = "aes-256-cts" \
 ro.crypto.set_dun = true
