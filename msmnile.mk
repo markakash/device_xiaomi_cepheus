@@ -3,7 +3,7 @@
 #### Turning BOARD_DYNAMIC_PARTITION_ENABLE flag to TRUE will enable dynamic partition/super image creation.
 
 # By default this target is new-launch config, so set the default shipping level to 29 (if not set explictly earlier)
-SHIPPING_API_LEVEL := 30
+SHIPPING_API_LEVEL := 28
 
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flag 2
 BOARD_AVB_RECOVERY_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
