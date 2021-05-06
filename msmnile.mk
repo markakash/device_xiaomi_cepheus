@@ -2,6 +2,9 @@
 ####
 #### Turning BOARD_DYNAMIC_PARTITION_ENABLE flag to TRUE will enable dynamic partition/super image creation.
 
+# Inherit proprietary targets
+$(call inherit-product-if-exists, vendor/xiaomi/cepheus/cepheus-vendor.mk)
+
 # By default this target is new-launch config, so set the default shipping level to 29 (if not set explictly earlier)
 SHIPPING_API_LEVEL := 28
 
