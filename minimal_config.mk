@@ -31,37 +31,14 @@
 
 #INIT
 INIT := init.qcom.rc
-INIT += init.qcom.sh
-INIT += init.qcom.class_core.sh
-INIT += init.class_main.sh
 INIT += init.qcom.early_boot.sh
 INIT += init.qcom.post_boot.sh
+INIT := init.qcom.sh
 INIT += init.target.rc
-INIT += vold.fstab
 INIT += fstab.qcom
-INIT += fstab.qti
-INIT += init.recovery.qcom.rc
-INIT += init.qcom.factory.rc
-INIT += init.qcom.composition_type.sh
-INIT += init.qti.ims.sh
-INIT += init.qcom.coex.sh
-INIT += init.qcom.sdio.sh
-INIT += init.qcom.ril.path.sh
 INIT += init.qcom.usb.rc
-INIT += init.msm.usb.configfs.rc
-INIT += init.qcom.usb.sh
-INIT += usf_post_boot.sh
-INIT += init.qcom.efs.sync.sh
 INIT += ueventd.qcom.rc
-INIT += qca6234-service.sh
-INIT += ssr_setup
-INIT += enable_swap.sh
-INIT += init.mdm.sh
-INIT += init.qcom.sensors.sh
-INIT += init.qcom.crashdata.sh
-INIT += init.qcom.vendor.rc
 INIT += init.target.vendor.rc
-INIT += init.qti.fm.sh
 INIT += init.veth_ipa_config.sh
 PRODUCT_PACKAGES += $(INIT)
 

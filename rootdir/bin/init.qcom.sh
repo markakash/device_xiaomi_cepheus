@@ -1,6 +1,6 @@
 #! /vendor/bin/sh
 
-# Copyright (c) 2013, The Linux Foundation. All rights reserved.
+# Copyright (c) 2009-2016, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -9,7 +9,7 @@
 #     * Redistributions in binary form must reproduce the above copyright
 #       notice, this list of conditions and the following disclaimer in the
 #       documentation and/or other materials provided with the distribution.
-#     * Neither the name of Linux Foundation nor
+#     * Neither the name of The Linux Foundation nor
 #       the names of its contributors may be used to endorse or promote
 #       products derived from this software without specific prior written
 #       permission.
@@ -27,8 +27,41 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-baseband=`getprop ro.baseband`
-if [ "$baseband" = "mdm" ] || [ "$baseband" = "mdm2" ]; then
-	start vendor.mdm_helper
+target=`getprop ro.board.platform`
+
+start_msm_irqbalance_msmnile()
+{
+         if [ -f /vendor/bin/msm_irqbalance ]; then
+                start vendor.msm_irqbalance
+         fi
+}
+
+case "$target" in
+    "msmnile")
+        start_msm_irqbalance_msmnile
+        ;;
+esac
+
+#
+# Make modem config folder and copy firmware config to that folder for RIL
+#
+if [ -f /data/vendor/modem_config/ver_info.txt ]; then
+    prev_version_info=`cat /data/vendor/modem_config/ver_info.txt`
+else
+    prev_version_info=""
 fi
 
+cur_version_info=`cat /vendor/firmware_mnt/verinfo/ver_info.txt`
+if [ ! -f /vendor/firmware_mnt/verinfo/ver_info.txt -o "$prev_version_info" != "$cur_version_info" ]; then
+    # add W for group recursively before delete
+    chmod g+w -R /data/vendor/modem_config/*
+    rm -rf /data/vendor/modem_config/*
+    # preserve the read only mode for all subdir and files
+    cp --preserve=m -dr /vendor/firmware_mnt/image/modem_pr/mcfg/configs/* /data/vendor/modem_config
+    cp --preserve=m -d /vendor/firmware_mnt/verinfo/ver_info.txt /data/vendor/modem_config/
+    cp --preserve=m -d /vendor/firmware_mnt/image/modem_pr/mbn_ota.txt /data/vendor/modem_config/
+    # the group must be root, otherwise this script could not add "W" for group recursively
+    chown -hR radio.root /data/vendor/modem_config/*
+fi
+chmod g-w /data/vendor/modem_config
+setprop ro.vendor.ril.mbn_copy_completed 1
