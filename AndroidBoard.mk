@@ -69,15 +69,6 @@ LOCAL_MODULE_PATH  := $(TARGET_OUT_VENDOR_EXECUTABLES)
 include $(BUILD_PREBUILT)
 
 
-ifeq ($(strip $(BOARD_DYNAMIC_PARTITION_ENABLE)),true)
-include $(CLEAR_VARS)
-LOCAL_MODULE       := fstab.qcom
-LOCAL_MODULE_TAGS  := optional
-LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := fstab_dynamic_partition.qcom
-LOCAL_MODULE_PATH  := $(TARGET_OUT_VENDOR_ETC)
-include $(BUILD_PREBUILT)
-else
 include $(CLEAR_VARS)
 LOCAL_MODULE       := fstab.qcom
 LOCAL_MODULE_TAGS  := optional
