@@ -1,6 +1,3 @@
-$(call inherit-product, device/xiaomi/cepheus/msmnile.mk)
-$(call inherit-product, device/xiaomi/cepheus/minimal_config.mk)
-
 TARGET_USE_VENDOR_CAMERA_EXT := true
 
 #skip boot jars check
@@ -21,9 +18,6 @@ ATRACE_HAL := android.hardware.atrace@1.0-service
 #BSON
 BSON := libbson
 
-#ColorConvert
-C2DCC := libc2dcolorconvert
-
 #DATA_OS
 DATA_OS := librmnetctl
 
@@ -35,31 +29,6 @@ QTI_TELEPHONY_UTILS += qti_telephony_utils.xml
 
 #HOSTAPD
 HOSTAPD := hostapd
-
-#I420COLORCONVERT
-I420CC := libI420colorconvert
-
-#INIT
-INIT += init.target.rc
-INIT += init.qcom.coex.sh
-INIT += init.qcom.early_boot.sh
-INIT += init.qcom.post_boot.sh
-INIT += init.qcom.rc
-INIT += init.recovery.qcom.rc
-INIT += init.qcom.factory.rc
-INIT += init.qcom.sdio.sh
-INIT += init.qcom.sh
-INIT += init.qcom.class_core.sh
-INIT += init.class_main.sh
-INIT += init.qcom.usb.rc
-INIT += init.qcom.usb.sh
-INIT += init.qcom.efs.sync.sh
-INIT += ueventd.qcom.rc
-INIT += qca6234-service.sh
-INIT += init.mdm.sh
-INIT += fstab.qcom
-INIT += init.qcom.sensors.sh
-INIT += init.veth_ipa_config.sh
 
 #IPACM
 IPACM += ipacm
@@ -85,9 +54,6 @@ LIBPOWER += android.hardware.power@1.0-service
 #LLVM for RenderScript
 #use qcom LLVM
 $(call inherit-product-if-exists, external/llvm/llvm-select.mk)
-
-#MEDIA_PROFILES
-MEDIA_PROFILES := media_profiles.xml
 
 #MM_AUDIO
 MM_AUDIO += libOmxAacEnc

@@ -51,10 +51,10 @@ PRODUCT_COPY_FILES += \
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
-    $(LOCAL_PATH)/device/overlay \
-    $(LOCAL_PATH)/product/overlay \
-    $(LOCAL_PATH)/overlay \
-    $(LOCAL_PATH)/overlay-404
+    device/xiaomi/cepheus/device/overlay \
+    device/xiaomi/cepheus/product/overlay \
+    device/xiaomi/cepheus/overlay \
+    device/xiaomi/cepheus/overlay-404
 
 # Properties
 TARGET_SYSTEM_PROP += device/xiaomi/cepheus/system.prop

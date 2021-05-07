@@ -1,5 +1,3 @@
-$(call inherit-product, device/xiaomi/cepheus/common64.mk)
-
 # Inherit proprietary targets
 $(call inherit-product-if-exists, vendor/xiaomi/cepheus/cepheus-vendor.mk)
 
@@ -14,9 +12,6 @@ BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 1
 
 # Enable AVB 2.0
 BOARD_AVB_ENABLE := true
-
-# privapp-permissions whitelisting (To Fix CTS :privappPermissionsMustBeEnforced)
-PRODUCT_PROPERTY_OVERRIDES += ro.control_privapp_permissions=enforce
 
 TARGET_DEFINES_DALVIK_HEAP := true
 TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
@@ -46,13 +41,6 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += android.hardware.media.omx@1.0-impl
 
-# Camera configuration file. Shared by passthrough/binderized camera HAL
-PRODUCT_PACKAGES += camera.device@3.2-impl
-PRODUCT_PACKAGES += camera.device@1.0-impl
-PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-impl
-# Enable binderized camera HAL
-PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-service_64
-
 PRODUCT_PACKAGES += fs_config_files
 
 # Fingerprint feature
@@ -66,9 +54,6 @@ PRODUCT_COPY_FILES += \
 DEVICE_MANIFEST_FILE := device/xiaomi/cepheus/manifest.xml
 DEVICE_MATRIX_FILE   := device/xiaomi/cepheus/compatibility_matrix.xml
 DEVICE_FRAMEWORK_MANIFEST_FILE := device/xiaomi/cepheus/framework_manifest.xml
-
-#audio related module
-PRODUCT_PACKAGES += libvolumelistener
 
 # Display/Graphics
 PRODUCT_PACKAGES += \
