@@ -144,12 +144,12 @@ MM_VIDEO += libstagefrighthw
 #NET
 NET += netutils-wrapper-1.0
 
-#NQ_NFC
-NQ_NFC += com.gsma.services.nfc
-NQ_NFC += libchrome.vendor
-NQ_NFC += Tag
-NQ_NFC += com.android.nfc_extras
-PRODUCT_PROPERTY_OVERRIDES += ro.hardware.nfc_nci=nqx.default
+#NFC
+NFC += android.hardware.nfc@1.2-service
+NFC += com.android.nfc_extras
+NFC += NfcNci
+NFC += Tag
+NFC += vendor.nxp.hardware.nfc@1.2-service
 
 PROTOBUF := libprotobuf-cpp-full
 
@@ -197,7 +197,7 @@ PRODUCT_PACKAGES += $(MM_CORE)
 PRODUCT_PACKAGES += $(MM_WFD)
 PRODUCT_PACKAGES += $(MM_VIDEO)
 PRODUCT_PACKAGES += $(NET)
-PRODUCT_PACKAGES += $(NQ_NFC)
+PRODUCT_PACKAGES += $(NFC)
 PRODUCT_PACKAGES += $(PROTOBUF)
 PRODUCT_PACKAGES += $(QTI_TELEPHONY_UTILS)
 PRODUCT_PACKAGES += $(STK)
