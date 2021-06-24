@@ -195,6 +195,9 @@ RCS += RcsService
 TELEPHONY_EXT += telephony-ext
 TELEPHONY_EXT_JAR += telephony-ext
 
+#THERMAL_HAL
+THERMAL_HAL += android.hardware.thermal@2.0-service.qti
+
 PRODUCT_PACKAGES += $(ATRACE_HAL)
 PRODUCT_PACKAGES += $(AUDIO_HAL)
 PRODUCT_PACKAGES += $(BLUETOOTH_HAL)
