@@ -61,6 +61,10 @@ DATA_OS := librmnetctl
 #DRM
 DRM += android.hardware.drm@1.3-service.clearkey
 
+#HEALTH
+HEALTH += android.hardware.health@2.1-impl
+HEALTH += android.hardware.health@2.1-service
+
 HIDL_WRAPPER := qti-telephony-hidl-wrapper
 HIDL_WRAPPER += qti_telephony_hidl_wrapper.xml
 
@@ -147,6 +151,7 @@ PRODUCT_PACKAGES += $(BSON)
 PRODUCT_PACKAGES += $(CAMERA)
 PRODUCT_PACKAGES += $(C2DCC)
 PRODUCT_PACKAGES += $(DRM)
+PRODUCT_PACKAGES += $(HEALTH)
 PRODUCT_PACKAGES += $(RCS)
 PRODUCT_PACKAGES += $(DATA_OS)
 PRODUCT_PACKAGES += $(HOSTAPD)
