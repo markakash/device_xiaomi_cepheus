@@ -61,6 +61,12 @@ DATA_OS := librmnetctl
 #DRM
 DRM += android.hardware.drm@1.3-service.clearkey
 
+#framework detect libs
+PRODUCT_PACKAGES += libvndfwk_detect_jni.qti
+PRODUCT_PACKAGES += libqti_vndfwk_detect
+PRODUCT_PACKAGES += libvndfwk_detect_jni.qti.vendor
+PRODUCT_PACKAGES += libqti_vndfwk_detect.vendor
+
 #HEALTH
 HEALTH += android.hardware.health@2.1-impl
 HEALTH += android.hardware.health@2.1-service
@@ -76,16 +82,19 @@ HIDL += android.hidl.manager@1.0.vendor
 HIDL_WRAPPER := qti-telephony-hidl-wrapper
 HIDL_WRAPPER += qti_telephony_hidl_wrapper.xml
 
-QTI_TELEPHONY_UTILS := qti-telephony-utils
-QTI_TELEPHONY_UTILS += qti_telephony_utils.xml
-
 #HOSTAPD
 HOSTAPD := hostapd
+
+#IMS Extension module for Android Telephony
+IMS_EXT := ims-ext-common
+IMS_EXT += ims_ext_common.xml
 
 #IPACM
 IPACM += ipacm
 IPACM += IPACM_cfg.xml
 IPACM += ipacm-diag
+IPACM += libipanat
+IPACM += liboffloadhal
 
 #LIB_XML2
 LIB_XML2 := libxml2
@@ -259,9 +268,3 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.qcomsysd.enabled=1
-
-# framework detect libs
-PRODUCT_PACKAGES += libvndfwk_detect_jni.qti
-PRODUCT_PACKAGES += libqti_vndfwk_detect
-PRODUCT_PACKAGES += libvndfwk_detect_jni.qti.vendor
-PRODUCT_PACKAGES += libqti_vndfwk_detect.vendor
