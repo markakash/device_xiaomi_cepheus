@@ -79,14 +79,14 @@ HIDL += android.hidl.manager@1.0
 HIDL += android.hidl.manager@1.0.vendor
 
 #HIDL_WRAPPER
-HIDL_WRAPPER := qti-telephony-hidl-wrapper
+HIDL_WRAPPER += qti-telephony-hidl-wrapper
 HIDL_WRAPPER += qti_telephony_hidl_wrapper.xml
 
 #HOSTAPD
 HOSTAPD := hostapd
 
 #IMS Extension module for Android Telephony
-IMS_EXT := ims-ext-common
+IMS_EXT += ims-ext-common
 IMS_EXT += ims_ext_common.xml
 
 #IPACM
@@ -112,10 +112,6 @@ LIBMEMTRACK += memtrack.kona
 
 #LIBQDMETADATA
 LIBQDMETADATA := libqdMetaData
-
-#LLVM for RenderScript
-#use qcom LLVM
-$(call inherit-product-if-exists, external/llvm/llvm-select.mk)
 
 #MEDIA
 MEDIA += libavservices_minijail
@@ -192,7 +188,7 @@ TELEPHONY_EXT += telephony-ext
 TELEPHONY_EXT_JAR += telephony-ext
 
 #THERMAL_HAL
-THERMAL_HAL += android.hardware.thermal@2.0-service.qti
+THERMAL_HAL := android.hardware.thermal@2.0-service.qti
 
 #USB
 USB += android.hardware.usb@1.0-service
@@ -206,6 +202,10 @@ WLAN += wpa_cli
 #WPA
 WPA := wpa_supplicant.conf
 WPA += wpa_supplicant
+
+#LLVM for RenderScript
+#use qcom LLVM
+$(call inherit-product-if-exists, external/llvm/llvm-select.mk)
 
 PRODUCT_PACKAGES += $(ATRACE_HAL)
 PRODUCT_PACKAGES += $(AUDIO_HAL)
@@ -251,10 +251,6 @@ PRODUCT_PACKAGES += $(IMS_EXT)
 
 # MSM updater library
 PRODUCT_PACKAGES += librecovery_updater_msm
-
-# healthd libaray expanded for mode charger
-PRODUCT_PACKAGES += android.hardware.health@2.1-impl
-PRODUCT_PACKAGES += android.hardware.health@2.1-service
 
 PRODUCT_COPY_FILES := \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.flash-autofocus.xml \
