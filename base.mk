@@ -177,10 +177,6 @@ SENSOR += vendor.qti.hardware.display.mapper@1.1.vendor
 #STK
 STK := Stk
 
-#WPA
-WPA := wpa_supplicant.conf
-WPA += wpa_supplicant
-
 #RCS
 RCS := rcs_service_aidl
 RCS += rcs_service_aidl.xml
@@ -200,6 +196,16 @@ THERMAL_HAL += android.hardware.thermal@2.0-service.qti
 
 #USB
 USB += android.hardware.usb@1.0-service
+
+#WLAN
+WLAN += android.hardware.wifi@1.0-service
+WLAN += libwifi-hal-qcom
+WLAN += libwpa_client
+WLAN += wpa_cli
+
+#WPA
+WPA := wpa_supplicant.conf
+WPA += wpa_supplicant
 
 PRODUCT_PACKAGES += $(ATRACE_HAL)
 PRODUCT_PACKAGES += $(AUDIO_HAL)
@@ -239,6 +245,7 @@ PRODUCT_BOOT_JARS += $(TELEPHONY_EXT_JAR)
 PRODUCT_PACKAGES += $(THERMAL_HAL)
 PRODUCT_PACKAGES += $(USB)
 PRODUCT_PACKAGES += $(WPA)
+PRODUCT_PACKAGES += $(WLAN)
 PRODUCT_PACKAGES += $(IPACM)
 PRODUCT_PACKAGES += $(IMS_EXT)
 
