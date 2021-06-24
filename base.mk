@@ -151,7 +151,10 @@ NFC += NfcNci
 NFC += Tag
 NFC += vendor.nxp.hardware.nfc@1.2-service
 
-PROTOBUF := libprotobuf-cpp-full
+#PROTOBUF
+PROTOBUF += libprotobuf-cpp-full-rtti
+PROTOBUF += libprotobuf-cpp-lite-vendorcompat
+PROTOBUF += libprotobuf-cpp-full-vendorcompat
 
 #STK
 STK := Stk
