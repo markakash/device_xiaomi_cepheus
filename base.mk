@@ -168,6 +168,12 @@ RIL += libril
 RIL += librilutils
 RIL += librmnetctl
 
+#SENSOR
+SENSOR += android.hardware.sensors@1.0-impl
+SENSOR += android.hardware.sensors@1.0-service
+SENSOR += libsensorndkbridge
+SENSOR += vendor.qti.hardware.display.mapper@1.1.vendor
+
 #STK
 STK := Stk
 
@@ -219,8 +225,9 @@ PRODUCT_PACKAGES += $(NFC)
 PRODUCT_PACKAGES += $(PROTOBUF)
 PRODUCT_PACKAGES += $(QMI)
 PRODUCT_PACKAGES += $(QTI_TELEPHONY_UTILS)
-PRODUCT_PACKAGES += $(STK)
 PRODUCT_PACKAGES += $(RIL)
+PRODUCT_PACKAGES += $(STK)
+PRODUCT_PACKAGES += $(SENSOR)
 PRODUCT_PACKAGES += $(TELEPHONY_EXT)
 PRODUCT_BOOT_JARS += $(TELEPHONY_EXT_JAR)
 PRODUCT_PACKAGES += $(THERMAL_HAL)
