@@ -156,6 +156,18 @@ PROTOBUF += libprotobuf-cpp-full-rtti
 PROTOBUF += libprotobuf-cpp-lite-vendorcompat
 PROTOBUF += libprotobuf-cpp-full-vendorcompat
 
+#QMI
+QMI += libjson
+
+#QTI_TELEPHONY_UTILS
+QTI_TELEPHONY_UTILS := qti-telephony-utils
+QTI_TELEPHONY_UTILS += qti_telephony_utils.xml
+
+#RIL
+RIL += libril
+RIL += librilutils
+RIL += librmnetctl
+
 #STK
 STK := Stk
 
@@ -169,10 +181,13 @@ RCS += rcs_service_aidl.xml
 RCS += rcs_service_aidl_static
 RCS += rcs_service_api
 RCS += rcs_service_api.xml
+RCS += com.android.ims.rcsmanager
+RCS += PresencePolling
+RCS += RcsService
 
-#IMS Extension module for Android Telephony
-IMS_EXT := ims-ext-common
-IMS_EXT += ims_ext_common.xml
+#TELEPHONY_EXT
+TELEPHONY_EXT += telephony-ext
+TELEPHONY_EXT_JAR += telephony-ext
 
 PRODUCT_PACKAGES += $(ATRACE_HAL)
 PRODUCT_PACKAGES += $(AUDIO_HAL)
@@ -202,8 +217,12 @@ PRODUCT_PACKAGES += $(MM_VIDEO)
 PRODUCT_PACKAGES += $(NET)
 PRODUCT_PACKAGES += $(NFC)
 PRODUCT_PACKAGES += $(PROTOBUF)
+PRODUCT_PACKAGES += $(QMI)
 PRODUCT_PACKAGES += $(QTI_TELEPHONY_UTILS)
 PRODUCT_PACKAGES += $(STK)
+PRODUCT_PACKAGES += $(RIL)
+PRODUCT_PACKAGES += $(TELEPHONY_EXT)
+PRODUCT_BOOT_JARS += $(TELEPHONY_EXT_JAR)
 PRODUCT_PACKAGES += $(THERMAL_HAL)
 PRODUCT_PACKAGES += $(WPA)
 PRODUCT_PACKAGES += $(IPACM)
