@@ -385,6 +385,7 @@ TARGET_COMMON_QTI_COMPONENTS += \
     bt \
     display \
     perf \
+    telephony \
     wfd
 
 # RCS
